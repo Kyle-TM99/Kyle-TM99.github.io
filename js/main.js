@@ -123,18 +123,54 @@ class PortfolioOS {
             return;
         }
 
-        // Reset any previous positioning
-        windowElement.style.left = '';
-        windowElement.style.top = '';
-        windowElement.style.transform = '';
+        // Check if mobile device
+        const isMobile = window.innerWidth <= 768;
         
-        // Show window (CSS will center it automatically)
+        if (isMobile) {
+            // 모바일에서는 전체화면으로 설정
+            windowElement.style.position = 'fixed';
+            windowElement.style.top = '0';
+            windowElement.style.left = '0';
+            windowElement.style.right = '0';
+            windowElement.style.bottom = '0';
+            windowElement.style.width = '100vw';
+            windowElement.style.height = '100vh';
+            windowElement.style.minWidth = '100vw';
+            windowElement.style.minHeight = '100vh';
+            windowElement.style.maxWidth = '100vw';
+            windowElement.style.maxHeight = '100vh';
+            windowElement.style.transform = 'none';
+            windowElement.style.borderRadius = '0';
+            windowElement.style.margin = '0';
+        } else {
+            // 데스크톱에서는 기존 방식 유지
+            // Reset any previous positioning
+            windowElement.style.left = '';
+            windowElement.style.top = '';
+            windowElement.style.transform = '';
+        }
+        
+        // Show window
         windowElement.style.display = 'block';
         
         // Animate window opening
         setTimeout(() => {
             windowElement.classList.add('show');
             this.focusWindow(windowElement);
+            
+            // 모바일에서는 윈도우 내용을 맨 위로 스크롤
+            if (isMobile) {
+                const windowContent = windowElement.querySelector('.window-content');
+                if (windowContent) {
+                    windowContent.scrollTop = 0;
+                }
+                
+                // 특정 컨테이너들도 스크롤 초기화
+                const containers = windowElement.querySelectorAll('.about-content, .projects-container, .experience-container, .help-body');
+                containers.forEach(container => {
+                    container.scrollTop = 0;
+                });
+            }
         }, 10);
 
         // Store window reference
@@ -180,8 +216,70 @@ class PortfolioOS {
             let startLeft = 0;
             let startTop = 0;
 
-            header.addEventListener('mousedown', (e) => {
+            // Check if mobile device
+            const isMobile = window.innerWidth <= 768;
+
+            // Mouse events (데스크톱에서만)
+            if (!isMobile) {
+                header.addEventListener('mousedown', (e) => {
+                    if (e.target.classList.contains('control-btn')) return;
+                    
+                    isDragging = true;
+                    
+                    // Get current position
+                    const rect = windowElement.getBoundingClientRect();
+                    startLeft = rect.left;
+                    startTop = rect.top;
+                    startX = e.clientX;
+                    startY = e.clientY;
+                    
+                    // Remove transform and set absolute position
+                    windowElement.style.transform = 'none';
+                    windowElement.style.left = startLeft + 'px';
+                    windowElement.style.top = startTop + 'px';
+                    windowElement.classList.add('dragging');
+                    
+                    header.style.cursor = 'grabbing';
+                    e.preventDefault();
+                });
+
+                // Mouse move
+                document.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return;
+                    
+                    e.preventDefault();
+                    
+                    const deltaX = e.clientX - startX;
+                    const deltaY = e.clientY - startY;
+                    
+                    let newLeft = startLeft + deltaX;
+                    let newTop = startTop + deltaY;
+                    
+                    // Keep window within viewport
+                    const maxX = window.innerWidth - windowElement.offsetWidth;
+                    const maxY = window.innerHeight - windowElement.offsetHeight;
+                    
+                    newLeft = Math.max(0, Math.min(newLeft, maxX));
+                    newTop = Math.max(30, Math.min(newTop, maxY));
+                    
+                    windowElement.style.left = newLeft + 'px';
+                    windowElement.style.top = newTop + 'px';
+                });
+
+                // Mouse up
+                document.addEventListener('mouseup', () => {
+                    if (isDragging) {
+                        isDragging = false;
+                        header.style.cursor = 'move';
+                        windowElement.classList.remove('dragging');
+                    }
+                });
+            }
+
+            // Touch events for mobile (전체화면이 아닐 때만)
+            header.addEventListener('touchstart', (e) => {
                 if (e.target.classList.contains('control-btn')) return;
+                if (isMobile) return; // 모바일에서는 드래그 비활성화
                 
                 isDragging = true;
                 
@@ -189,8 +287,8 @@ class PortfolioOS {
                 const rect = windowElement.getBoundingClientRect();
                 startLeft = rect.left;
                 startTop = rect.top;
-                startX = e.clientX;
-                startY = e.clientY;
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
                 
                 // Remove transform and set absolute position
                 windowElement.style.transform = 'none';
@@ -198,17 +296,18 @@ class PortfolioOS {
                 windowElement.style.top = startTop + 'px';
                 windowElement.classList.add('dragging');
                 
-                header.style.cursor = 'grabbing';
                 e.preventDefault();
             });
 
-            document.addEventListener('mousemove', (e) => {
+            // Touch move
+            document.addEventListener('touchmove', (e) => {
                 if (!isDragging) return;
+                if (isMobile) return; // 모바일에서는 드래그 비활성화
                 
                 e.preventDefault();
                 
-                const deltaX = e.clientX - startX;
-                const deltaY = e.clientY - startY;
+                const deltaX = e.touches[0].clientX - startX;
+                const deltaY = e.touches[0].clientY - startY;
                 
                 let newLeft = startLeft + deltaX;
                 let newTop = startTop + deltaY;
@@ -224,10 +323,10 @@ class PortfolioOS {
                 windowElement.style.top = newTop + 'px';
             });
 
-            document.addEventListener('mouseup', () => {
+            // Touch end
+            document.addEventListener('touchend', () => {
                 if (isDragging) {
                     isDragging = false;
-                    header.style.cursor = 'move';
                     windowElement.classList.remove('dragging');
                 }
             });
@@ -279,6 +378,24 @@ class PortfolioOS {
                 terminalInput.focus();
             }
         });
+
+        // Mobile touch support for terminal
+        document.addEventListener('touchstart', (e) => {
+            const terminalWindow = e.target.closest('#terminal-window');
+            if (terminalWindow && terminalWindow.classList.contains('show')) {
+                terminalInput.focus();
+            }
+        });
+
+        // Prevent zoom on double tap for mobile
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', (e) => {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                e.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
     }
 
     processTerminalCommand(command) {

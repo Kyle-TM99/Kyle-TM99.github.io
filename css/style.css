@@ -515,6 +515,8 @@ body {
     border-radius: 12px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 800px;
+    height: 600px;
     min-width: 400px;
     min-height: 300px;
     z-index: 100;
@@ -524,6 +526,26 @@ body {
     transform: translate(-50%, -50%) scale(0.8);
     user-select: none;
     transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Specific window sizes */
+#projects-window {
+    width: 900px;
+    height: 700px;
+}
+
+#experience-window {
+    width: 900px;
+    height: 700px;
+}
+
+#terminal-window {
+    width: 600px;
+    height: 400px;
+    min-width: 600px;
+    min-height: 400px;
+    max-width: 600px;
+    max-height: 400px;
 }
 
 .window.show {
@@ -1084,7 +1106,163 @@ body {
     background: #5a67d8;
 }
 
-/* Timeline - REMOVED */
+/* Experience */
+.experience-container {
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.experience-card {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.experience-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.experience-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.experience-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.experience-title {
+    flex: 1;
+}
+
+.experience-title h3 {
+    color: #333;
+    margin: 0 0 4px 0;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.experience-title .company {
+    color: #666;
+    margin: 0;
+    font-size: 14px;
+}
+
+.experience-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    flex-shrink: 0;
+}
+
+.experience-badge.current {
+    background: linear-gradient(135deg, #4ade80, #22c55e);
+}
+
+.experience-badge.past {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.experience-details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.experience-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 12px 16px;
+    background: rgba(102, 126, 234, 0.05);
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+}
+
+.experience-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #555;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.experience-meta i {
+    color: #667eea;
+    font-size: 12px;
+    width: 14px;
+}
+
+.experience-description h4 {
+    color: #333;
+    margin: 0 0 12px 0;
+    font-size: 16px;
+    font-weight: 600;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 8px;
+    margin-top: 20px;
+}
+
+.experience-description h4:first-child {
+    margin-top: 0;
+}
+
+.experience-description ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.experience-description li {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.experience-description strong {
+    color: #333;
+    font-weight: 600;
+}
+
+/* Experience Scrollbar */
+.experience-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.experience-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.experience-container::-webkit-scrollbar-thumb {
+    background: #667eea;
+    border-radius: 4px;
+}
+
+.experience-container::-webkit-scrollbar-thumb:hover {
+    background: #5a67d8;
+}
 
 /* Contact */
 .contact-info {
@@ -1603,254 +1781,764 @@ body {
     background: #5a67d8;
 }
 
-/* Responsive */
+/* Mobile optimizations */
 @media (max-width: 768px) {
-    .desktop-widgets {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        top: 40px;
-        left: 15px;
-        right: 15px;
-        bottom: 80px;
-        padding: 5px;
-        gap: 15px;
+    /* Smooth scrolling */
+    html {
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
     }
     
-    .widget {
-        max-height: 250px;
+    /* Prevent text selection on draggable elements */
+    .window-header {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+        -webkit-tap-highlight-color: transparent;
     }
     
-    .current-time {
-        font-size: 24px;
-    }
-    
-    .temperature {
-        font-size: 22px;
-    }
-    
-    .window {
-        min-width: 90vw;
-        min-height: 70vh;
-        left: 5vw !important;
-        top: 15vh !important;
-    }
-    
-    .terminal-window {
-        width: 90vw;
-        height: 70vh;
-        max-width: 90vw;
-        max-height: 70vh;
-        min-width: 90vw;
-        min-height: 70vh;
-    }
-    
-    .dock {
-        bottom: 5px;
-        padding: 6px 12px;
+    /* Improve touch targets */
+    .control-btn {
+        min-width: 44px;
+        min-height: 44px;
     }
     
     .dock-item {
-        width: 40px;
+        min-width: 44px;
+        min-height: 44px;
+    }
+    
+    .menu-item {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+    
+    /* Better scrolling for containers */
+    .about-content,
+    .projects-container,
+    .experience-container,
+    .help-body {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+    
+    /* Prevent horizontal scroll */
+    body {
+        overflow-x: hidden;
+    }
+    
+    .window-content {
+        overflow-x: hidden;
+    }
+    
+    /* Better text rendering */
+    * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    /* Menu Bar */
+    .menu-bar {
         height: 40px;
+        padding: 0 10px;
+        font-size: 12px;
+    }
+    
+    .menu-left {
+        gap: 10px;
+    }
+    
+    .menu-item {
+        padding: 4px 6px;
+        font-size: 11px;
+    }
+    
+    #Kyle {
+        width: 16px;
+        height: 16px;
+        margin-top: 3px;
+    }
+    
+    /* Desktop Widgets */
+    .desktop-widgets {
+        top: 50px;
+        left: 10px;
+        right: 10px;
+        bottom: 90px;
+        padding: 5px;
+        gap: 10px;
+        flex-direction: column;
+        align-content: stretch;
+    }
+    
+    .widget {
+        width: 100%;
+        max-height: none;
+        min-height: 120px;
+    }
+    
+    .widget-header {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+    
+    .widget-content {
+        padding: 12px;
+    }
+    
+    .current-time {
+        font-size: 20px;
+    }
+    
+    .current-date {
+        font-size: 12px;
+    }
+    
+    /* Dock */
+    .dock {
+        bottom: 5px;
+        padding: 4px 8px;
+        gap: 4px;
+        border-radius: 15px;
+    }
+    
+    .dock-item {
+        width: 35px;
+        height: 35px;
+        border-radius: 8px;
     }
     
     .dock-item i {
-        font-size: 20px;
-    }
-
-    .help-content {
-        width: 95vw;
-        max-height: 95vh;
+        font-size: 16px;
     }
     
-    .help-header {
+    .dock-item:hover {
+        transform: translateY(-4px) scale(1.05);
+    }
+    
+    /* Windows - 모바일 전체화면 설정 */
+    .window {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        min-width: 100vw !important;
+        min-height: 100vh !important;
+        max-width: 100vw !important;
+        max-height: 100vh !important;
+        transform: none !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+    }
+    
+    .window.show {
+        transform: none !important;
+    }
+    
+    .window.dragging {
+        transform: none !important;
+    }
+    
+    /* 특정 윈도우들도 동일하게 전체화면 적용 */
+    #projects-window,
+    #experience-window,
+    #terminal-window,
+    #about-window,
+    #skills-window,
+    #contact-window {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        min-width: 100vw !important;
+        min-height: 100vh !important;
+        max-width: 100vw !important;
+        max-height: 100vh !important;
+        transform: none !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+    }
+    
+    .window-header {
+        border-radius: 0 !important;
         padding: 15px 20px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        cursor: default !important;
     }
     
-    .help-header h2 {
+    .window-title {
+        font-size: 16px;
+    }
+    
+    .control-btn {
+        width: 24px;
+        height: 24px;
+        font-size: 14px;
+    }
+    
+    .window-content {
+        padding: 15px;
+        height: calc(100vh - 60px) !important;
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* About Content 모바일 최적화 */
+    .about-content {
+        padding: 15px;
+        height: calc(100vh - 90px) !important;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    
+    .profile-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    .profile-image {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .profile-info h2 {
+        font-size: 24px;
+        text-align: center;
+    }
+    
+    .profile-info .title {
+        font-size: 16px;
+        text-align: center;
+    }
+    
+    .personal-info {
+        text-align: left;
+    }
+    
+    .personal-info p {
+        font-size: 13px;
+        justify-content: space-between;
+    }
+    
+    .personal-info strong {
+        min-width: 70px;
+    }
+    
+    .about-description h3 {
         font-size: 18px;
     }
     
+    .about-description p {
+        font-size: 14px;
+    }
+    
+    .about-description li {
+        font-size: 13px;
+    }
+    
+    /* Skills 모바일 최적화 */
+    .skills-grid {
+        gap: 20px;
+    }
+    
+    .skill-category h3 {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    
+    .skill-tag {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    /* Projects 모바일 최적화 */
+    .projects-container {
+        height: calc(100vh - 90px) !important;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-right: 5px;
+    }
+    
+    .project-card {
+        padding: 16px;
+        margin-bottom: 15px;
+    }
+    
+    .project-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        text-align: left;
+    }
+    
+    .project-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+    
+    .project-title h3 {
+        font-size: 18px;
+    }
+    
+    .project-subtitle {
+        font-size: 13px;
+    }
+    
+    .project-badge {
+        padding: 4px 8px;
+        font-size: 11px;
+        align-self: flex-start;
+    }
+    
+    .project-meta {
+        flex-direction: column;
+        gap: 8px;
+        padding: 10px 12px;
+    }
+    
+    .project-meta span {
+        font-size: 12px;
+    }
+    
+    .project-description h4 {
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+    
+    .project-description li {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+    
+    .project-tech {
+        gap: 6px;
+    }
+    
+    .tech-tag {
+        padding: 3px 8px;
+        font-size: 11px;
+    }
+    
+    /* Experience 모바일 최적화 */
+    .experience-container {
+        height: calc(100vh - 90px) !important;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-right: 5px;
+    }
+    
+    .experience-card {
+        padding: 16px;
+        margin-bottom: 15px;
+    }
+    
+    .experience-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        text-align: left;
+    }
+    
+    .experience-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+    
+    .experience-title h3 {
+        font-size: 18px;
+    }
+    
+    .experience-title .company {
+        font-size: 14px;
+    }
+    
+    .experience-badge {
+        padding: 4px 8px;
+        font-size: 11px;
+        align-self: flex-start;
+    }
+    
+    .experience-meta {
+        flex-direction: column;
+        gap: 8px;
+        padding: 10px 12px;
+    }
+    
+    .experience-meta span {
+        font-size: 12px;
+    }
+    
+    .experience-description h4 {
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+    
+    .experience-description li {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+    
+    /* Contact 모바일 최적화 */
+    .contact-info {
+        gap: 12px;
+        padding: 10px 0;
+    }
+    
+    .contact-item {
+        padding: 12px;
+        gap: 12px;
+    }
+    
+    .contact-item i {
+        font-size: 18px;
+        width: 20px;
+    }
+    
+    .contact-item span {
+        font-size: 14px;
+    }
+    
+    /* Terminal 모바일 최적화 */
+    .terminal-window {
+        width: 100vw !important;
+        height: 100vh !important;
+        max-width: 100vw !important;
+        max-height: 100vh !important;
+        min-width: 100vw !important;
+        min-height: 100vh !important;
+    }
+    
+    .terminal-content {
+        padding: 12px;
+        height: calc(100vh - 60px) !important;
+    }
+    
+    .terminal-line {
+        font-size: 12px;
+        line-height: 1.3;
+    }
+    
+    .terminal-input {
+        font-size: 12px;
+    }
+    
+    /* Welcome Modal 모바일 최적화 */
+    .welcome-content {
+        padding: 25px;
+        max-width: 95vw;
+        width: 95vw;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .welcome-avatar {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .welcome-content h2 {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+    
+    .welcome-intro {
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+    
+    .welcome-message p {
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 10px;
+    }
+    
+    .welcome-features {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    
+    /* Help Modal 모바일 최적화 */
+    .help-content {
+        width: 95vw;
+        max-height: 95vh;
+        height: 95vh;
+    }
+    
     .help-body {
-        padding: 20px;
+        padding: 15px;
+        max-height: calc(95vh - 110px);
+        overflow-y: auto;
+        overflow-x: hidden;
     }
     
     .tech-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        gap: 8px;
     }
     
     .tech-item {
-        padding: 15px;
+        padding: 10px;
     }
     
     .tech-item i {
-        font-size: 24px;
+        font-size: 18px;
+    }
+    
+    .tech-item span {
+        font-size: 11px;
+    }
+    
+    .tech-item small {
+        font-size: 9px;
     }
 }
 
-/* Experience */
-.experience-container {
-    height: 100%;
-    overflow-y: auto;
-    padding-right: 10px;
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+    .desktop-widgets {
+        top: 45px;
+        left: 5px;
+        right: 5px;
+        bottom: 85px;
+        gap: 8px;
+    }
+    
+    .widget {
+        min-height: 100px;
+    }
+    
+    .widget-header {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+    
+    .widget-content {
+        padding: 10px;
+    }
+    
+    .current-time {
+        font-size: 18px;
+    }
+    
+    .current-date {
+        font-size: 11px;
+    }
+    
+    .dock {
+        bottom: 3px;
+        padding: 3px 6px;
+        gap: 3px;
+    }
+    
+    .dock-item {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .dock-item i {
+        font-size: 14px;
+    }
+    
+    /* 윈도우는 이미 전체화면으로 설정되어 있음 */
+    .window-content {
+        padding: 12px;
+    }
+    
+    .about-content {
+        padding: 12px;
+    }
+    
+    .profile-image {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .profile-info h2 {
+        font-size: 20px;
+    }
+    
+    .profile-info .title {
+        font-size: 14px;
+    }
+    
+    .personal-info p {
+        font-size: 12px;
+    }
+    
+    .about-description h3 {
+        font-size: 16px;
+    }
+    
+    .about-description p {
+        font-size: 13px;
+    }
+    
+    .about-description li {
+        font-size: 12px;
+    }
+    
+    .skill-category h3 {
+        font-size: 14px;
+    }
+    
+    .skill-tag {
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+    
+    .project-card {
+        padding: 12px;
+    }
+    
+    .project-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+    
+    .project-title h3 {
+        font-size: 16px;
+    }
+    
+    .project-subtitle {
+        font-size: 12px;
+    }
+    
+    .experience-card {
+        padding: 12px;
+    }
+    
+    .experience-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+    
+    .experience-title h3 {
+        font-size: 16px;
+    }
+    
+    .experience-title .company {
+        font-size: 13px;
+    }
+    
+    .welcome-content {
+        padding: 20px;
+    }
+    
+    .welcome-avatar {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .welcome-content h2 {
+        font-size: 20px;
+    }
+    
+    .welcome-intro {
+        font-size: 15px;
+    }
+    
+    .welcome-message p {
+        font-size: 13px;
+    }
+    
+    .welcome-features {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .help-content {
+        width: 98vw;
+        max-height: 98vh;
+        height: 98vh;
+    }
+    
+    .help-body {
+        padding: 15px;
+        max-height: calc(98vh - 110px);
+    }
+    
+    .tech-grid {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+    
+    .tech-item {
+        padding: 10px;
+    }
+    
+    .tech-item i {
+        font-size: 18px;
+    }
+    
+    .tech-item span {
+        font-size: 11px;
+    }
+    
+    .tech-item small {
+        font-size: 9px;
+    }
 }
 
-.experience-card {
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 16px;
-    padding: 24px;
-    margin-bottom: 20px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
-}
-
-.experience-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-    background: rgba(255, 255, 255, 0.95);
-}
-
-.experience-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 20px;
-}
-
-.experience-icon {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 24px;
-    flex-shrink: 0;
-}
-
-.experience-title {
-    flex: 1;
-}
-
-.experience-title h3 {
-    color: #333;
-    margin: 0 0 4px 0;
-    font-size: 20px;
-    font-weight: 700;
-}
-
-.experience-title .company {
-    color: #667eea;
-    margin: 0;
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.experience-badge {
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    color: white;
-    flex-shrink: 0;
-}
-
-.experience-badge.current {
-    background: linear-gradient(135deg, #4ade80, #22c55e);
-}
-
-.experience-badge.team {
-    background: linear-gradient(135deg, #f59e0b, #d97706);
-}
-
-.experience-badge.solo {
-    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-}
-
-.experience-badge.learning {
-    background: linear-gradient(135deg, #06b6d4, #0891b2);
-}
-
-.experience-details {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.experience-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    padding: 12px 16px;
-    background: rgba(102, 126, 234, 0.05);
-    border-radius: 8px;
-    border-left: 4px solid #667eea;
-}
-
-.experience-meta span {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: #555;
-    font-size: 13px;
-    font-weight: 500;
-}
-
-.experience-meta i {
-    color: #667eea;
-    font-size: 12px;
-    width: 14px;
-}
-
-.experience-description h4 {
-    color: #333;
-    margin: 0 0 12px 0;
-    font-size: 16px;
-    font-weight: 600;
-    border-bottom: 2px solid #667eea;
-    padding-bottom: 8px;
-    margin-top: 20px;
-}
-
-.experience-description h4:first-child {
-    margin-top: 0;
-}
-
-.experience-description ul {
-    margin: 0;
-    padding-left: 20px;
-}
-
-.experience-description li {
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 8px;
-    font-size: 14px;
-}
-
-.experience-description strong {
-    color: #333;
-    font-weight: 600;
-}
-
-/* Experience Scrollbar */
-.experience-container::-webkit-scrollbar {
-    width: 8px;
-}
-
-.experience-container::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-}
-
-.experience-container::-webkit-scrollbar-thumb {
-    background: #667eea;
-    border-radius: 4px;
-}
-
-.experience-container::-webkit-scrollbar-thumb:hover {
-    background: #5a67d8;
+/* Landscape Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .desktop-widgets {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: flex-start;
+    }
+    
+    .widget {
+        width: calc(50% - 5px);
+        min-height: 80px;
+    }
+    
+    .dock {
+        bottom: 3px;
+        padding: 3px 8px;
+    }
+    
+    .dock-item {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .dock-item i {
+        font-size: 15px;
+    }
+    
+    /* 윈도우는 여전히 전체화면 유지 */
+    .window {
+        height: 100vh !important;
+    }
+    
+    .welcome-content {
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    
+    .help-content {
+        max-height: 90vh;
+    }
 } 
