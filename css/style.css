@@ -5,18 +5,32 @@
     box-sizing: border-box;
 }
 
+html {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow: hidden;
+    overflow-x: hidden;
     height: 100vh;
+    width: 100vw;
+    max-width: 100vw;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     user-select: none;
+    position: relative;
 }
 
 /* Desktop */
 .desktop {
     height: 100vh;
+    width: 100vw;
+    max-width: 100vw;
     position: relative;
+    overflow: hidden;
+    overflow-x: hidden;
     background: 
         radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
         radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
@@ -1783,6 +1797,14 @@ body {
 
 /* Mobile optimizations */
 @media (max-width: 768px) {
+    /* Prevent horizontal scroll completely */
+    html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        position: relative;
+    }
+    
     /* Smooth scrolling */
     html {
         scroll-behavior: smooth;
@@ -1823,21 +1845,45 @@ body {
     .help-body {
         -webkit-overflow-scrolling: touch;
         scroll-behavior: smooth;
+        overflow-x: hidden !important;
     }
     
     /* Prevent horizontal scroll */
     body {
-        overflow-x: hidden;
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100% !important;
     }
     
     .window-content {
-        overflow-x: hidden;
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100% !important;
     }
     
     /* Better text rendering */
     * {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* Force all elements to stay within viewport */
+    .desktop {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+    }
+    
+    .desktop-widgets {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+    }
+    
+    .widget {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
     }
 }
 
@@ -2315,25 +2361,50 @@ body {
 
 /* Small Mobile Devices */
 @media (max-width: 480px) {
+    /* Prevent horizontal scroll completely */
+    html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        position: relative;
+    }
+    
+    .desktop {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+    }
+    
     .desktop-widgets {
         top: 45px;
         left: 5px;
         right: 5px;
         bottom: 85px;
         gap: 8px;
+        width: calc(100% - 10px) !important;
+        max-width: calc(100% - 10px) !important;
+        overflow-x: hidden !important;
     }
     
     .widget {
         min-height: 100px;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
     }
     
     .widget-header {
         padding: 6px 10px;
         font-size: 11px;
+        width: 100% !important;
+        max-width: 100% !important;
     }
     
     .widget-content {
         padding: 10px;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
     }
     
     .current-time {
@@ -2348,11 +2419,15 @@ body {
         bottom: 3px;
         padding: 3px 6px;
         gap: 3px;
+        width: auto !important;
+        max-width: calc(100% - 12px) !important;
+        overflow-x: hidden !important;
     }
     
     .dock-item {
         width: 30px;
         height: 30px;
+        flex-shrink: 0;
     }
     
     .dock-item i {
@@ -2362,10 +2437,16 @@ body {
     /* 윈도우는 이미 전체화면으로 설정되어 있음 */
     .window-content {
         padding: 12px;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
     }
     
     .about-content {
         padding: 12px;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
     }
     
     .profile-image {
@@ -2408,6 +2489,9 @@ body {
     
     .project-card {
         padding: 12px;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
     }
     
     .project-icon {
@@ -2426,6 +2510,9 @@ body {
     
     .experience-card {
         padding: 12px;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
     }
     
     .experience-icon {
@@ -2444,6 +2531,9 @@ body {
     
     .welcome-content {
         padding: 20px;
+        width: calc(100% - 40px) !important;
+        max-width: calc(100% - 40px) !important;
+        overflow-x: hidden !important;
     }
     
     .welcome-avatar {
@@ -2469,14 +2559,18 @@ body {
     }
     
     .help-content {
-        width: 98vw;
-        max-height: 98vh;
-        height: 98vh;
+        width: calc(100% - 4px) !important;
+        max-width: calc(100% - 4px) !important;
+        height: calc(100% - 4px) !important;
+        overflow-x: hidden !important;
     }
     
     .help-body {
         padding: 15px;
         max-height: calc(98vh - 110px);
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
     }
     
     .tech-grid {
@@ -2486,6 +2580,8 @@ body {
     
     .tech-item {
         padding: 10px;
+        width: 100% !important;
+        max-width: 100% !important;
     }
     
     .tech-item i {
@@ -2503,25 +2599,48 @@ body {
 
 /* Landscape Mobile */
 @media (max-width: 768px) and (orientation: landscape) {
+    /* Prevent horizontal scroll completely */
+    html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        position: relative;
+    }
+    
+    .desktop {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+    }
+    
     .desktop-widgets {
         flex-direction: row;
         flex-wrap: wrap;
         align-content: flex-start;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
     }
     
     .widget {
         width: calc(50% - 5px);
         min-height: 80px;
+        max-width: calc(50% - 5px) !important;
+        overflow-x: hidden !important;
     }
     
     .dock {
         bottom: 3px;
         padding: 3px 8px;
+        width: auto !important;
+        max-width: calc(100% - 16px) !important;
+        overflow-x: hidden !important;
     }
     
     .dock-item {
         width: 32px;
         height: 32px;
+        flex-shrink: 0;
     }
     
     .dock-item i {
@@ -2531,14 +2650,23 @@ body {
     /* 윈도우는 여전히 전체화면 유지 */
     .window {
         height: 100vh !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
     }
     
     .welcome-content {
         max-height: 80vh;
         overflow-y: auto;
+        width: calc(100% - 40px) !important;
+        max-width: calc(100% - 40px) !important;
+        overflow-x: hidden !important;
     }
     
     .help-content {
         max-height: 90vh;
+        width: calc(100% - 20px) !important;
+        max-width: calc(100% - 20px) !important;
+        overflow-x: hidden !important;
     }
 } 
