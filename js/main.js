@@ -49,6 +49,11 @@ class PortfolioOS {
     }
 
     setupEventListeners() {
+        // Menu bar help click
+        document.querySelector('.menu-item:last-child').addEventListener('click', () => {
+            this.openHelp();
+        });
+
         // Dock icon click
         document.querySelectorAll('.dock-item').forEach(item => {
             item.addEventListener('click', (e) => {
@@ -326,6 +331,22 @@ class PortfolioOS {
         }, 500);
     }
 
+    openHelp() {
+        const helpModal = document.getElementById('help-modal');
+        helpModal.style.display = 'flex';
+        setTimeout(() => {
+            helpModal.classList.remove('hidden');
+        }, 10);
+    }
+
+    closeHelp() {
+        const helpModal = document.getElementById('help-modal');
+        helpModal.classList.add('hidden');
+        setTimeout(() => {
+            helpModal.style.display = 'none';
+        }, 300);
+    }
+
     initializeWidgets() {
         this.updateClockWidget();
         this.updateSystemWidget();
@@ -524,9 +545,13 @@ class PortfolioOS {
     }
 }
 
-// Global function for welcome button
+// Global functions for modal buttons
 function closeWelcome() {
     portfolioOS.closeWelcome();
+}
+
+function closeHelp() {
+    portfolioOS.closeHelp();
 }
 
 // Dock hover effects
