@@ -4,17 +4,18 @@ class PortfolioOS {
         this.windows = new Map();
         this.zIndex = 100;
         this.terminalCommands = {
-            'help': 'Available commands: help, about, skills, projects, experience, contact, blog, github, clear, date, whoami',
-            'about': 'Full Stack Developer passionate about creating innovative web solutions.',
-            'skills': 'Frontend: HTML, CSS, JavaScript, React, Vue.js\nBackend: Node.js, Python, Express, Django',
-            'projects': 'Portfolio OS - Creative OS-style portfolio website\nReact Native App - Cross-platform mobile application',
-            'experience': '2023-Present: Senior Frontend Developer at Tech Company\n2021-2023: Full Stack Developer at Startup Inc.',
-            'contact': 'Email: your.email@example.com\nGitHub: github.com/yourusername\nLinkedIn: linkedin.com/in/yourprofile',
+            'help': 'Available commands: help, about, skills, projects, experience, contact, blog, github, baekjoon, clear, date, whoami',
+            'about': 'Full Stack Developer passionate about creating innovative web solutions. Currently working at GoodSen as a 1-person full-stack developer.',
+            'skills': 'Frontend: HTML, CSS, JavaScript\nBackend: Java, Spring Boot, Spring Security\nDatabase: MySQL, MyBatis, JPA\nCloud & DevOps: AWS, Docker, Jenkins\nTools: Git, Confluence, Notion',
+            'projects': 'OneStack - IT 전문가 매칭 플랫폼 (팀장)\nKyleTalk - 실시간 채팅 기반 소셜 네트워크 서비스\nKyleMall - 남성 의류 쇼핑몰\nOne Develop - 개발 전문 커뮤니티 플랫폼 (팀장)',
+            'experience': '2025.04-Present: Full Stack Developer & DevOps Engineer at GoodSen\n- 온라인 교육 플랫폼 백엔드 시스템 설계 및 구축\n- 사내 Python 업무 자동화 시스템 설계 및 구축',
+            'contact': 'Email: rlaxoals9977@gmail.com\nGitHub: github.com/Kyle-TM99\nBlog: pids.tistory.com\nLinkedIn: linkedin.com/in/taemin-kim-353b20352',
             'blog': 'Kyle Developer Story - Tech Blog\nURL: https://pids.tistory.com/\nTopics: Vue.js, Unity, Java, QueryDSL, AI, Algorithm, Web Development',
             'github': 'Kyle GitHub Profile\nURL: https://github.com/Kyle-TM99\nRepositories: OneStack, KyleTalk, KyleMall, OneDevelop, OnClass and more...',
+            'baekjoon': 'Baekjoon Online Judge Profile\nHandle: pids\nURL: https://solved.ac/profile/pids\nCheck the Baekjoon widget for live stats!',
             'clear': 'clear',
             'date': new Date().toLocaleString(),
-            'whoami': 'Full Stack Developer | Creative Problem Solver | Tech Enthusiast'
+            'whoami': 'Full Stack Developer | GoodSen | Team Leader | Problem Solver'
         };
         this.init();
     }
@@ -33,6 +34,9 @@ class PortfolioOS {
         
         // Update GitHub data every 5 minutes
         setInterval(() => this.fetchGitHubData(), 300000);
+        
+        // Update Baekjoon data every 10 minutes
+        setInterval(() => this.fetchBaekjoonData(), 600000);
     }
 
     updateTime() {
@@ -49,9 +53,15 @@ class PortfolioOS {
     }
 
     setupEventListeners() {
-        // Menu bar help click
-        document.querySelector('.menu-item:last-child').addEventListener('click', () => {
-            this.openHelp();
+        // Menu bar items click
+        document.querySelectorAll('.menu-item').forEach((item, index) => {
+            item.addEventListener('click', () => {
+                if (item.textContent === '도움말') {
+                    this.openHelp();
+                } else if (item.textContent === '후원') {
+                    window.open('https://coff.ee/kyle99', '_blank');
+                }
+            });
         });
 
         // Dock icon click
@@ -73,10 +83,6 @@ class PortfolioOS {
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('close')) {
                 this.closeWindow(e.target.closest('.window'));
-            } else if (e.target.classList.contains('minimize')) {
-                this.minimizeWindow(e.target.closest('.window'));
-            } else if (e.target.classList.contains('maximize')) {
-                this.maximizeWindow(e.target.closest('.window'));
             }
         });
 
@@ -111,19 +117,18 @@ class PortfolioOS {
         
         if (!windowElement) return;
 
-        // If window is already open, just focus it
-        if (windowElement.classList.contains('show')) {
+        // If window is already open and visible, just focus it
+        if (windowElement.classList.contains('show') && windowElement.style.display !== 'none') {
             this.focusWindow(windowElement);
             return;
         }
 
-        // Position window
-        const centerX = (globalThis.innerWidth - 400) / 2;
-        const centerY = (globalThis.innerHeight - 300) / 2;
-        const offset = document.querySelectorAll('.window.show').length * 30;
-
-        windowElement.style.left = `${centerX + offset}px`;
-        windowElement.style.top = `${centerY + offset}px`;
+        // Reset any previous positioning
+        windowElement.style.left = '';
+        windowElement.style.top = '';
+        windowElement.style.transform = '';
+        
+        // Show window (CSS will center it automatically)
         windowElement.style.display = 'block';
         
         // Animate window opening
@@ -154,36 +159,6 @@ class PortfolioOS {
         this.windows.delete(windowElement.id);
     }
 
-    minimizeWindow(windowElement) {
-        windowElement.style.transform = 'scale(0.1) translateY(100vh)';
-        windowElement.style.opacity = '0';
-        setTimeout(() => {
-            windowElement.style.display = 'none';
-            windowElement.style.transform = '';
-            windowElement.style.opacity = '';
-        }, 300);
-    }
-
-    maximizeWindow(windowElement) {
-        if (windowElement.dataset.maximized === 'true') {
-            // Restore
-            windowElement.style.width = '';
-            windowElement.style.height = '';
-            windowElement.style.left = windowElement.dataset.originalLeft;
-            windowElement.style.top = windowElement.dataset.originalTop;
-            windowElement.dataset.maximized = 'false';
-        } else {
-            // Maximize
-            windowElement.dataset.originalLeft = windowElement.style.left;
-            windowElement.dataset.originalTop = windowElement.style.top;
-            windowElement.style.left = '0px';
-            windowElement.style.top = '30px';
-            windowElement.style.width = '100vw';
-            windowElement.style.height = 'calc(100vh - 30px)';
-            windowElement.dataset.maximized = 'true';
-        }
-    }
-
     focusWindow(windowElement) {
         // Bring window to front
         this.zIndex++;
@@ -200,38 +175,68 @@ class PortfolioOS {
         document.querySelectorAll('.window').forEach(windowElement => {
             const header = windowElement.querySelector('.window-header');
             let isDragging = false;
-            let currentX = 0;
-            let currentY = 0;
-            let initialX = 0;
-            let initialY = 0;
+            let startX = 0;
+            let startY = 0;
+            let startLeft = 0;
+            let startTop = 0;
 
             header.addEventListener('mousedown', (e) => {
                 if (e.target.classList.contains('control-btn')) return;
                 
                 isDragging = true;
-                initialX = e.clientX - windowElement.offsetLeft;
-                initialY = e.clientY - windowElement.offsetTop;
+                
+                // Get current position
+                const rect = windowElement.getBoundingClientRect();
+                startLeft = rect.left;
+                startTop = rect.top;
+                startX = e.clientX;
+                startY = e.clientY;
+                
+                // Remove transform and set absolute position
+                windowElement.style.transform = 'none';
+                windowElement.style.left = startLeft + 'px';
+                windowElement.style.top = startTop + 'px';
+                windowElement.classList.add('dragging');
+                
                 header.style.cursor = 'grabbing';
+                e.preventDefault();
             });
 
             document.addEventListener('mousemove', (e) => {
                 if (!isDragging) return;
-
+                
                 e.preventDefault();
-                currentX = e.clientX - initialX;
-                currentY = e.clientY - initialY;
-
+                
+                const deltaX = e.clientX - startX;
+                const deltaY = e.clientY - startY;
+                
+                let newLeft = startLeft + deltaX;
+                let newTop = startTop + deltaY;
+                
                 // Keep window within viewport
-                currentX = Math.max(0, Math.min(currentX, globalThis.innerWidth - windowElement.offsetWidth));
-                currentY = Math.max(30, Math.min(currentY, globalThis.innerHeight - windowElement.offsetHeight));
-
-                windowElement.style.left = `${currentX}px`;
-                windowElement.style.top = `${currentY}px`;
+                const maxX = window.innerWidth - windowElement.offsetWidth;
+                const maxY = window.innerHeight - windowElement.offsetHeight;
+                
+                newLeft = Math.max(0, Math.min(newLeft, maxX));
+                newTop = Math.max(30, Math.min(newTop, maxY));
+                
+                windowElement.style.left = newLeft + 'px';
+                windowElement.style.top = newTop + 'px';
             });
 
             document.addEventListener('mouseup', () => {
-                isDragging = false;
-                header.style.cursor = 'move';
+                if (isDragging) {
+                    isDragging = false;
+                    header.style.cursor = 'move';
+                    windowElement.classList.remove('dragging');
+                }
+            });
+
+            // Prevent drag when clicking on controls
+            header.addEventListener('click', (e) => {
+                if (e.target.classList.contains('control-btn')) {
+                    isDragging = false;
+                }
             });
         });
     }
@@ -317,10 +322,10 @@ class PortfolioOS {
     initializeWelcome() {
         const welcomeModal = document.getElementById('welcome-modal');
         
-        // Auto-close welcome after 5 seconds
-        setTimeout(() => {
-            this.closeWelcome();
-        }, 5000);
+        // Auto-close welcome after 5 seconds - REMOVED
+        // setTimeout(() => {
+        //     this.closeWelcome();
+        // }, 5000);
     }
 
     closeWelcome() {
@@ -351,6 +356,7 @@ class PortfolioOS {
         this.updateClockWidget();
         this.updateSystemWidget();
         this.fetchGitHubData();
+        this.fetchBaekjoonData();
         this.startUptime = Date.now();
     }
 
@@ -433,6 +439,43 @@ class PortfolioOS {
         }
     }
 
+    async fetchBaekjoonData() {
+        try {
+            console.log('Fetching Baekjoon data for user: pids');
+            
+            // Simple fetch without extra headers
+            const userResponse = await fetch('https://solved.ac/api/v3/user/show?handle=pids');
+            
+            console.log('Baekjoon API Response Status:', userResponse.status);
+            
+            if (userResponse.ok) {
+                const userData = await userResponse.json();
+                console.log('Baekjoon API Response Data:', userData);
+                this.updateBaekjoonWidget(userData);
+            } else {
+                console.error('Baekjoon API Error:', userResponse.status, userResponse.statusText);
+                // Use sample data for testing
+                this.updateBaekjoonWidget({
+                    handle: "pids",
+                    rating: 1425,
+                    tier: 9,
+                    rank: 15000,
+                    solvedCount: 456
+                });
+            }
+        } catch (error) {
+            console.error('Failed to fetch Baekjoon data:', error);
+            // Use sample data for testing
+            this.updateBaekjoonWidget({
+                handle: "pids",
+                rating: 1425,
+                tier: 9,
+                rank: 15000,
+                solvedCount: 456
+            });
+        }
+    }
+
     updateGitHubWidget(userData, reposData) {
         if (userData && reposData) {
             // Calculate additional stats from repositories
@@ -445,59 +488,59 @@ class PortfolioOS {
             const recentRepo = reposData.find(repo => repo.pushed_at);
             const lastActivity = recentRepo ? new Date(recentRepo.pushed_at) : null;
             
-                         // Update GitHub widget with dynamic content
-             const githubWidget = document.querySelector('.github-stats');
-             if (githubWidget) {
-                 githubWidget.innerHTML = `
-                     <div class="stat-row">
-                         <i class="fas fa-folder-open stat-icon"></i>
-                         <span class="stat-text">Public Repos: ${publicRepos}</span>
-                     </div>
-                     <div class="stat-row">
-                         <i class="fas fa-star stat-icon"></i>
-                         <span class="stat-text">Total Stars: ${totalStars}</span>
-                     </div>
-                     <div class="stat-row">
-                         <i class="fas fa-code-branch stat-icon"></i>
-                         <span class="stat-text">Total Forks: ${totalForks}</span>
-                     </div>
-                     <div class="stat-row">
-                         <i class="fas fa-users stat-icon"></i>
-                         <span class="stat-text">Followers: ${userData.followers}</span>
-                     </div>
-                     <div class="stat-row">
-                         <i class="fas fa-code stat-icon"></i>
-                         <span class="stat-text">Languages: ${Math.min(languages.length, 8)}+</span>
-                     </div>
-                     <div class="stat-row">
-                         <i class="fas fa-calendar-alt stat-icon"></i>
-                         <span class="stat-text">Since: ${new Date(userData.created_at).getFullYear()}.${String(new Date(userData.created_at).getMonth() + 1).padStart(2, '0')}</span>
-                     </div>
-                 `;
-             }
+            // Update GitHub widget with dynamic content
+            const githubWidget = document.querySelector('.github-stats');
+            if (githubWidget) {
+                githubWidget.innerHTML = `
+                    <div class="stat-row">
+                        <i class="fas fa-folder-open stat-icon"></i>
+                        <span class="stat-text">Public Repos: ${publicRepos}</span>
+                    </div>
+                    <div class="stat-row">
+                        <i class="fas fa-star stat-icon"></i>
+                        <span class="stat-text">Total Stars: ${totalStars}</span>
+                    </div>
+                    <div class="stat-row">
+                        <i class="fas fa-code-branch stat-icon"></i>
+                        <span class="stat-text">Total Forks: ${totalForks}</span>
+                    </div>
+                    <div class="stat-row">
+                        <i class="fas fa-users stat-icon"></i>
+                        <span class="stat-text">Followers: ${userData.followers}</span>
+                    </div>
+                    <div class="stat-row">
+                        <i class="fas fa-code stat-icon"></i>
+                        <span class="stat-text">Languages: ${Math.min(languages.length, 8)}+</span>
+                    </div>
+                    <div class="stat-row">
+                        <i class="fas fa-calendar-alt stat-icon"></i>
+                        <span class="stat-text">Since: ${new Date(userData.created_at).getFullYear()}.${String(new Date(userData.created_at).getMonth() + 1).padStart(2, '0')}</span>
+                    </div>
+                `;
+            }
             
             // Update projects widget with real repository data
             this.updateProjectsWidget(reposData);
-                 } else {
-             // Fallback to static data if API fails
-             const githubWidget = document.querySelector('.github-stats');
-             if (githubWidget) {
-                 githubWidget.innerHTML = `
-                     <div class="stat-row">
-                         <i class="fas fa-folder-open stat-icon"></i>
-                         <span class="stat-text">Public Repos: 8</span>
-                     </div>
-                     <div class="stat-row">
-                         <i class="fas fa-users stat-icon"></i>
-                         <span class="stat-text">Followers: 1</span>
-                     </div>
-                     <div class="stat-row">
-                         <i class="fas fa-calendar-alt stat-icon"></i>
-                         <span class="stat-text">Since: 2024.04</span>
-                     </div>
-                 `;
-             }
-         }
+        } else {
+            // Fallback to static data if API fails
+            const githubWidget = document.querySelector('.github-stats');
+            if (githubWidget) {
+                githubWidget.innerHTML = `
+                    <div class="stat-row">
+                        <i class="fas fa-folder-open stat-icon"></i>
+                        <span class="stat-text">Public Repos: 8</span>
+                    </div>
+                    <div class="stat-row">
+                        <i class="fas fa-users stat-icon"></i>
+                        <span class="stat-text">Followers: 1</span>
+                    </div>
+                    <div class="stat-row">
+                        <i class="fas fa-calendar-alt stat-icon"></i>
+                        <span class="stat-text">Since: 2024.04</span>
+                    </div>
+                `;
+            }
+        }
     }
 
     updateProjectsWidget(reposData) {
@@ -524,6 +567,91 @@ class PortfolioOS {
                 </div>
             `).join('');
         }
+    }
+
+    updateBaekjoonWidget(userData) {
+        if (userData) {
+            // Get tier information
+            const tier = userData.tier || 0;
+            const tierName = this.getTierName(tier);
+            const tierColor = this.getTierColor(tier);
+            
+            // Get solved count (handle different possible field names)
+            const solvedCount = userData.solvedCount || userData.solved || 0;
+            const rating = userData.rating || 0;
+            const rank = userData.rank || 'N/A';
+            
+            console.log('Baekjoon API Response:', userData); // Debug log
+            
+            // Update Baekjoon widget with dynamic content
+            const baekjoonWidget = document.querySelector('.baekjoon-stats');
+            if (baekjoonWidget) {
+                baekjoonWidget.innerHTML = `
+                    <div class="stat-row">
+                        <span class="stat-icon">🏆</span>
+                        <span class="stat-text">Tier: <span class="tier-text" style="color: ${tierColor}">${tierName}</span></span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-icon">📝</span>
+                        <span class="stat-text">Solved: <span class="solved-count">${solvedCount}</span></span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-icon">📊</span>
+                        <span class="stat-text">Rank: <span class="rank-text">${rank}</span></span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-icon">⭐</span>
+                        <span class="stat-text">Rating: <span class="rating-text">${rating}</span></span>
+                    </div>
+                `;
+            }
+        } else {
+            // Fallback to static data if API fails
+            const baekjoonWidget = document.querySelector('.baekjoon-stats');
+            if (baekjoonWidget) {
+                baekjoonWidget.innerHTML = `
+                    <div class="stat-row">
+                        <span class="stat-icon">🏆</span>
+                        <span class="stat-text">Tier: <span class="tier-text">Bronze</span></span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-icon">📝</span>
+                        <span class="stat-text">Solved: <span class="solved-count">0</span></span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-icon">📊</span>
+                        <span class="stat-text">Rank: <span class="rank-text">N/A</span></span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-icon">⭐</span>
+                        <span class="stat-text">Rating: <span class="rating-text">0</span></span>
+                    </div>
+                `;
+            }
+        }
+    }
+
+    getTierName(tier) {
+        const tiers = {
+            1: 'Bronze V', 2: 'Bronze IV', 3: 'Bronze III', 4: 'Bronze II', 5: 'Bronze I',
+            6: 'Silver V', 7: 'Silver IV', 8: 'Silver III', 9: 'Silver II', 10: 'Silver I',
+            11: 'Gold V', 12: 'Gold IV', 13: 'Gold III', 14: 'Gold II', 15: 'Gold I',
+            16: 'Platinum V', 17: 'Platinum IV', 18: 'Platinum III', 19: 'Platinum II', 20: 'Platinum I',
+            21: 'Diamond V', 22: 'Diamond IV', 23: 'Diamond III', 24: 'Diamond II', 25: 'Diamond I',
+            26: 'Ruby V', 27: 'Ruby IV', 28: 'Ruby III', 29: 'Ruby II', 30: 'Ruby I',
+            31: 'Master'
+        };
+        return tiers[tier] || 'Unrated';
+    }
+
+    getTierColor(tier) {
+        if (tier <= 5) return '#ad5600'; // Bronze
+        if (tier <= 10) return '#435f7a'; // Silver
+        if (tier <= 15) return '#ec9a00'; // Gold
+        if (tier <= 20) return '#27e2a4'; // Platinum
+        if (tier <= 25) return '#00b4fc'; // Diamond
+        if (tier <= 30) return '#ff0062'; // Ruby
+        return '#ff0000'; // Master
     }
 
     getTimeAgo(date) {
