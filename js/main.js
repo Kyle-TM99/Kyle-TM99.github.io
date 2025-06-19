@@ -4,12 +4,14 @@ class PortfolioOS {
         this.windows = new Map();
         this.zIndex = 100;
         this.terminalCommands = {
-            'help': 'Available commands: help, about, skills, projects, experience, contact, clear, date, whoami',
+            'help': 'Available commands: help, about, skills, projects, experience, contact, blog, github, clear, date, whoami',
             'about': 'Full Stack Developer passionate about creating innovative web solutions.',
             'skills': 'Frontend: HTML, CSS, JavaScript, React, Vue.js\nBackend: Node.js, Python, Express, Django',
             'projects': 'Portfolio OS - Creative OS-style portfolio website\nReact Native App - Cross-platform mobile application',
             'experience': '2023-Present: Senior Frontend Developer at Tech Company\n2021-2023: Full Stack Developer at Startup Inc.',
             'contact': 'Email: your.email@example.com\nGitHub: github.com/yourusername\nLinkedIn: linkedin.com/in/yourprofile',
+            'blog': 'Kyle Developer Story - Tech Blog\nURL: https://pids.tistory.com/\nTopics: Vue.js, Unity, Java, QueryDSL, AI, Algorithm, Web Development',
+            'github': 'Kyle GitHub Profile\nURL: https://github.com/Kyle-TM99\nRepositories: OneStack, KyleTalk, KyleMall, OneDevelop, OnClass and more...',
             'clear': 'clear',
             'date': new Date().toLocaleString(),
             'whoami': 'Full Stack Developer | Creative Problem Solver | Tech Enthusiast'
@@ -21,9 +23,16 @@ class PortfolioOS {
         this.updateTime();
         this.setupEventListeners();
         this.initializeWelcome();
+        this.initializeWidgets();
         
         // Update time every second
         setInterval(() => this.updateTime(), 1000);
+        
+        // Update widgets every 5 seconds
+        setInterval(() => this.updateWidgets(), 5000);
+        
+        // Update GitHub data every 5 minutes
+        setInterval(() => this.fetchGitHubData(), 300000);
     }
 
     updateTime() {
@@ -40,24 +49,18 @@ class PortfolioOS {
     }
 
     setupEventListeners() {
-        // Desktop icon double-click
-        document.querySelectorAll('.desktop-icon').forEach(icon => {
-            let clickCount = 0;
-            icon.addEventListener('click', (e) => {
-                clickCount++;
-                setTimeout(() => {
-                    if (clickCount === 2) {
-                        this.openWindow(icon.dataset.app);
-                    }
-                    clickCount = 0;
-                }, 300);
-            });
-        });
-
         // Dock icon click
         document.querySelectorAll('.dock-item').forEach(item => {
             item.addEventListener('click', (e) => {
-                this.openWindow(item.dataset.app);
+                if (item.dataset.app === 'blog') {
+                    // 블로그는 새 창에서 열기
+                    window.open('https://pids.tistory.com/', '_blank');
+                } else if (item.dataset.app === 'github') {
+                    // GitHub은 새 창에서 열기
+                    window.open('https://github.com/Kyle-TM99', '_blank');
+                } else {
+                    this.openWindow(item.dataset.app);
+                }
             });
         });
 
@@ -80,9 +83,9 @@ class PortfolioOS {
 
         // Window focus management
         document.addEventListener('mousedown', (e) => {
-            const window = e.target.closest('.window');
-            if (window && window.style.display !== 'none') {
-                this.focusWindow(window);
+            const windowElement = e.target.closest('.window');
+            if (windowElement && windowElement.style.display !== 'none') {
+                this.focusWindow(windowElement);
             }
         });
 
@@ -90,8 +93,8 @@ class PortfolioOS {
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 // Close all windows
-                document.querySelectorAll('.window.show').forEach(window => {
-                    this.closeWindow(window);
+                document.querySelectorAll('.window.show').forEach(windowElement => {
+                    this.closeWindow(windowElement);
                 });
             }
         });
@@ -99,98 +102,98 @@ class PortfolioOS {
 
     openWindow(appName) {
         const windowId = `${appName}-window`;
-        const window = document.getElementById(windowId);
+        const windowElement = document.getElementById(windowId);
         
-        if (!window) return;
+        if (!windowElement) return;
 
         // If window is already open, just focus it
-        if (window.classList.contains('show')) {
-            this.focusWindow(window);
+        if (windowElement.classList.contains('show')) {
+            this.focusWindow(windowElement);
             return;
         }
 
         // Position window
-        const centerX = (window.innerWidth - 400) / 2;
-        const centerY = (window.innerHeight - 300) / 2;
+        const centerX = (globalThis.innerWidth - 400) / 2;
+        const centerY = (globalThis.innerHeight - 300) / 2;
         const offset = document.querySelectorAll('.window.show').length * 30;
 
-        window.style.left = `${centerX + offset}px`;
-        window.style.top = `${centerY + offset}px`;
-        window.style.display = 'block';
+        windowElement.style.left = `${centerX + offset}px`;
+        windowElement.style.top = `${centerY + offset}px`;
+        windowElement.style.display = 'block';
         
         // Animate window opening
         setTimeout(() => {
-            window.classList.add('show');
-            this.focusWindow(window);
+            windowElement.classList.add('show');
+            this.focusWindow(windowElement);
         }, 10);
 
         // Store window reference
-        this.windows.set(windowId, window);
+        this.windows.set(windowId, windowElement);
 
         // Special handling for terminal
         if (appName === 'terminal') {
-            const terminalInput = window.querySelector('.terminal-input');
+            const terminalInput = windowElement.querySelector('.terminal-input');
             if (terminalInput) {
                 setTimeout(() => terminalInput.focus(), 300);
             }
         }
     }
 
-    closeWindow(window) {
-        window.classList.remove('show');
+    closeWindow(windowElement) {
+        windowElement.classList.remove('show');
         setTimeout(() => {
-            window.style.display = 'none';
+            windowElement.style.display = 'none';
         }, 300);
 
         // Remove from windows map
-        this.windows.delete(window.id);
+        this.windows.delete(windowElement.id);
     }
 
-    minimizeWindow(window) {
-        window.style.transform = 'scale(0.1) translateY(100vh)';
-        window.style.opacity = '0';
+    minimizeWindow(windowElement) {
+        windowElement.style.transform = 'scale(0.1) translateY(100vh)';
+        windowElement.style.opacity = '0';
         setTimeout(() => {
-            window.style.display = 'none';
-            window.style.transform = '';
-            window.style.opacity = '';
+            windowElement.style.display = 'none';
+            windowElement.style.transform = '';
+            windowElement.style.opacity = '';
         }, 300);
     }
 
-    maximizeWindow(window) {
-        if (window.dataset.maximized === 'true') {
+    maximizeWindow(windowElement) {
+        if (windowElement.dataset.maximized === 'true') {
             // Restore
-            window.style.width = '';
-            window.style.height = '';
-            window.style.left = window.dataset.originalLeft;
-            window.style.top = window.dataset.originalTop;
-            window.dataset.maximized = 'false';
+            windowElement.style.width = '';
+            windowElement.style.height = '';
+            windowElement.style.left = windowElement.dataset.originalLeft;
+            windowElement.style.top = windowElement.dataset.originalTop;
+            windowElement.dataset.maximized = 'false';
         } else {
             // Maximize
-            window.dataset.originalLeft = window.style.left;
-            window.dataset.originalTop = window.style.top;
-            window.style.left = '0px';
-            window.style.top = '30px';
-            window.style.width = '100vw';
-            window.style.height = 'calc(100vh - 30px)';
-            window.dataset.maximized = 'true';
+            windowElement.dataset.originalLeft = windowElement.style.left;
+            windowElement.dataset.originalTop = windowElement.style.top;
+            windowElement.style.left = '0px';
+            windowElement.style.top = '30px';
+            windowElement.style.width = '100vw';
+            windowElement.style.height = 'calc(100vh - 30px)';
+            windowElement.dataset.maximized = 'true';
         }
     }
 
-    focusWindow(window) {
+    focusWindow(windowElement) {
         // Bring window to front
         this.zIndex++;
-        window.style.zIndex = this.zIndex;
+        windowElement.style.zIndex = this.zIndex;
 
         // Update visual focus
         document.querySelectorAll('.window').forEach(w => {
             w.classList.remove('focused');
         });
-        window.classList.add('focused');
+        windowElement.classList.add('focused');
     }
 
     makeDraggable() {
-        document.querySelectorAll('.window').forEach(window => {
-            const header = window.querySelector('.window-header');
+        document.querySelectorAll('.window').forEach(windowElement => {
+            const header = windowElement.querySelector('.window-header');
             let isDragging = false;
             let currentX = 0;
             let currentY = 0;
@@ -201,8 +204,8 @@ class PortfolioOS {
                 if (e.target.classList.contains('control-btn')) return;
                 
                 isDragging = true;
-                initialX = e.clientX - window.offsetLeft;
-                initialY = e.clientY - window.offsetTop;
+                initialX = e.clientX - windowElement.offsetLeft;
+                initialY = e.clientY - windowElement.offsetTop;
                 header.style.cursor = 'grabbing';
             });
 
@@ -214,11 +217,11 @@ class PortfolioOS {
                 currentY = e.clientY - initialY;
 
                 // Keep window within viewport
-                currentX = Math.max(0, Math.min(currentX, window.innerWidth - window.offsetWidth));
-                currentY = Math.max(30, Math.min(currentY, window.innerHeight - window.offsetHeight));
+                currentX = Math.max(0, Math.min(currentX, globalThis.innerWidth - windowElement.offsetWidth));
+                currentY = Math.max(30, Math.min(currentY, globalThis.innerHeight - windowElement.offsetHeight));
 
-                window.style.left = `${currentX}px`;
-                window.style.top = `${currentY}px`;
+                windowElement.style.left = `${currentX}px`;
+                windowElement.style.top = `${currentY}px`;
             });
 
             document.addEventListener('mouseup', () => {
@@ -321,6 +324,203 @@ class PortfolioOS {
         setTimeout(() => {
             welcomeModal.style.display = 'none';
         }, 500);
+    }
+
+    initializeWidgets() {
+        this.updateClockWidget();
+        this.updateSystemWidget();
+        this.fetchGitHubData();
+        this.startUptime = Date.now();
+    }
+
+    updateWidgets() {
+        this.updateClockWidget();
+        this.updateSystemWidget();
+    }
+
+    updateClockWidget() {
+        const now = new Date();
+        const timeElement = document.querySelector('.current-time');
+        const dateElement = document.querySelector('.current-date');
+        
+        if (timeElement) {
+            const timeString = now.toLocaleTimeString('ko-KR', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false 
+            });
+            timeElement.textContent = timeString;
+        }
+        
+        if (dateElement) {
+            const dateString = now.toLocaleDateString('ko-KR', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                weekday: 'long'
+            });
+            dateElement.textContent = dateString;
+        }
+    }
+
+    updateSystemWidget() {
+        // Update uptime
+        const uptimeElement = document.getElementById('uptime');
+        if (uptimeElement && this.startUptime) {
+            const uptime = Date.now() - this.startUptime;
+            const hours = Math.floor(uptime / (1000 * 60 * 60));
+            const minutes = Math.floor((uptime % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((uptime % (1000 * 60)) / 1000);
+            uptimeElement.textContent = `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // Simulate CPU and Memory usage
+        const cpuElement = document.querySelector('.system-stats .stat-item:nth-child(1) .stat-value');
+        const memoryElement = document.querySelector('.system-stats .stat-item:nth-child(2) .stat-value');
+        
+        if (cpuElement) {
+            const cpu = Math.floor(Math.random() * 20) + 30; // 30-50%
+            cpuElement.textContent = `${cpu}%`;
+        }
+        
+        if (memoryElement) {
+            const memory = (Math.random() * 1 + 1.5).toFixed(1); // 1.5-2.5GB
+            memoryElement.textContent = `${memory}GB`;
+        }
+    }
+
+    async fetchGitHubData() {
+        try {
+            // Fetch user data
+            const userResponse = await fetch('https://api.github.com/users/Kyle-TM99');
+            const userData = await userResponse.json();
+            
+            // Fetch repositories data
+            const reposResponse = await fetch('https://api.github.com/users/Kyle-TM99/repos?sort=updated&per_page=100');
+            const reposData = await reposResponse.json();
+            
+            if (userResponse.ok && reposResponse.ok) {
+                this.updateGitHubWidget(userData, reposData);
+            } else {
+                console.error('GitHub API Error');
+                this.updateGitHubWidget(null, null);
+            }
+        } catch (error) {
+            console.error('Failed to fetch GitHub data:', error);
+            this.updateGitHubWidget(null, null);
+        }
+    }
+
+    updateGitHubWidget(userData, reposData) {
+        if (userData && reposData) {
+            // Calculate additional stats from repositories
+            const totalStars = reposData.reduce((sum, repo) => sum + repo.stargazers_count, 0);
+            const totalForks = reposData.reduce((sum, repo) => sum + repo.forks_count, 0);
+            const languages = [...new Set(reposData.map(repo => repo.language).filter(lang => lang))];
+            const publicRepos = reposData.filter(repo => !repo.private).length;
+            
+            // Find most recent commit
+            const recentRepo = reposData.find(repo => repo.pushed_at);
+            const lastActivity = recentRepo ? new Date(recentRepo.pushed_at) : null;
+            
+                         // Update GitHub widget with dynamic content
+             const githubWidget = document.querySelector('.github-stats');
+             if (githubWidget) {
+                 githubWidget.innerHTML = `
+                     <div class="stat-row">
+                         <i class="fas fa-folder-open stat-icon"></i>
+                         <span class="stat-text">Public Repos: ${publicRepos}</span>
+                     </div>
+                     <div class="stat-row">
+                         <i class="fas fa-star stat-icon"></i>
+                         <span class="stat-text">Total Stars: ${totalStars}</span>
+                     </div>
+                     <div class="stat-row">
+                         <i class="fas fa-code-branch stat-icon"></i>
+                         <span class="stat-text">Total Forks: ${totalForks}</span>
+                     </div>
+                     <div class="stat-row">
+                         <i class="fas fa-users stat-icon"></i>
+                         <span class="stat-text">Followers: ${userData.followers}</span>
+                     </div>
+                     <div class="stat-row">
+                         <i class="fas fa-code stat-icon"></i>
+                         <span class="stat-text">Languages: ${Math.min(languages.length, 8)}+</span>
+                     </div>
+                     <div class="stat-row">
+                         <i class="fas fa-calendar-alt stat-icon"></i>
+                         <span class="stat-text">Since: ${new Date(userData.created_at).getFullYear()}.${String(new Date(userData.created_at).getMonth() + 1).padStart(2, '0')}</span>
+                     </div>
+                 `;
+             }
+            
+            // Update projects widget with real repository data
+            this.updateProjectsWidget(reposData);
+                 } else {
+             // Fallback to static data if API fails
+             const githubWidget = document.querySelector('.github-stats');
+             if (githubWidget) {
+                 githubWidget.innerHTML = `
+                     <div class="stat-row">
+                         <i class="fas fa-folder-open stat-icon"></i>
+                         <span class="stat-text">Public Repos: 8</span>
+                     </div>
+                     <div class="stat-row">
+                         <i class="fas fa-users stat-icon"></i>
+                         <span class="stat-text">Followers: 1</span>
+                     </div>
+                     <div class="stat-row">
+                         <i class="fas fa-calendar-alt stat-icon"></i>
+                         <span class="stat-text">Since: 2024.04</span>
+                     </div>
+                 `;
+             }
+         }
+    }
+
+    updateProjectsWidget(reposData) {
+        if (!reposData || reposData.length === 0) return;
+        
+        // Sort by stars and recent activity, filter out forks
+        const featuredRepos = reposData
+            .filter(repo => !repo.fork && repo.name !== 'Kyle-TM99')  // Exclude forks and profile repo
+            .sort((a, b) => {
+                // Sort by stars first, then by recent updates
+                if (b.stargazers_count !== a.stargazers_count) {
+                    return b.stargazers_count - a.stargazers_count;
+                }
+                return new Date(b.pushed_at) - new Date(a.pushed_at);
+            })
+            .slice(0, 3);  // Take top 3
+        
+        const projectsList = document.querySelector('.project-list');
+        if (projectsList && featuredRepos.length > 0) {
+            projectsList.innerHTML = featuredRepos.map((repo, index) => `
+                <div class="project-item-mini">
+                    <div class="project-dot ${index === 0 ? 'active' : ''}"></div>
+                    <span title="${repo.description || 'No description'}">${repo.name}</span>
+                </div>
+            `).join('');
+        }
+    }
+
+    getTimeAgo(date) {
+        const now = new Date();
+        const diffMs = now - date;
+        const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+        const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+        const diffMinutes = Math.floor(diffMs / (1000 * 60));
+        
+        if (diffDays > 0) {
+            return `${diffDays}일 전`;
+        } else if (diffHours > 0) {
+            return `${diffHours}시간 전`;
+        } else if (diffMinutes > 0) {
+            return `${diffMinutes}분 전`;
+        } else {
+            return '방금 전';
+        }
     }
 }
 

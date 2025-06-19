@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio OS - Your Name</title>
+    <title>Portfolio - Kyle</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="image/Kyle.png">
+    <link rel="shortcut icon" type="image/png" href="image/Kyle.png">
+    <link rel="apple-touch-icon" href="image/Kyle.png">
+    
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -26,48 +32,144 @@
             </div>
         </div>
 
-        <!-- Desktop Icons -->
-        <div class="desktop-icons">
-            <div class="desktop-icon" data-app="about">
-                <div class="icon-image">
+        <!-- Desktop Widgets -->
+        <div class="desktop-widgets">
+            <!-- Profile Status Widget -->
+            <div class="widget info-widget">
+                <div class="widget-header">
                     <i class="fas fa-user-circle"></i>
+                    <span>Kyle Profile</span>
                 </div>
-                <div class="icon-label">About Me</div>
+                <div class="widget-content">
+                    <div class="profile-quick">
+                        <div class="status-indicator online"></div>
+                        <div class="status-text">현재 Goodsen에서 재직중</div>
+                        <div class="role">Full Stack Developer</div>
+                        <div class="location"><i class="fas fa-map-marker-alt"></i> Seoul, Korea</div>
+                    </div>
+                </div>
             </div>
-            
-            <div class="desktop-icon" data-app="skills">
-                <div class="icon-image">
-                    <i class="fas fa-code"></i>
+
+            <!-- GitHub Stats Widget -->
+            <div class="widget github-widget">
+                <div class="widget-header">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub Stats</span>
                 </div>
-                <div class="icon-label">Skills</div>
+                <div class="widget-content">
+                    <div class="github-stats">
+                        <div class="stat-row">
+                            <span class="stat-icon">📊</span>
+                            <span class="stat-text">Public Repos: 2</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-icon">👥</span>
+                            <span class="stat-text">Followers: 1</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-icon">📅</span>
+                            <span class="stat-text">Since: 2024.04</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <div class="desktop-icon" data-app="projects">
-                <div class="icon-image">
-                    <i class="fas fa-folder-open"></i>
+
+            <!-- My Projects Widget -->
+            <div class="widget projects-widget">
+                <div class="widget-header">
+                    <i class="fas fa-rocket"></i>
+                    <span>Kyle's Projects</span>
                 </div>
-                <div class="icon-label">Projects</div>
+                <div class="widget-content">
+                    <div class="project-list">
+                        <div class="project-item-mini">
+                            <div class="project-dot active"></div>
+                            <span>Kyle-TM99.github.io</span>
+                        </div>
+                        <div class="project-item-mini">
+                            <div class="project-dot"></div>
+                            <span>Tech Blog</span>
+                        </div>
+                        <div class="project-item-mini">
+                            <div class="project-dot"></div>
+                            <span>Web Development</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <div class="desktop-icon" data-app="experience">
-                <div class="icon-image">
-                    <i class="fas fa-briefcase"></i>
+
+            <!-- My Skills Widget -->
+            <div class="widget skills-widget">
+                <div class="widget-header">
+                    <i class="fas fa-tools"></i>
+                    <span>Kyle's Skills</span>
                 </div>
-                <div class="icon-label">Experience</div>
+                <div class="widget-content">
+                    <div class="skill-bars">
+                        <div class="skill-bar">
+                            <span>Java</span>
+                            <div class="bar">
+                                <div class="fill" data-percent="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <span>Spring Framework</span>
+                            <div class="bar">
+                                <div class="fill" data-percent="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <span>JavaScript</span>
+                            <div class="bar">
+                                <div class="fill" data-percent="75"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <span>Docker</span>
+                            <div class="bar">
+                                <div class="fill" data-percent="70"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <div class="desktop-icon" data-app="contact">
-                <div class="icon-image">
-                    <i class="fas fa-envelope"></i>
+
+            <!-- Blog Activity Widget -->
+            <div class="widget blog-widget">
+                <div class="widget-header">
+                    <i class="fas fa-pen-alt"></i>
+                    <span>Blog Activity</span>
                 </div>
-                <div class="icon-label">Contact</div>
+                <div class="widget-content">
+                    <div class="blog-stats">
+                        <div class="stat-item">
+                            <span class="stat-label"><i class="fas fa-edit"></i> 총 글 수</span>
+                            <span class="stat-value">47</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label"><i class="fas fa-eye"></i> 총 조회수</span>
+                            <span class="stat-value">12.5K</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label"><i class="fas fa-clock"></i> 최근 포스팅</span>
+                            <span class="stat-value">3일 전</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <div class="desktop-icon" data-app="terminal">
-                <div class="icon-image">
-                    <i class="fas fa-terminal"></i>
+
+            <!-- Clock Widget -->
+            <div class="widget clock-widget">
+                <div class="widget-header">
+                    <i class="fas fa-clock"></i>
+                    <span>시계</span>
                 </div>
-                <div class="icon-label">Terminal</div>
+                <div class="widget-content">
+                    <div class="time-display">
+                        <div class="current-time"></div>
+                        <div class="current-date"></div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -92,6 +194,14 @@
             <div class="dock-item" data-app="contact">
                 <i class="fas fa-envelope"></i>
                 <div class="dock-tooltip">Contact</div>
+            </div>
+            <div class="dock-item" data-app="blog">
+                <i class="fas fa-blog"></i>
+                <div class="dock-tooltip">Tech Blog</div>
+            </div>
+            <div class="dock-item" data-app="github">
+                <i class="fab fa-github"></i>
+                <div class="dock-tooltip">GitHub</div>
             </div>
             <div class="dock-item" data-app="terminal">
                 <i class="fas fa-terminal"></i>
@@ -121,11 +231,13 @@
                         <i class="fas fa-user-circle"></i>
                     </div>
                     <div class="profile-info">
-                        <h2>Your Name</h2>
+                        <h2>Kyle</h2>
                         <p class="title">Full Stack Developer</p>
                         <p class="description">
-                            안녕하세요! 창의적이고 혁신적인 웹 개발자입니다. 
-                            사용자 경험을 중시하며, 깔끔하고 효율적인 코드를 작성하는 것을 좋아합니다.
+                            안녕하세요! Kyle입니다. 창의적이고 혁신적인 웹 개발을 추구하며, 
+                            사용자 경험을 중시하는 개발자입니다. 새로운 기술에 대한 열정과 
+                            깔끔한 코드를 작성하는 것을 좋아합니다. Tech Blog를 통해 
+                            개발 경험과 지식을 공유하고 있습니다.
                         </p>
                     </div>
                 </div>
@@ -156,26 +268,28 @@
                         <span class="skill-tag">JavaScript</span>
                         <span class="skill-tag">React</span>
                         <span class="skill-tag">Vue.js</span>
+                        <span class="skill-tag">Responsive Design</span>
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3>Backend</h3>
+                    <h3>Backend & Database</h3>
                     <div class="skill-items">
                         <span class="skill-tag">Node.js</span>
-                        <span class="skill-tag">Python</span>
                         <span class="skill-tag">Express</span>
-                        <span class="skill-tag">Django</span>
                         <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">RESTful API</span>
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3>Tools</h3>
+                    <h3>Tools & Technologies</h3>
                     <div class="skill-items">
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Git & GitHub</span>
                         <span class="skill-tag">VS Code</span>
-                        <span class="skill-tag">Figma</span>
-                        <span class="skill-tag">Photoshop</span>
+                        <span class="skill-tag">GitHub Pages</span>
+                        <span class="skill-tag">Tistory Blog</span>
+                        <span class="skill-tag">Web Animation</span>
+                        <span class="skill-tag">UI/UX Design</span>
                     </div>
                 </div>
             </div>
@@ -199,28 +313,44 @@
             <div class="projects-list">
                 <div class="project-item">
                     <div class="project-icon">
-                        <i class="fas fa-globe"></i>
+                        <i class="fas fa-desktop"></i>
                     </div>
                     <div class="project-info">
-                        <h3>Portfolio Website</h3>
-                        <p>창의적인 OS 스타일 포트폴리오 웹사이트</p>
+                        <h3>Kyle-TM99.github.io</h3>
+                        <p>OS 스타일 인터랙티브 포트폴리오 웹사이트</p>
                         <div class="project-tech">
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">HTML5</span>
+                            <span class="tech-tag">CSS3</span>
                             <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">GitHub Pages</span>
                         </div>
                     </div>
                 </div>
                 <div class="project-item">
                     <div class="project-icon">
-                        <i class="fas fa-mobile-alt"></i>
+                        <i class="fas fa-blog"></i>
                     </div>
                     <div class="project-info">
-                        <h3>React Native App</h3>
-                        <p>크로스 플랫폼 모바일 애플리케이션</p>
+                        <h3>Tech Blog</h3>
+                        <p>개발 경험과 기술 지식을 공유하는 기술 블로그</p>
                         <div class="project-tech">
-                            <span class="tech-tag">React Native</span>
-                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">Tistory</span>
+                            <span class="tech-tag">Technical Writing</span>
+                            <span class="tech-tag">Web Development</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-item">
+                    <div class="project-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>Web Development Projects</h3>
+                        <p>다양한 웹 개발 프로젝트 및 실험적 작업들</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">Node.js</span>
                         </div>
                     </div>
                 </div>
@@ -244,19 +374,27 @@
         <div class="window-content">
             <div class="timeline">
                 <div class="timeline-item">
-                    <div class="timeline-date">2023 - Present</div>
+                    <div class="timeline-date">2024 - Present</div>
                     <div class="timeline-content">
-                        <h3>Senior Frontend Developer</h3>
-                        <p class="company">Tech Company</p>
-                        <p>React 기반 대규모 웹 애플리케이션 개발 및 유지보수</p>
+                        <h3>Full Stack Developer</h3>
+                        <p class="company">Freelance</p>
+                        <p>개인 포트폴리오 및 웹 개발 프로젝트 진행, 기술 블로그 운영을 통한 지식 공유</p>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="timeline-date">2021 - 2023</div>
+                    <div class="timeline-date">2023 - 2024</div>
                     <div class="timeline-content">
-                        <h3>Full Stack Developer</h3>
-                        <p class="company">Startup Inc.</p>
-                        <p>풀스택 웹 개발 및 API 설계</p>
+                        <h3>Web Developer</h3>
+                        <p class="company">Personal Projects</p>
+                        <p>다양한 웹 기술 학습 및 실습, GitHub을 통한 오픈소스 기여</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2022 - 2023</div>
+                    <div class="timeline-content">
+                        <h3>Programming Enthusiast</h3>
+                        <p class="company">Self-Learning</p>
+                        <p>프로그래밍 기초부터 웹 개발 전반에 걸친 체계적 학습</p>
                     </div>
                 </div>
             </div>
@@ -280,19 +418,19 @@
             <div class="contact-info">
                 <div class="contact-item">
                     <i class="fas fa-envelope"></i>
-                    <span>your.email@example.com</span>
+                    <span>rlaxoals9977@gmail.com</span>
                 </div>
-                <div class="contact-item">
+                <div class="contact-item" onclick="window.open('https://github.com/Kyle-TM99', '_blank')" style="cursor: pointer;">
                     <i class="fab fa-github"></i>
-                    <span>github.com/yourusername</span>
+                    <span>github.com/Kyle-TM99</span>
+                </div>
+                <div class="contact-item" onclick="window.open('https://pids.tistory.com', '_blank')" style="cursor: pointer;">
+                    <i class="fas fa-blog"></i>
+                    <span>pids.tistory.com</span>
                 </div>
                 <div class="contact-item">
                     <i class="fab fa-linkedin"></i>
-                    <span>linkedin.com/in/yourprofile</span>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    <span>+82 10-0000-0000</span>
+                    <span>linkedin.com/in/kyle-developer</span>
                 </div>
             </div>
         </div>
@@ -327,9 +465,9 @@
     <!-- Welcome Modal -->
     <div class="welcome-modal" id="welcome-modal">
         <div class="welcome-content">
-            <h2>Portfolio OS에 오신 것을 환영합니다! 🚀</h2>
-            <p>창의적인 OS 스타일 포트폴리오입니다.</p>
-            <p>데스크톱 아이콘을 더블클릭하거나 Dock을 클릭해보세요!</p>
+            <h2>Welcome to Kyle Portfolio</h2>
+            <p>창의적인 포트폴리오입니다.</p>
+            <p>데스크톱 아이콘을 더블클릭하거나 Dock을 클릭해보세요</p>
             <button class="welcome-btn" onclick="closeWelcome()">시작하기</button>
         </div>
     </div>

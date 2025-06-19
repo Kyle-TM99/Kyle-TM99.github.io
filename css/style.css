@@ -96,58 +96,321 @@ body {
     font-weight: 500;
 }
 
-/* Desktop Icons */
-.desktop-icons {
+/* Desktop Widgets */
+.desktop-widgets {
     position: absolute;
-    top: 60px;
+    top: 50px;
     left: 30px;
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 30px;
-    z-index: 10;
-}
-
-.desktop-icon {
+    right: 30px;
+    bottom: 100px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    cursor: pointer;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 20px;
+    z-index: 10;
     padding: 10px;
-    border-radius: 8px;
+}
+
+.widget {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
     transition: all 0.3s ease;
-    width: 80px;
+    width: 280px;
+    height: fit-content;
+    max-height: 350px;
+    flex-shrink: 0;
 }
 
-.desktop-icon:hover {
+.github-widget {
+    max-height: 400px;
+}
+
+.widget:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.widget-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
     background: rgba(255, 255, 255, 0.1);
-    transform: scale(1.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 600;
+    color: white;
+    font-size: 14px;
 }
 
-.icon-image {
-    width: 48px;
-    height: 48px;
+.widget-header i {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.widget-content {
+    padding: 16px;
+}
+
+/* Clock Widget */
+.clock-widget {
+    grid-column: span 1;
+}
+
+.time-display {
+    text-align: center;
+    color: white;
+}
+
+.current-time {
+    font-size: 32px;
+    font-weight: 300;
+    margin-bottom: 8px;
+    font-family: 'SF Mono', Monaco, monospace;
+}
+
+.current-date {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* Weather Widget */
+.weather-widget {
+    grid-column: span 1;
+}
+
+.weather-info {
+    text-align: center;
+    color: white;
+}
+
+.temperature {
+    font-size: 28px;
+    font-weight: 300;
+    margin-bottom: 8px;
+}
+
+.weather-desc {
+    font-size: 16px;
+    margin-bottom: 4px;
+    opacity: 0.9;
+}
+
+.location {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+/* Quick Info Widget */
+.info-widget {
+    grid-column: span 1;
+}
+
+.profile-quick {
+    color: white;
+    text-align: center;
+}
+
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 0 auto 8px;
+}
+
+.status-indicator.online {
+    background: #4ade80;
+    box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+}
+
+.status-text {
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #4ade80;
+}
+
+.role {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+/* Projects Widget */
+.projects-widget {
+    grid-column: span 1;
+}
+
+.project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.project-item-mini {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    font-size: 14px;
+}
+
+.project-dot {
+    width: 8px;
+    height: 8px;
+    background: #667eea;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Skills Widget */
+.skills-widget {
+    grid-column: span 1;
+}
+
+.skill-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.skill-bar {
+    color: white;
+}
+
+.skill-bar span {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 4px;
+    opacity: 0.9;
+}
+
+.bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 3px;
+    transition: width 2s ease;
+    animation: fillBar 2s ease-out;
+}
+
+@keyframes fillBar {
+    from { width: 0%; }
+}
+
+.fill[data-percent="95"] { width: 95%; }
+.fill[data-percent="92"] { width: 92%; }
+.fill[data-percent="90"] { width: 90%; }
+.fill[data-percent="88"] { width: 88%; }
+.fill[data-percent="85"] { width: 85%; }
+.fill[data-percent="80"] { width: 80%; }
+.fill[data-percent="75"] { width: 75%; }
+.fill[data-percent="70"] { width: 70%; }
+
+/* GitHub Widget */
+.github-widget {
+    grid-column: span 1;
+}
+
+.github-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.stat-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 3px 0;
+    min-height: 24px;
+}
+
+.stat-icon {
+    font-size: 14px;
+    width: 16px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.stat-text {
+    font-size: 13px;
+    color: white;
+    font-weight: 500;
+}
+
+/* Blog Widget */
+.blog-widget {
+    grid-column: span 1;
+}
+
+.blog-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 12px;
+}
+
+.stat-label {
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.stat-label i {
+    font-size: 12px;
+    width: 14px;
+    text-align: center;
+}
+
+.stat-value {
+    font-weight: 600;
+    font-family: 'SF Mono', Monaco, monospace;
+}
+
+/* Profile Updates */
+.profile-quick .location {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 8px;
-    border-radius: 12px;
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    gap: 4px;
 }
 
-.icon-image i {
-    font-size: 24px;
-    color: white;
+.profile-quick .location i {
+    font-size: 11px;
 }
 
-.icon-label {
-    color: white;
-    font-size: 12px;
-    text-align: center;
-    font-weight: 500;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+/* Project dot active state */
+.project-dot.active {
+    background: #4CAF50;
+    animation: pulse 2s infinite;
 }
 
 /* Dock */
@@ -516,8 +779,12 @@ body {
     background: #1e1e1e;
     color: #00ff00;
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    width: 600px;
+    height: 400px;
     min-width: 600px;
     min-height: 400px;
+    max-width: 600px;
+    max-height: 400px;
 }
 
 .terminal-window .window-header {
@@ -527,23 +794,31 @@ body {
 
 .terminal-content {
     background: #1e1e1e;
-    height: 100%;
+    height: calc(100% - 49px); /* 헤더 높이 제외 */
     padding: 16px;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .terminal-output {
+    flex: 1;
+    overflow-y: auto;
     margin-bottom: 16px;
+    padding-right: 8px;
 }
 
 .terminal-line {
     margin-bottom: 4px;
     line-height: 1.4;
+    word-wrap: break-word;
 }
 
 .terminal-input-line {
     display: flex;
     align-items: center;
+    flex-shrink: 0;
+    margin-top: auto;
 }
 
 .terminal-prompt {
@@ -559,6 +834,25 @@ body {
     flex: 1;
     font-family: inherit;
     font-size: 14px;
+}
+
+/* Terminal Scrollbar */
+.terminal-output::-webkit-scrollbar {
+    width: 8px;
+}
+
+.terminal-output::-webkit-scrollbar-track {
+    background: #333;
+    border-radius: 4px;
+}
+
+.terminal-output::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 4px;
+}
+
+.terminal-output::-webkit-scrollbar-thumb:hover {
+    background: #888;
 }
 
 /* Welcome Modal */
@@ -634,11 +928,26 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
-    .desktop-icons {
-        grid-template-columns: repeat(2, 1fr);
-        top: 50px;
-        left: 20px;
-        right: 20px;
+    .desktop-widgets {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        top: 40px;
+        left: 15px;
+        right: 15px;
+        bottom: 80px;
+        padding: 5px;
+        gap: 15px;
+    }
+    
+    .widget {
+        max-height: 250px;
+    }
+    
+    .current-time {
+        font-size: 24px;
+    }
+    
+    .temperature {
+        font-size: 22px;
     }
     
     .window {
@@ -646,6 +955,15 @@ body {
         min-height: 70vh;
         left: 5vw !important;
         top: 15vh !important;
+    }
+    
+    .terminal-window {
+        width: 90vw;
+        height: 70vh;
+        max-width: 90vw;
+        max-height: 70vh;
+        min-width: 90vw;
+        min-height: 70vh;
     }
     
     .dock {
