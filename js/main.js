@@ -705,19 +705,19 @@ class PortfolioOS {
             if (baekjoonWidget) {
                 baekjoonWidget.innerHTML = `
                     <div class="stat-row">
-                        <span class="stat-icon">🏆</span>
+                        <i class="fas fa-trophy stat-icon"></i>
                         <span class="stat-text">Tier: <span class="tier-text" style="color: ${tierColor}">${tierName}</span></span>
                     </div>
                     <div class="stat-row">
-                        <span class="stat-icon">📝</span>
+                        <i class="fas fa-code stat-icon"></i>
                         <span class="stat-text">Solved: <span class="solved-count">${solvedCount}</span></span>
                     </div>
                     <div class="stat-row">
-                        <span class="stat-icon">📊</span>
+                        <i class="fas fa-chart-line stat-icon"></i>
                         <span class="stat-text">Rank: <span class="rank-text">${rank}</span></span>
                     </div>
                     <div class="stat-row">
-                        <span class="stat-icon">⭐</span>
+                        <i class="fas fa-star stat-icon"></i>
                         <span class="stat-text">Rating: <span class="rating-text">${rating}</span></span>
                     </div>
                 `;
@@ -728,19 +728,19 @@ class PortfolioOS {
             if (baekjoonWidget) {
                 baekjoonWidget.innerHTML = `
                     <div class="stat-row">
-                        <span class="stat-icon">🏆</span>
+                        <i class="fas fa-trophy stat-icon"></i>
                         <span class="stat-text">Tier: <span class="tier-text">Bronze</span></span>
                     </div>
                     <div class="stat-row">
-                        <span class="stat-icon">📝</span>
+                        <i class="fas fa-code stat-icon"></i>
                         <span class="stat-text">Solved: <span class="solved-count">0</span></span>
                     </div>
                     <div class="stat-row">
-                        <span class="stat-icon">📊</span>
+                        <i class="fas fa-chart-line stat-icon"></i>
                         <span class="stat-text">Rank: <span class="rank-text">N/A</span></span>
                     </div>
                     <div class="stat-row">
-                        <span class="stat-icon">⭐</span>
+                        <i class="fas fa-star stat-icon"></i>
                         <span class="stat-text">Rating: <span class="rating-text">0</span></span>
                     </div>
                 `;
