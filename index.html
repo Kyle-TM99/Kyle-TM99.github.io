@@ -40,8 +40,8 @@
                 <div class="widget-content">
                     <div class="profile-quick">
                         <div class="status-indicator online"></div>
-                        <div class="status-text">현재 <strong>GoodSen</strong>에서 재직중</div>
-                        <div class="role">Full Stack Developer</div>
+                        <div class="status-text">현재 <strong>베오</strong>에서 재직중</div>
+                        <div class="role">Education PM & Full-stack Developer</div>
                         <div class="location"><i class="fas fa-map-marker-alt"></i> Seoul, Korea</div>
                     </div>
                 </div>
@@ -99,25 +99,35 @@
                 </div>
             </div>
 
-            <!-- My Projects Widget -->
-            <div class="widget projects-widget">
+            <!-- Kyle Experience Widget -->
+            <div class="widget experience-widget">
                 <div class="widget-header">
-                    <i class="fas fa-rocket"></i>
-                    <span>Kyle's Projects</span>
+                    <i class="fas fa-briefcase"></i>
+                    <span>Kyle Experience</span>
                 </div>
                 <div class="widget-content">
-                    <div class="project-list">
-                        <div class="project-item-mini">
-                            <div class="project-dot active"></div>
-                            <span>Kyle-TM99.github.io</span>
+                    <div class="experience-summary">
+                        <div class="total-experience">
+                            <span class="experience-label">총 경력</span>
+                            <span class="experience-duration" id="total-experience">계산 중...</span>
                         </div>
-                        <div class="project-item-mini">
-                            <div class="project-dot"></div>
-                            <span>Tech Blog</span>
-                        </div>
-                        <div class="project-item-mini">
-                            <div class="project-dot"></div>
-                            <span>Web Development</span>
+                        <div class="experience-list">
+                            <div class="experience-item-mini current">
+                                <div class="experience-dot active"></div>
+                                <div class="experience-info">
+                                    <span class="company-name">베오</span>
+                                    <span class="position">Education PM & Full-stack Developer</span>
+                                    <span class="period">2025.07 ~ 현재</span>
+                                </div>
+                            </div>
+                            <div class="experience-item-mini">
+                                <div class="experience-dot"></div>
+                                <div class="experience-info">
+                                    <span class="company-name">GoodSen</span>
+                                    <span class="position">백엔드 개발자 (1인 개발)</span>
+                                    <span class="period">2025.04 ~ 2025.07</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -588,15 +598,123 @@
         <div class="window-content">
             <div class="experience-container">
                 <div class="experience-card">
-                    <div class="experience-header">
+                    <div class="experience-header" onclick="toggleExperience(this)">
+                        <div class="experience-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="experience-title">
+                            <h3>베오</h3>
+                            <p class="company">Education PM & Full-stack Developer</p>
+                        </div>
+                        <div class="experience-badge current">재직중</div>
+                        <div class="experience-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="experience-details">
+                        <div class="experience-meta">
+                            <span><i class="fas fa-calendar"></i> 2025.07 ~ 현재</span>
+                            <span><i class="fas fa-map-marker-alt"></i> 서울, 대한민국</span>
+                            <span><i class="fas fa-user"></i> PM & 풀스택 개발</span>
+                        </div>
+                        <div class="experience-description">
+                            <h4><i class="fas fa-graduation-cap"></i> 교육 플랫폼 PM</h4>
+                            <p><strong>프로젝트 개요:</strong> 교육 플랫폼 프로젝트 총괄 매니징</p>
+                            
+                            <div class="achievement-highlight">
+                                <div class="achievement-item">
+                                    <i class="fas fa-tasks"></i>
+                                    <span>프로젝트 총괄</span>
+                                </div>
+                                <div class="achievement-item">
+                                    <i class="fas fa-users"></i>
+                                    <span>팀 매니징</span>
+                                </div>
+                                <div class="achievement-item">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>성과 관리</span>
+                                </div>
+                            </div>
+                            
+                            <ul>
+                                <li>
+                                    <strong><i class="fas fa-project-diagram"></i> 프로젝트 기획 및 관리</strong><br>
+                                    교육 플랫폼 프로젝트의 전체적인 기획과 개발 일정 관리, 팀원 간 업무 조율 및 진행 상황 모니터링
+                                </li>
+                                <li>
+                                    <strong><i class="fas fa-bullseye"></i> 요구사항 분석 및 정의</strong><br>
+                                    교육 플랫폼의 핵심 기능 요구사항 분석, 사용자 경험 설계, 기술적 요구사항 정의
+                                </li>
+                                <li>
+                                    <strong><i class="fas fa-handshake"></i> 이해관계자 커뮤니케이션</strong><br>
+                                    내부 팀원과 외부 이해관계자 간의 원활한 소통, 프로젝트 진행 상황 보고 및 피드백 수렴
+                                </li>
+                            </ul>
+                            
+                            <h4><i class="fas fa-code"></i> 솔루션 웹 풀스택 개발</h4>
+                            <p><strong>프로젝트 개요:</strong> 전자상거래 상품 솔루션 플랫폼 1인 기획, 개발, 배포, 운영 End to End 개발</p>
+                            
+                            <div class="achievement-highlight">
+                                <div class="achievement-item">
+                                    <i class="fas fa-rocket"></i>
+                                    <span>End to End 개발</span>
+                                </div>
+                                <div class="achievement-item">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <span>전자상거래 솔루션</span>
+                                </div>
+                                <div class="achievement-item">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>1인 풀스택</span>
+                                </div>
+                            </div>
+                            
+                            <ul>
+                                <li>
+                                    <strong><i class="fas fa-lightbulb"></i> 솔루션 기획 및 설계</strong><br>
+                                    전자상거래 상품 솔루션 플랫폼의 전체적인 기획, 사용자 요구사항 분석, 시스템 아키텍처 설계
+                                </li>
+                                <li>
+                                    <strong><i class="fas fa-laptop-code"></i> 풀스택 개발</strong><br>
+                                    프론트엔드부터 백엔드까지 전체 개발 스택을 활용한 솔루션 플랫폼 구축, 데이터베이스 설계 및 API 개발
+                                </li>
+                                <li>
+                                    <strong><i class="fas fa-cloud-upload-alt"></i> 배포 및 운영</strong><br>
+                                    클라우드 환경에서의 배포 자동화, 모니터링 시스템 구축, 지속적인 운영 및 유지보수
+                                </li>
+                            </ul>
+                            
+                            <div class="tech-stack-section">
+                                <h5><i class="fas fa-tools"></i> 활용 기술 스택</h5>
+                                <div class="tech-stack-tags">
+                                    <span class="tech-tag">Java</span>
+                                    <span class="tech-tag">Spring</span>
+                                    <span class="tech-tag">Spring Boot</span>
+                                    <span class="tech-tag">JPA</span>
+                                    <span class="tech-tag">MySQL</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                    <span class="tech-tag">HTML/CSS</span>
+                                    <span class="tech-tag">AWS</span>
+                                    <span class="tech-tag">Docker</span>
+                                    <span class="tech-tag">Git</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="experience-card">
+                    <div class="experience-header" onclick="toggleExperience(this)">
                         <div class="experience-icon">
                             <i class="fas fa-building"></i>
                         </div>
                         <div class="experience-title">
                             <h3>GoodSen</h3>
-                            <p class="company">백엔드 개발자 (1인 개발)</p>
+                            <p class="company">Backend Developer</p>
                         </div>
-                        <div class="experience-badge current">현재</div>
+                        <div class="experience-badge past">완료</div>
+                        <div class="experience-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
                     </div>
                     <div class="experience-details">
                         <div class="experience-meta">

@@ -29,7 +29,10 @@ class PortfolioOS {
         // Update time every second
         setInterval(() => this.updateTime(), 1000);
         
-        // Update widgets every 5 seconds
+        // Update clock widget every second
+        setInterval(() => this.updateClockWidget(), 1000);
+        
+        // Update other widgets every 5 seconds
         setInterval(() => this.updateWidgets(), 5000);
         
         // Update GitHub data every 5 minutes
@@ -478,8 +481,8 @@ class PortfolioOS {
     }
 
     updateWidgets() {
-        this.updateClockWidget();
         this.updateSystemWidget();
+        this.updateExperienceWidget();
     }
 
     updateClockWidget() {
@@ -531,6 +534,33 @@ class PortfolioOS {
         if (memoryElement) {
             const memory = (Math.random() * 1 + 1.5).toFixed(1); // 1.5-2.5GB
             memoryElement.textContent = `${memory}GB`;
+        }
+    }
+
+    updateExperienceWidget() {
+        const totalExperienceElement = document.getElementById('total-experience');
+        if (totalExperienceElement) {
+            // 2025.04 기준으로 경력 계산
+            const startDate = new Date('2025-04-21');
+            const currentDate = new Date();
+            
+            const diffTime = currentDate.getTime() - startDate.getTime();
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            const months = Math.floor(diffDays / 30);
+            const remainingDays = diffDays % 30;
+            
+            let experienceText = '';
+            if (months > 0) {
+                experienceText = `${months}개월`;
+                if (remainingDays > 0) {
+                    experienceText += ` ${remainingDays}일`;
+                }
+            } else {
+                experienceText = `${remainingDays}일`;
+            }
+            
+            totalExperienceElement.textContent = experienceText;
         }
     }
 
@@ -797,6 +827,29 @@ function closeWelcome() {
 
 function closeHelp() {
     portfolioOS.closeHelp();
+}
+
+// Experience accordion function
+function toggleExperience(header) {
+    const details = header.nextElementSibling;
+    const isExpanded = header.classList.contains('expanded');
+    
+    // Close all other experience cards
+    document.querySelectorAll('.experience-header').forEach(otherHeader => {
+        if (otherHeader !== header) {
+            otherHeader.classList.remove('expanded');
+            otherHeader.nextElementSibling.classList.remove('expanded');
+        }
+    });
+    
+    // Toggle current card
+    if (isExpanded) {
+        header.classList.remove('expanded');
+        details.classList.remove('expanded');
+    } else {
+        header.classList.add('expanded');
+        details.classList.add('expanded');
+    }
 }
 
 // Dock hover effects
