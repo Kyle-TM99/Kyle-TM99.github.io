@@ -351,15 +351,31 @@
                 <div class="skill-category">
                     <h3>🌱 Spring Ecosystem</h3>
                     <div class="skill-items">
-                        <span class="skill-tag spring">Spring</span>
+                        <span class="skill-tag spring">Spring Boot</span>
+                        <span class="skill-tag spring">Spring Security</span>
+                        <span class="skill-tag spring">Spring Data JDBC</span>
                         <span class="skill-tag jpa">JPA</span>
                         <span class="skill-tag mybatis">MyBatis</span>
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3>🗄️ Database & ORM</h3>
+                    <h3>⚛️ Frontend Frameworks & Libraries</h3>
+                    <div class="skill-items">
+                        <span class="skill-tag vue">Vue.js 3</span>
+                        <span class="skill-tag vue">Vite</span>
+                        <span class="skill-tag vue">Vue Router</span>
+                        <span class="skill-tag vue">Pinia</span>
+                        <span class="skill-tag tailwind">Tailwind CSS</span>
+                        <span class="skill-tag chart">Chart.js</span>
+                        <span class="skill-tag sass">SASS</span>
+                        <span class="skill-tag thymeleaf">Thymeleaf</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>🗄️ Database & Caching</h3>
                     <div class="skill-items">
                         <span class="skill-tag mysql">MySQL</span>
+                        <span class="skill-tag redis">Redis</span>
                         <span class="skill-tag h2">H2</span>
                         <span class="skill-tag querydsl">QueryDSL</span>
                     </div>
@@ -367,27 +383,57 @@
                 <div class="skill-category">
                     <h3>☁️ Cloud & DevOps</h3>
                     <div class="skill-items">
-                        <span class="skill-tag aws">AWS</span>
+                        <span class="skill-tag aws">AWS S3</span>
+                        <span class="skill-tag aws">AWS EC2</span>
                         <span class="skill-tag docker">Docker</span>
                         <span class="skill-tag jenkins">Jenkins</span>
                         <span class="skill-tag linux">Linux</span>
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3>🛠️ Tools & Collaboration</h3>
+                    <h3>🔐 Security & Authentication</h3>
                     <div class="skill-items">
-                        <span class="skill-tag git">Git</span>
-                        <span class="skill-tag confluence">Confluence</span>
-                        <span class="skill-tag notion">Notion</span>
+                        <span class="skill-tag jwt">JWT</span>
+                        <span class="skill-tag oauth">OAuth2</span>
+                        <span class="skill-tag spring">Spring Security</span>
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3>⚡ Web Technologies</h3>
+                    <h3>🛠️ Tools & Collaboration</h3>
+                    <div class="skill-items">
+                        <span class="skill-tag git">Git</span>
+                        <span class="skill-tag github">GitHub</span>
+                        <span class="skill-tag confluence">Confluence</span>
+                        <span class="skill-tag notion">Notion</span>
+                        <span class="skill-tag swagger">Swagger/OpenAPI</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>⚡ Web Technologies & APIs</h3>
                     <div class="skill-items">
                         <span class="skill-tag websocket">WebSocket</span>
                         <span class="skill-tag ajax">AJAX</span>
+                        <span class="skill-tag axios">Axios</span>
                         <span class="skill-tag jquery">jQuery</span>
-                        <span class="skill-tag thymeleaf">Thymeleaf</span>
+                        <span class="skill-tag api">RESTful API</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>🧩 Browser Extensions & Automation</h3>
+                    <div class="skill-items">
+                        <span class="skill-tag extension">Chrome Extension</span>
+                        <span class="skill-tag manifest">Manifest v3</span>
+                        <span class="skill-tag excel">ExcelJS</span>
+                        <span class="skill-tag api">API Interception</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>📧 External Services Integration</h3>
+                    <div class="skill-items">
+                        <span class="skill-tag mail">Gmail SMTP</span>
+                        <span class="skill-tag sms">ALIGO SMS API</span>
+                        <span class="skill-tag payment">PortOne</span>
+                        <span class="skill-tag coupang">Coupang Open API</span>
                     </div>
                 </div>
             </div>
@@ -408,7 +454,266 @@
         <div class="window-content">
             <div class="projects-container">
                 <div class="project-card">
-                    <div class="project-header">
+                    <div class="project-header" onclick="toggleProject(this)">
+                        <div class="project-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="project-title">
+                            <h3>SellerKit</h3>
+                            <p class="project-subtitle">쿠팡 셀러 어시스턴트 솔루션 - 쿠팡 판매자를 위한 올인원 SaaS 플랫폼</p>
+                        </div>
+                        <div class="project-badge solo"><i class="fas fa-building"></i> 1인 풀스택</div>
+                        <div class="project-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="project-details">
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> 2025.07 ~ 현재</span>
+                            <span><i class="fas fa-user"></i> 1인 풀스택 개발</span>
+                            <span><i class="fas fa-building"></i> 베오</span>
+                        </div>
+                        <div class="project-description">
+                            <h4>프로젝트 개요</h4>
+                            <p>쿠팡 판매자를 위한 통합 관리형 SaaS 솔루션으로, 광고 효율 분석부터 마진 계산, 소싱 전략 수립, 커뮤니티 운영까지 한 번에 관리할 수 있도록 설계된 플랫폼. 기획·설계·백엔드·프론트엔드·배포까지 전 과정을 1인 풀스택으로 수행.</p>
+                            
+                            <h4>주요 기능</h4>
+                            <ul>
+                                <li><strong>쿠팡 Open API 연동:</strong> 광고 데이터, 매출 데이터 실시간 수집 및 분석</li>
+                                <li><strong>KPI 대시보드:</strong> ROAS, CPC, CTR, CVR 등 핵심 지표 시각화</li>
+                                <li><strong>광고 분석 엔진:</strong> 자동 계산 및 기간별 추이 분석 시스템</li>
+                                <li><strong>마진 계산기:</strong> 국내/해외 사입, 제로 ROAS, 적정 원가 자동 산출</li>
+                                <li><strong>소싱 분석기:</strong> 시장 점수 기반 상품 소싱 추천 및 수익률 비교</li>
+                                <li><strong>성장 코치:</strong> 광고 효율, 매출 트렌드, 마진 개선 가이드 제공</li>
+                                <li><strong>커뮤니티 시스템:</strong> 기수별 게시판, 댓글/대댓글, 좋아요, 공지, 권한 제어</li>
+                                <li><strong>회원/보안 모듈:</strong> JWT 인증, 이메일/문자 인증, 프로필 관리, 실시간 알림</li>
+                            </ul>
+                            
+                            <h4>기술적 성과</h4>
+                            <ul>
+                                <li>기획부터 배포까지 전 과정 1인 개발로 완성</li>
+                                <li>쿠팡 Open API 및 내부 네트워크 분석을 통한 데이터 수집 자동화</li>
+                                <li>실제 쿠팡 셀러들의 광고 효율·매출 분석·소싱 전략 자동화 도구로 상용화</li>
+                                <li>클라우드 기반 인프라 안정화 (AWS S3 + Redis + MySQL + SMTP + SMS)</li>
+                                <li>Vue3 + Tailwind + Chart.js를 통한 직관적이고 모던한 UI 구현</li>
+                            </ul>
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Java 17</span>
+                            <span class="tech-tag">Spring Boot 3.2.0</span>
+                            <span class="tech-tag">Spring Security</span>
+                            <span class="tech-tag">MyBatis</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">Redis</span>
+                            <span class="tech-tag">JWT</span>
+                            <span class="tech-tag">Vue.js 3</span>
+                            <span class="tech-tag">Vite</span>
+                            <span class="tech-tag">Pinia</span>
+                            <span class="tech-tag">Tailwind CSS</span>
+                            <span class="tech-tag">Chart.js</span>
+                            <span class="tech-tag">AWS S3</span>
+                            <span class="tech-tag">Coupang API</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header" onclick="toggleProject(this)">
+                        <div class="project-icon">
+                            <i class="fas fa-puzzle-piece"></i>
+                        </div>
+                        <div class="project-title">
+                            <h3>쿠팡 광고 캠페인 추출기</h3>
+                            <p class="project-subtitle">Chrome Extension - 광고 데이터 자동 수집 도구</p>
+                        </div>
+                        <div class="project-badge solo"><i class="fas fa-building"></i> 개인 프로젝트</div>
+                        <div class="project-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="project-details">
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> 2025.09</span>
+                            <span><i class="fas fa-user"></i> 개인 프로젝트</span>
+                            <span><i class="fas fa-building"></i> 베오</span>
+                        </div>
+                        <div class="project-description">
+                            <h4>프로젝트 개요</h4>
+                            <p>쿠팡 광고보드의 네트워크 응답값을 파싱하여 Excel 데이터로 자동 변환하는 브라우저 확장 프로그램. 광고 캠페인별 KPI를 빠르게 수집하여 분석 시간을 80% 이상 단축.</p>
+                            
+                            <h4>주요 기능</h4>
+                            <ul>
+                                <li><strong>네트워크 트래픽 분석:</strong> 쿠팡 관리자 페이지의 네트워크 응답 데이터 실시간 파싱</li>
+                                <li><strong>자동 데이터 변환:</strong> 광고 그룹, 캠페인명, 노출수, 클릭수, 전환율, 광고비 등 핵심 지표 자동 정리</li>
+                                <li><strong>Excel 다운로드:</strong> ExcelJS를 이용한 실시간 데이터 시트 생성 및 다운로드</li>
+                                <li><strong>분석 시간 단축:</strong> 수동 작업 대비 80% 이상의 시간 절감 효과</li>
+                            </ul>
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Chrome Extension</span>
+                            <span class="tech-tag">Manifest v3</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Axios</span>
+                            <span class="tech-tag">ExcelJS</span>
+                            <span class="tech-tag">JSON Parsing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header" onclick="toggleProject(this)">
+                        <div class="project-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="project-title">
+                            <h3>쿠팡 인기상품 검색어 추출기</h3>
+                            <p class="project-subtitle">Chrome Extension - 트렌딩 키워드 수집 도구</p>
+                        </div>
+                        <div class="project-badge solo"><i class="fas fa-building"></i> 개인 프로젝트</div>
+                        <div class="project-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="project-details">
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> 2025.08</span>
+                            <span><i class="fas fa-user"></i> 개인 프로젝트</span>
+                            <span><i class="fas fa-building"></i> 베오</span>
+                        </div>
+                        <div class="project-description">
+                            <h4>프로젝트 개요</h4>
+                            <p>쿠팡 관리자 페이지의 "인기상품 검색" 기능에서 실시간 인기 검색어·상품 현황을 추출하는 브라우저 확장 프로그램. 마케팅 캠페인 및 상품 등록 시점 최적화에 활용.</p>
+                            
+                            <h4>주요 기능</h4>
+                            <ul>
+                                <li><strong>실시간 트렌드 수집:</strong> 쿠팡 내부 API에서 인기 검색어 및 상품 데이터 추출</li>
+                                <li><strong>Network 응답 가공:</strong> JSON 응답 데이터를 가공하여 엑셀 형식으로 변환</li>
+                                <li><strong>마케팅 인사이트:</strong> 상품 등록 및 광고 캠페인 시점 최적화를 위한 데이터 제공</li>
+                                <li><strong>사용자 친화적 UI:</strong> 간편한 클릭 한 번으로 데이터 다운로드</li>
+                            </ul>
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Chrome Extension</span>
+                            <span class="tech-tag">Manifest v3</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Fetch API</span>
+                            <span class="tech-tag">ExcelJS</span>
+                            <span class="tech-tag">API Interception</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header" onclick="toggleProject(this)">
+                        <div class="project-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="project-title">
+                            <h3>쿠팡 판매량 추적기</h3>
+                            <p class="project-subtitle">Chrome Extension - 실판매량 데이터 추출 도구</p>
+                        </div>
+                        <div class="project-badge solo"><i class="fas fa-building"></i> 개인 프로젝트</div>
+                        <div class="project-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="project-details">
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> 2025.10</span>
+                            <span><i class="fas fa-user"></i> 개인 프로젝트</span>
+                            <span><i class="fas fa-building"></i> 베오</span>
+                        </div>
+                        <div class="project-description">
+                            <h4>프로젝트 개요</h4>
+                            <p>쿠팡 내부 API 요청 인터셉트를 통해 상품별 실판매량 데이터를 100% 정확도로 추출하는 브라우저 확장 프로그램. 오피셜 API 미지원 데이터까지 직접 수집하여 정밀한 매출 분석 기반 확보.</p>
+                            
+                            <h4>주요 기능</h4>
+                            <ul>
+                                <li><strong>API 인터셉트:</strong> 쿠팡 내부 API 요청을 인터셉트하여 실판매량 데이터 추출</li>
+                                <li><strong>정확한 데이터 수집:</strong> 상품별 일별 판매량, 누적 매출, 카테고리별 트렌드 100% 정확도로 추적</li>
+                                <li><strong>미지원 데이터 확보:</strong> 공식 API에서 제공하지 않는 내부 데이터까지 수집</li>
+                                <li><strong>정밀한 분석 기반:</strong> 실제 판매 데이터 기반의 정확한 시장 분석 가능</li>
+                            </ul>
+                            
+                            <h4>기술적 구현</h4>
+                            <ul>
+                                <li>Axios/Fetch API 인터셉트를 통한 네트워크 트래픽 모니터링</li>
+                                <li>사용자 입력 기반 동적 URL 추출 및 인증 쿠키 기반 세션 유지</li>
+                                <li>스크립트 경량화 및 비동기 처리로 빠른 응답 구현</li>
+                            </ul>
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Chrome Extension</span>
+                            <span class="tech-tag">Manifest v3</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">API Interception</span>
+                            <span class="tech-tag">ExcelJS</span>
+                            <span class="tech-tag">Cookie Management</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header" onclick="toggleProject(this)">
+                        <div class="project-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="project-title">
+                            <h3>OnClass</h3>
+                            <p class="project-subtitle">온라인 교육 플랫폼</p>
+                        </div>
+                        <div class="project-badge solo"><i class="fas fa-building"></i> 1인 풀스택</div>
+                        <div class="project-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="project-details">
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> 2025.04 ~ 2025.07 (1개월 개발)</span>
+                            <span><i class="fas fa-user"></i> 1인 풀스택 개발</span>
+                            <span><i class="fas fa-building"></i> GoodSen</span>
+                        </div>
+                        <div class="project-description">
+                            <h4>프로젝트 개요</h4>
+                            <p>1개월 내 개발 완료 및 실서비스 운영 중인 확장 가능한 온라인 교육 플랫폼. Spring Boot 기반 백엔드 시스템 설계 및 15개 핵심 모듈 개발.</p>
+                            
+                            <h4>주요 기능</h4>
+                            <ul>
+                                <li><strong>OAuth2 소셜 로그인:</strong> Spring Security OAuth2 기반 커스텀 OAuth2UserService 구현, JWT 토큰 자동 갱신</li>
+                                <li><strong>강의 관리 시스템:</strong> 강의 등록, 수정, 삭제, 카테고리별 조회 및 검색 기능</li>
+                                <li><strong>결제 시스템:</strong> PortOne API 연동, 멱등성 키 검증 로직, 분산 락 기반 트랜잭션 처리</li>
+                                <li><strong>파일 업로드:</strong> AWS S3 Presigned URL 활용한 직접 업로드 방식, 대용량 동영상 처리</li>
+                                <li><strong>수강생 관리:</strong> 수강 신청, 진도율 추적, 수료증 발급 시스템</li>
+                            </ul>
+                            
+                            <h4>기술적 성과</h4>
+                            <ul>
+                                <li><strong>성능 최적화:</strong> MyBatis JOIN 최적화 및 복합 인덱스 설계로 응답시간 40% 향상 (3초 → 1.8초)</li>
+                                <li><strong>비즈니스 임팩트:</strong> OAuth2 소셜 로그인 도입으로 회원가입 완료율 106% 향상 (35% → 72%)</li>
+                                <li><strong>시스템 안정성:</strong> 결제 실패율 80% 감소 (5% → 1% 미만), 결제 데이터 정합성 100% 확보</li>
+                                <li><strong>배포 자동화:</strong> Docker 컨테이너화 및 Jenkins CI/CD 파이프라인 구축으로 배포 시간 60% 단축</li>
+                                <li><strong>비용 절감:</strong> AWS S3 Presigned URL 활용으로 서버 트래픽 비용 20% 절감</li>
+                            </ul>
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Spring Boot 3.2.3</span>
+                            <span class="tech-tag">Spring Security</span>
+                            <span class="tech-tag">MyBatis</span>
+                            <span class="tech-tag">OAuth2</span>
+                            <span class="tech-tag">JWT</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">AWS S3</span>
+                            <span class="tech-tag">AWS EC2</span>
+                            <span class="tech-tag">PortOne</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">Jenkins</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header" onclick="toggleProject(this)">
                         <div class="project-icon">
                             <i class="fas fa-users"></i>
                         </div>
@@ -417,6 +722,9 @@
                             <p class="project-subtitle">IT 전문가 매칭 플랫폼</p>
                         </div>
                         <div class="project-badge team-lead">팀장</div>
+                        <div class="project-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
                     </div>
                     <div class="project-details">
                         <div class="project-meta">
@@ -455,7 +763,7 @@
                 </div>
 
                 <div class="project-card">
-                    <div class="project-header">
+                    <div class="project-header" onclick="toggleProject(this)">
                         <div class="project-icon">
                             <i class="fas fa-comments"></i>
                         </div>
@@ -464,6 +772,9 @@
                             <p class="project-subtitle">실시간 채팅 기반 소셜 네트워크 서비스</p>
                         </div>
                         <div class="project-badge solo">개인 프로젝트</div>
+                        <div class="project-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
                     </div>
                     <div class="project-details">
                         <div class="project-meta">
@@ -498,7 +809,7 @@
                 </div>
 
                 <div class="project-card">
-                    <div class="project-header">
+                    <div class="project-header" onclick="toggleProject(this)">
                         <div class="project-icon">
                             <i class="fas fa-shopping-cart"></i>
                         </div>
@@ -507,6 +818,9 @@
                             <p class="project-subtitle">남성 의류 쇼핑몰</p>
                         </div>
                         <div class="project-badge solo">개인 프로젝트</div>
+                        <div class="project-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
                     </div>
                     <div class="project-details">
                         <div class="project-meta">
@@ -540,7 +854,7 @@
                 </div>
 
                 <div class="project-card">
-                    <div class="project-header">
+                    <div class="project-header" onclick="toggleProject(this)">
                         <div class="project-icon">
                             <i class="fas fa-laptop-code"></i>
                         </div>
@@ -549,6 +863,9 @@
                             <p class="project-subtitle">개발 전문 커뮤니티 플랫폼</p>
                         </div>
                         <div class="project-badge team-lead">팀장</div>
+                        <div class="project-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
                     </div>
                     <div class="project-details">
                         <div class="project-meta">
@@ -606,7 +923,7 @@
                             <h3>베오</h3>
                             <p class="company">Education PM & Full-stack Developer</p>
                         </div>
-                        <div class="experience-badge current">재직중</div>
+                        <div class="experience-badge current"><i class="fas fa-building"></i> 재직중</div>
                         <div class="experience-toggle">
                             <i class="fas fa-chevron-down"></i>
                         </div>
@@ -618,85 +935,70 @@
                             <span><i class="fas fa-user"></i> PM & 풀스택 개발</span>
                         </div>
                         <div class="experience-description">
-                            <h4><i class="fas fa-graduation-cap"></i> 교육 플랫폼 PM</h4>
-                            <p><strong>프로젝트 개요:</strong> 교육 플랫폼 프로젝트 총괄 매니징</p>
+                            <h4><i class="fas fa-briefcase"></i> 주요 직무 및 역할</h4>
                             
                             <div class="achievement-highlight">
                                 <div class="achievement-item">
-                                    <i class="fas fa-tasks"></i>
-                                    <span>프로젝트 총괄</span>
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>Education PM</span>
                                 </div>
                                 <div class="achievement-item">
-                                    <i class="fas fa-users"></i>
-                                    <span>팀 매니징</span>
+                                    <i class="fas fa-laptop-code"></i>
+                                    <span>Full-stack Developer</span>
                                 </div>
                                 <div class="achievement-item">
-                                    <i class="fas fa-chart-line"></i>
-                                    <span>성과 관리</span>
+                                    <i class="fas fa-rocket"></i>
+                                    <span>1인 개발 체제</span>
                                 </div>
                             </div>
                             
                             <ul>
                                 <li>
-                                    <strong><i class="fas fa-project-diagram"></i> 프로젝트 기획 및 관리</strong><br>
-                                    교육 플랫폼 프로젝트의 전체적인 기획과 개발 일정 관리, 팀원 간 업무 조율 및 진행 상황 모니터링
+                                    <strong><i class="fas fa-project-diagram"></i> 교육 플랫폼 프로젝트 매니징</strong><br>
+                                    교육 플랫폼 프로젝트의 전체 기획, 개발 일정 관리, 팀원 간 업무 조율 및 진행 상황 모니터링, 이해관계자 커뮤니케이션 담당
                                 </li>
                                 <li>
-                                    <strong><i class="fas fa-bullseye"></i> 요구사항 분석 및 정의</strong><br>
-                                    교육 플랫폼의 핵심 기능 요구사항 분석, 사용자 경험 설계, 기술적 요구사항 정의
+                                    <strong><i class="fas fa-code"></i> SellerKit (쿠팡 셀러 어시스턴트 솔루션) 1인 풀스택 개발</strong><br>
+                                    쿠팡 셀러를 위한 올인원 관리 플랫폼 개발 (기획·설계·백엔드·프론트엔드·배포 전 과정 단독 수행)
                                 </li>
                                 <li>
-                                    <strong><i class="fas fa-handshake"></i> 이해관계자 커뮤니케이션</strong><br>
-                                    내부 팀원과 외부 이해관계자 간의 원활한 소통, 프로젝트 진행 상황 보고 및 피드백 수렴
+                                    <strong><i class="fas fa-puzzle-piece"></i> Chrome Extension 개발</strong><br>
+                                    광고 캠페인 추출기, 인기상품 검색어 추출기, 판매량 추적기 등 데이터 수집 자동화 도구 개발
                                 </li>
                             </ul>
                             
-                            <h4><i class="fas fa-code"></i> 솔루션 웹 풀스택 개발</h4>
-                            <p><strong>프로젝트 개요:</strong> 전자상거래 상품 솔루션 플랫폼 1인 기획, 개발, 배포, 운영 End to End 개발</p>
-                            
-                            <div class="achievement-highlight">
-                                <div class="achievement-item">
-                                    <i class="fas fa-rocket"></i>
-                                    <span>End to End 개발</span>
-                                </div>
-                                <div class="achievement-item">
-                                    <i class="fas fa-shopping-cart"></i>
-                                    <span>전자상거래 솔루션</span>
-                                </div>
-                                <div class="achievement-item">
-                                    <i class="fas fa-cogs"></i>
-                                    <span>1인 풀스택</span>
-                                </div>
-                            </div>
-                            
+                            <h4><i class="fas fa-trophy"></i> 핵심 성과</h4>
                             <ul>
                                 <li>
-                                    <strong><i class="fas fa-lightbulb"></i> 솔루션 기획 및 설계</strong><br>
-                                    전자상거래 상품 솔루션 플랫폼의 전체적인 기획, 사용자 요구사항 분석, 시스템 아키텍처 설계
+                                    <strong><i class="fas fa-rocket"></i> 1인 End-to-End 개발 완성</strong><br>
+                                    기획부터 배포까지 전 과정을 단독 수행하여 상용화 수준의 SaaS 플랫폼 구축 완료
                                 </li>
                                 <li>
-                                    <strong><i class="fas fa-laptop-code"></i> 풀스택 개발</strong><br>
-                                    프론트엔드부터 백엔드까지 전체 개발 스택을 활용한 솔루션 플랫폼 구축, 데이터베이스 설계 및 API 개발
+                                    <strong><i class="fas fa-plug"></i> 실시간 데이터 수집 자동화</strong><br>
+                                    쿠팡 Open API 연동 및 내부 네트워크 분석을 통한 광고·매출 데이터 자동 수집 시스템 구현
                                 </li>
                                 <li>
-                                    <strong><i class="fas fa-cloud-upload-alt"></i> 배포 및 운영</strong><br>
-                                    클라우드 환경에서의 배포 자동화, 모니터링 시스템 구축, 지속적인 운영 및 유지보수
+                                    <strong><i class="fas fa-chart-line"></i> 분석 시간 80% 단축</strong><br>
+                                    Chrome Extension 개발을 통해 수동 작업 대비 광고 캠페인 분석 시간 80% 이상 절감
+                                </li>
+                                <li>
+                                    <strong><i class="fas fa-layer-group"></i> 최신 기술 스택 도입</strong><br>
+                                    Vue.js 3, Vite, Tailwind CSS, Chart.js 등 모던 프론트엔드 기술 스택과 Spring Boot 3.2, Redis 등을 활용한 고성능 백엔드 시스템 구축
                                 </li>
                             </ul>
                             
                             <div class="tech-stack-section">
                                 <h5><i class="fas fa-tools"></i> 활용 기술 스택</h5>
                                 <div class="tech-stack-tags">
-                                    <span class="tech-tag">Java</span>
-                                    <span class="tech-tag">Spring</span>
-                                    <span class="tech-tag">Spring Boot</span>
-                                    <span class="tech-tag">JPA</span>
+                                    <span class="tech-tag">Java 17</span>
+                                    <span class="tech-tag">Spring Boot 3.2.0</span>
+                                    <span class="tech-tag">Vue.js 3</span>
+                                    <span class="tech-tag">Tailwind CSS</span>
+                                    <span class="tech-tag">Chart.js</span>
                                     <span class="tech-tag">MySQL</span>
-                                    <span class="tech-tag">JavaScript</span>
-                                    <span class="tech-tag">HTML/CSS</span>
-                                    <span class="tech-tag">AWS</span>
-                                    <span class="tech-tag">Docker</span>
-                                    <span class="tech-tag">Git</span>
+                                    <span class="tech-tag">Redis</span>
+                                    <span class="tech-tag">AWS S3</span>
+                                    <span class="tech-tag">Chrome Extension</span>
                                 </div>
                             </div>
                         </div>
@@ -711,7 +1013,7 @@
                             <h3>GoodSen</h3>
                             <p class="company">Backend Developer</p>
                         </div>
-                        <div class="experience-badge past">완료</div>
+                        <div class="experience-badge past"><i class="fas fa-building"></i> 완료</div>
                         <div class="experience-toggle">
                             <i class="fas fa-chevron-down"></i>
                         </div>
@@ -723,147 +1025,43 @@
                             <span><i class="fas fa-user"></i> 1인 풀스택 개발</span>
                         </div>
                         <div class="experience-description">
-                            <h4><i class="fas fa-graduation-cap"></i> 온라인 교육 플랫폼 백엔드 시스템 구축</h4>
-                            <p><strong>프로젝트 개요:</strong> 1개월 내 개발 완료 및 실서비스 운영 중인 확장 가능한 교육 플랫폼 구축</p>
+                            <h4><i class="fas fa-briefcase"></i> 주요 직무 및 역할</h4>
                             
                             <div class="achievement-highlight">
+                                <div class="achievement-item">
+                                    <i class="fas fa-server"></i>
+                                    <span>Backend Developer</span>
+                                </div>
+                                <div class="achievement-item">
+                                    <i class="fas fa-robot"></i>
+                                    <span>Automation Engineer</span>
+                                </div>
                                 <div class="achievement-item">
                                     <i class="fas fa-rocket"></i>
-                                    <span>1개월 내 완전한 플랫폼 구축</span>
-                                </div>
-                                <div class="achievement-item">
-                                    <i class="fas fa-users"></i>
-                                    <span>실서비스 운영 중</span>
-                                </div>
-                                <div class="achievement-item">
-                                    <i class="fas fa-code"></i>
-                                    <span>15개 핵심 모듈 설계</span>
+                                    <span>1인 개발 체제</span>
                                 </div>
                             </div>
                             
                             <ul>
                                 <li>
-                                    <strong><i class="fas fa-database"></i> 데이터베이스 성능 최적화 및 쿼리 튜닝</strong><br>
-                                    <strong>문제:</strong> 강의 목록 조회 시 N+1 쿼리 문제로 인한 3초 이상의 응답 지연 발생<br>
-                                    <strong>해결:</strong> MyBatis 기반 연관 쿼리 JOIN 최적화 및 카테고리별 강의 목록 복합 인덱스 설계<br>
-                                    <strong>성과:</strong> 평균 응답시간 1.8초 달성 (40% 성능 향상), 동시 접속자 처리 능력 확보
+                                    <strong><i class="fas fa-graduation-cap"></i> 온라인 교육 플랫폼 백엔드 시스템 개발</strong><br>
+                                    Spring Boot 기반 교육 플랫폼 백엔드 시스템 설계 및 구축, 15개 핵심 모듈 개발 (1개월 내 완성 후 실서비스 운영 중)
                                 </li>
                                 <li>
-                                    <strong><i class="fas fa-shield-alt"></i> OAuth2 기반 소셜 로그인 시스템 구축</strong><br>
-                                    <strong>문제:</strong> 기존 이메일 인증 방식의 낮은 회원가입 완료율 (35%)<br>
-                                    <strong>기술적 도전:</strong> JWT 토큰 만료 처리, 리프레시 토큰 갱신 로직의 복잡성<br>
-                                    <strong>해결:</strong> Spring Security OAuth2 기반 커스텀 OAuth2UserService 구현, 토큰 자동 갱신 인터셉터 개발<br>
-                                    <strong>성과:</strong> 회원가입 완료율 72% 달성 (106% 향상), 사용자 편의성 극대화
-                                </li>
-                                <li>
-                                    <strong><i class="fas fa-cloud-upload-alt"></i> AWS S3 기반 파일 업로드 시스템 최적화</strong><br>
-                                    <strong>문제:</strong> 대용량 동영상 업로드 시 서버 부하 및 실패 시 롤백 처리 복잡성<br>
-                                    <strong>해결:</strong> Presigned URL 활용한 직접 업로드 방식 도입, 실패 시 S3 객체 자동 삭제 로직 구현<br>
-                                    <strong>성과:</strong> 서버 트래픽 비용 20% 절감, 업로드 안정성 확보
-                                </li>
-                                <li>
-                                    <strong><i class="fas fa-credit-card"></i> 고가용성 결제 시스템 구축</strong><br>
-                                    <strong>문제:</strong> PortOne API 연동 시 결제 승인과 DB 저장 간 데이터 불일치 위험<br>
-                                    <strong>해결:</strong> 멱등성 키 검증 로직 구현, 분산 락 기반 트랜잭션 처리 시스템 구축<br>
-                                    <strong>성과:</strong> 결제 실패율 5% → 1% 미만으로 감소, 결제 데이터 정합성 100% 확보
-                                </li>
-                                <li>
-                                    <strong><i class="fab fa-docker"></i> Docker 기반 CI/CD 파이프라인 구축</strong><br>
-                                    <strong>문제:</strong> 수동 배포로 인한 20분 소요 시간 및 휴먼 에러 발생<br>
-                                    <strong>해결:</strong> Docker 컨테이너화 및 Jenkins 자동 빌드/테스트/배포 파이프라인 구축<br>
-                                    <strong>성과:</strong> 배포 시간 8분 단축 (60% 향상), 배포 실패율 80% 감소
+                                    <strong><i class="fas fa-robot"></i> 사내 업무 자동화 시스템 개발</strong><br>
+                                    Python 기반 인사팀 업무 자동화 시스템 구축 (채용 플랫폼 크롤링, 프리랜서 관리, SNS 계정 통합 관리)
                                 </li>
                             </ul>
                             
-                            <div class="tech-stack-section">
-                                <h5><i class="fas fa-tools"></i> 사용 기술 스택</h5>
-                                <div class="tech-stack-tags">
-                                    <span class="tech-tag">Java</span>
-                                    <span class="tech-tag">Spring Boot 3.2.3</span>
-                                    <span class="tech-tag">MyBatis</span>
-                                    <span class="tech-tag">Spring Security</span>
-                                    <span class="tech-tag">OAuth2</span>
-                                    <span class="tech-tag">MySQL</span>
-                                    <span class="tech-tag">AWS S3</span>
-                                    <span class="tech-tag">AWS EC2</span>
-                                    <span class="tech-tag">PortOne</span>
-                                    <span class="tech-tag">Docker</span>
-                                    <span class="tech-tag">Jenkins</span>
-                                </div>
-                            </div>
-                            
-                            <h4><i class="fas fa-robot"></i> 사내 인사팀 업무 자동화 시스템 구축</h4>
-                            <p><strong>프로젝트 개요:</strong> Python 기반 다중 자동화 시스템으로 인사팀 업무 효율성 혁신</p>
-                            
-                            <div class="achievement-highlight">
-                                <div class="achievement-item">
-                                    <i class="fas fa-clock"></i>
-                                    <span>업무 시간 83% 단축</span>
-                                </div>
-                                <div class="achievement-item">
-                                    <i class="fas fa-chart-line"></i>
-                                    <span>효율성 70% 향상</span>
-                                </div>
-                                <div class="achievement-item">
-                                    <i class="fas fa-cogs"></i>
-                                    <span>3개 자동화 시스템</span>
-                                </div>
-                            </div>
-                            
-                            <ul>
-                                <li>
-                                    <strong><i class="fas fa-search"></i> 지능형 채용 플랫폼 크롤링 시스템</strong><br>
-                                    <strong>문제:</strong> 다중 플랫폼 수동 확인으로 인한 일 3시간 소요<br>
-                                    <strong>기술적 도전:</strong> 동적 로딩 방식 및 봇 탐지 시스템 우회<br>
-                                    <strong>해결:</strong> Selenium 기반 동적 페이지 처리, 요청 간격 랜덤화 및 User-Agent 로테이션 적용<br>
-                                    <strong>성과:</strong> 업무 시간 30분 단축 (83% 효율성 향상), 안정적인 데이터 수집 환경 구축
-                                </li>
-                                <li>
-                                    <strong><i class="fas fa-file-contract"></i> 프리랜서 업무 자동화 통합 시스템</strong><br>
-                                    <strong>문제:</strong> 개별 연락 및 계약서 전송의 반복적 업무 처리<br>
-                                    <strong>해결:</strong> CustomTkinter 기반 GUI 대시보드 구현, 일괄 메시지 발송 및 계약서 템플릿 자동 생성 시스템 구축<br>
-                                    <strong>성과:</strong> 계약 프로세스 소요 시간 50% 단축, 업무 표준화 달성
-                                </li>
-                                <li>
-                                    <strong><i class="fas fa-share-alt"></i> SNS 계정 통합 관리 시스템</strong><br>
-                                    <strong>문제:</strong> 100개 이상 SNS 계정의 분산된 관리 체계<br>
-                                    <strong>혁신적 해결:</strong> Selenium 멀티프로세싱 기반 4개 브라우저 동시 운영 병렬 처리 아키텍처 구현<br>
-                                    <strong>해결:</strong> 실시간 팔로워 증감 시각화 대시보드 구현, 다차원 필터링 및 정렬 기능 제공<br>
-                                    <strong>성과:</strong> 계정 모니터링 업무 70% 단축, 데이터 기반 의사결정 지원
-                                </li>
-                            </ul>
-                            
-                            <div class="tech-stack-section">
-                                <h5><i class="fas fa-tools"></i> 사용 기술 스택</h5>
-                                <div class="tech-stack-tags">
-                                    <span class="tech-tag">Python</span>
-                                    <span class="tech-tag">Selenium</span>
-                                    <span class="tech-tag">Tkinter</span>
-                                    <span class="tech-tag">CustomTkinter</span>
-                                    <span class="tech-tag">Multiprocessing</span>
-                                    <span class="tech-tag">Web Scraping</span>
-                                    <span class="tech-tag">GUI Development</span>
-                                </div>
-                            </div>
-                            
-                            <h4><i class="fas fa-trophy"></i> 핵심 성과 및 전문성</h4>
+                            <h4><i class="fas fa-trophy"></i> 핵심 성과</h4>
                             <div class="expertise-grid">
-                                <div class="expertise-item">
-                                    <div class="expertise-icon">
-                                        <i class="fas fa-crown"></i>
-                                    </div>
-                                    <div class="expertise-content">
-                                        <h5>기술적 리더십</h5>
-                                        <p>1인 풀스택 개발자로 기획부터 배포까지 전 개발 사이클 독립 수행, 15개 이상 핵심 기능 모듈 설계 및 구현, 확장 가능한 아키텍처 구축</p>
-                                    </div>
-                                </div>
                                 <div class="expertise-item">
                                     <div class="expertise-icon">
                                         <i class="fas fa-tachometer-alt"></i>
                                     </div>
                                     <div class="expertise-content">
-                                        <h5>성능 최적화 전문성</h5>
-                                        <p>데이터베이스 쿼리 최적화, 파일 업로드 성능 향상, 병렬 처리 시스템 구축, 다양한 성능 병목 지점 해결 및 시스템 안정성 확보</p>
+                                        <h5>성능 최적화</h5>
+                                        <p>데이터베이스 쿼리 최적화로 응답시간 40% 향상, AWS S3 Presigned URL 활용으로 서버 트래픽 비용 20% 절감, 배포 자동화로 배포 시간 60% 단축</p>
                                     </div>
                                 </div>
                                 <div class="expertise-item">
@@ -872,7 +1070,16 @@
                                     </div>
                                     <div class="expertise-content">
                                         <h5>비즈니스 임팩트</h5>
-                                        <p>회원가입 완료율 106% 향상, 결제 실패율 80% 감소, 업무 자동화를 통한 인사팀 효율성 70% 이상 향상, 운영 비용 절감 및 개발 생산성 극대화</p>
+                                        <p>OAuth2 소셜 로그인 도입으로 회원가입 완료율 106% 향상, 결제 시스템 안정화로 결제 실패율 80% 감소, 업무 자동화로 인사팀 효율성 70% 향상</p>
+                                    </div>
+                                </div>
+                                <div class="expertise-item">
+                                    <div class="expertise-icon">
+                                        <i class="fas fa-crown"></i>
+                                    </div>
+                                    <div class="expertise-content">
+                                        <h5>기술적 리더십</h5>
+                                        <p>1인 풀스택 개발자로 기획부터 배포까지 전 개발 사이클 독립 수행, Docker 기반 CI/CD 파이프라인 구축, 확장 가능한 시스템 아키텍처 설계</p>
                                     </div>
                                 </div>
                                 <div class="expertise-item">
@@ -881,8 +1088,23 @@
                                     </div>
                                     <div class="expertise-content">
                                         <h5>문제 해결 역량</h5>
-                                        <p>복잡한 기술적 문제를 체계적으로 분석하고 창의적 해결책 도출, 실무 환경에서 발생하는 다양한 이슈를 신속하고 안정적으로 해결</p>
+                                        <p>N+1 쿼리 문제, JWT 토큰 갱신, 결제 데이터 정합성 등 복잡한 기술적 문제를 체계적으로 분석하고 창의적 해결책 도출</p>
                                     </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tech-stack-section">
+                                <h5><i class="fas fa-tools"></i> 활용 기술 스택</h5>
+                                <div class="tech-stack-tags">
+                                    <span class="tech-tag">Java</span>
+                                    <span class="tech-tag">Spring Boot 3.2.3</span>
+                                    <span class="tech-tag">MyBatis</span>
+                                    <span class="tech-tag">MySQL</span>
+                                    <span class="tech-tag">AWS S3</span>
+                                    <span class="tech-tag">Docker</span>
+                                    <span class="tech-tag">Jenkins</span>
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">Selenium</span>
                                 </div>
                             </div>
                         </div>

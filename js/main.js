@@ -5,17 +5,17 @@ class PortfolioOS {
         this.zIndex = 100;
         this.terminalCommands = {
             'help': 'Available commands: help, about, skills, projects, experience, contact, blog, github, baekjoon, clear, date, whoami',
-            'about': 'Full Stack Developer passionate about creating innovative web solutions. Currently working at GoodSen as a 1-person full-stack developer.',
-            'skills': 'Frontend: HTML, CSS, JavaScript\nBackend: Java, Spring Boot, Spring Security\nDatabase: MySQL, MyBatis, JPA\nCloud & DevOps: AWS, Docker, Jenkins\nTools: Git, Confluence, Notion',
-            'projects': 'OneStack - IT 전문가 매칭 플랫폼 (팀장)\nKyleTalk - 실시간 채팅 기반 소셜 네트워크 서비스\nKyleMall - 남성 의류 쇼핑몰\nOne Develop - 개발 전문 커뮤니티 플랫폼 (팀장)',
-            'experience': '2025.04-Present: Full Stack Developer & DevOps Engineer at GoodSen\n- 온라인 교육 플랫폼 백엔드 시스템 설계 및 구축\n- 사내 Python 업무 자동화 시스템 설계 및 구축',
+            'about': 'Full Stack Developer passionate about creating innovative web solutions. Currently working at BEO as Education PM & Full-stack Developer.',
+            'skills': 'Frontend: Vue.js 3, Vite, Tailwind CSS, Chart.js, HTML, CSS, JavaScript\nBackend: Java 17, Spring Boot 3.2.0, Spring Security, MyBatis, JPA\nDatabase: MySQL, Redis\nCloud & DevOps: AWS S3, AWS EC2, Docker, Jenkins\nBrowser Extensions: Chrome Extension, Manifest v3, ExcelJS\nTools: Git, Swagger/OpenAPI, Notion',
+            'projects': 'SellerKit - 쿠팡 셀러 어시스턴트 솔루션 (2025.07~현재, 1인 풀스택)\n쿠팡 광고 캠페인 추출기 - Chrome Extension (2025.09)\n쿠팡 인기상품 검색어 추출기 - Chrome Extension (2025.08)\n쿠팡 판매량 추적기 - Chrome Extension (2025.10)\nOnClass - 온라인 교육 플랫폼 (2025.04~2025.07)\nOneStack - IT 전문가 매칭 플랫폼 (2024.12~2025.02, 팀장)\nKyleTalk - 실시간 채팅 기반 소셜 네트워크 서비스 (2024.11~2024.12)\nKyleMall - 남성 의류 쇼핑몰 (2024.10~2024.11)\nOne Develop - 개발 전문 커뮤니티 플랫폼 (2024.09~2024.10, 팀장)',
+            'experience': '2025.07-Present: Education PM & Full-stack Developer at BEO\n- 교육 플랫폼 프로젝트 총괄 매니징\n- SellerKit (쿠팡 셀러 어시스턴트 솔루션) 1인 풀스택 개발 (Vue.js 3, Spring Boot, Redis, MySQL)\n- 쿠팡 API 연동 및 데이터 수집 자동화 시스템 구축\n- Chrome Extension 개발 (광고 캠페인 추출기, 인기상품 검색어 추출기, 판매량 추적기)\n\n2025.04-2025.07: Backend Developer at GoodSen\n- 온라인 교육 플랫폼 백엔드 시스템 설계 및 구축\n- 사내 Python 업무 자동화 시스템 설계 및 구축',
             'contact': 'Email: rlaxoals9977@gmail.com\nGitHub: github.com/Kyle-TM99\nBlog: pids.tistory.com\nLinkedIn: linkedin.com/in/taemin-kim-353b20352',
             'blog': 'Kyle Developer Story - Tech Blog\nURL: https://pids.tistory.com/\nTopics: Vue.js, Unity, Java, QueryDSL, AI, Algorithm, Web Development',
             'github': 'Kyle GitHub Profile\nURL: https://github.com/Kyle-TM99\nRepositories: OneStack, KyleTalk, KyleMall, OneDevelop, OnClass and more...',
             'baekjoon': 'Baekjoon Online Judge Profile\nHandle: pids\nURL: https://solved.ac/profile/pids\nCheck the Baekjoon widget for live stats!',
             'clear': 'clear',
             'date': new Date().toLocaleString(),
-            'whoami': 'Full Stack Developer | GoodSen | Team Leader | Problem Solver'
+            'whoami': 'Full Stack Developer | BEO | Education PM | 1-Person Full-stack Developer'
         };
         this.init();
     }
@@ -836,6 +836,29 @@ function toggleExperience(header) {
     
     // Close all other experience cards
     document.querySelectorAll('.experience-header').forEach(otherHeader => {
+        if (otherHeader !== header) {
+            otherHeader.classList.remove('expanded');
+            otherHeader.nextElementSibling.classList.remove('expanded');
+        }
+    });
+    
+    // Toggle current card
+    if (isExpanded) {
+        header.classList.remove('expanded');
+        details.classList.remove('expanded');
+    } else {
+        header.classList.add('expanded');
+        details.classList.add('expanded');
+    }
+}
+
+// Project accordion function
+function toggleProject(header) {
+    const details = header.nextElementSibling;
+    const isExpanded = header.classList.contains('expanded');
+    
+    // Close all other project cards
+    document.querySelectorAll('.project-header').forEach(otherHeader => {
         if (otherHeader !== header) {
             otherHeader.classList.remove('expanded');
             otherHeader.nextElementSibling.classList.remove('expanded');
