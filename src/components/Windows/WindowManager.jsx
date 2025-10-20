@@ -1,0 +1,37 @@
+import AboutWindow from './AboutWindow'
+import SkillsWindow from './SkillsWindow'
+import ProjectsWindow from './ProjectsWindow'
+import ExperienceWindow from './ExperienceWindow'
+import ContactWindow from './ContactWindow'
+import TerminalWindow from './TerminalWindow'
+import './Window.css'
+
+function WindowManager({ openWindows, onCloseWindow, onFocusWindow, zIndexCounter }) {
+  const windows = {
+    about: AboutWindow,
+    skills: SkillsWindow,
+    projects: ProjectsWindow,
+    experience: ExperienceWindow,
+    contact: ContactWindow,
+    terminal: TerminalWindow
+  }
+
+  return (
+    <>
+      {openWindows.map(windowId => {
+        const WindowComponent = windows[windowId]
+        return WindowComponent ? (
+          <WindowComponent
+            key={windowId}
+            onClose={() => onCloseWindow(windowId)}
+            onFocus={() => onFocusWindow(windowId)}
+            zIndex={zIndexCounter}
+          />
+        ) : null
+      })}
+    </>
+  )
+}
+
+export default WindowManager
+

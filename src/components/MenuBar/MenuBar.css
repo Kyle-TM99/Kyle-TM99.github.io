@@ -1,0 +1,80 @@
+.menu-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: rgba(13, 17, 23, 0.85);
+    backdrop-filter: blur(30px) saturate(180%);
+    border-bottom: 1px solid rgba(48, 54, 61, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    z-index: 1000;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 500;
+}
+
+.menu-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.apple-logo img {
+    margin-top: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.menu-item {
+    cursor: pointer;
+    padding: 5px 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.menu-item.active {
+    font-weight: 600;
+}
+
+.menu-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.time {
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .menu-bar {
+        height: 40px;
+        padding: 0 10px;
+        font-size: 12px;
+    }
+    
+    .menu-left {
+        gap: 10px;
+    }
+    
+    .menu-item {
+        padding: 4px 6px;
+        font-size: 11px;
+    }
+    
+    .apple-logo img {
+        width: 16px;
+        height: 16px;
+        margin-top: 3px;
+    }
+}
+
