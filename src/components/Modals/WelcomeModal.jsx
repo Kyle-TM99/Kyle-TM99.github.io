@@ -8,7 +8,7 @@ function WelcomeModal({ show, onClose }) {
       <div className="welcome-content">
         <div className="welcome-header">
           <div className="welcome-avatar">
-            <img src="image/Kyle.png" alt="Kyle" className="welcome-photo" />
+            <img src="/Kyle.png" alt="Kyle" className="welcome-photo" />
           </div>
           <h2>안녕하세요, 저는 김태민(Kyle) 입니다 👋</h2>
         </div>

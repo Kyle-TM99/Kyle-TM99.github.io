@@ -17,7 +17,7 @@ function AboutWindow({ onClose, onFocus, zIndex }) {
         <div className="resume-header">
           <div className="resume-photo-section">
             <div className="resume-photo">
-              <img src="image/taemin.jpg" alt="Kyle" />
+              <img src="/taemin.jpg" alt="Kyle" />
               <div className="status-badge">
                 <div className="status-dot"></div>
                 <span>Available</span>
