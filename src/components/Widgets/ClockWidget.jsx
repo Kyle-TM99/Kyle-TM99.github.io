@@ -9,11 +9,11 @@ function ClockWidget() {
   }, [])
 
   const formatTime = (date) => {
-    return date.toLocaleTimeString('ko-KR', { 
-      hour: '2-digit', 
+    return date.toLocaleTimeString('ko-KR', {
+      hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',
-      hour12: false 
+      hour12: false
     })
   }
 
@@ -27,7 +27,7 @@ function ClockWidget() {
   }
 
   return (
-    <div className="widget clock-widget">
+    <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <div className="widget-header">
         <i className="fas fa-clock"></i>
         <span>시계</span>

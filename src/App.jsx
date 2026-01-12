@@ -64,7 +64,7 @@ function App() {
       <ParticleSystem />
       <Desktop>
         <MenuBar onHelpClick={handleHelp} />
-        <Dock onOpenWindow={openWindow} />
+        <Dock onOpenWindow={openWindow} openWindows={openWindows} />
         <WindowManager
           openWindows={openWindows}
           onCloseWindow={closeWindow}

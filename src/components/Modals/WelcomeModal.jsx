@@ -1,45 +1,66 @@
 import './Modal.css'
 
-function WelcomeModal({ show, onClose }) {
-  if (!show) return null
+import { motion, AnimatePresence } from 'framer-motion'
+import './Modal.css'
 
+function WelcomeModal({ show, onClose }) {
   return (
-    <div className={`welcome-modal ${show ? '' : 'hidden'}`}>
-      <div className="welcome-content">
-        <div className="welcome-header">
-          <div className="welcome-avatar">
-            <img src="/Kyle.png" alt="Kyle" className="welcome-photo" />
-          </div>
-          <h2>안녕하세요, 저는 김태민(Kyle) 입니다 👋</h2>
-        </div>
-        <div className="welcome-body">
-          <p className="welcome-intro">제가 만든 Kyle Portfolio OS에 오신 것을 환영합니다.</p>
-          <div className="welcome-message" style={{ textAlign: 'center' }}>
-            <p>단순한 이력서나 리스트가 아닌, <strong>제가 직접 기획하고 개발한 경험들</strong>을 담았습니다.</p>
-            <p>마치 작은 운영체제처럼 작동하는 이 공간에서, 저만의 개발 여정을 탐험해보세요.</p>
-            <p>기술과 창의성이 어우러진 곳에서 <strong>저의 색깔</strong>을 느끼실 수 있기를 바랍니다.</p>
-          </div>
-          <div className="welcome-features">
-            <div className="feature-item">
-              <i className="fas fa-heart"></i>
-              <span>개발 가치관</span>
+    <AnimatePresence>
+      {show && (
+        <motion.div
+          className="welcome-overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <motion.div
+            className="welcome-card"
+            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+            transition={{ type: "spring", duration: 0.5 }}
+          >
+            <div className="welcome-header">
+              <div className="avatar-wrapper">
+                <img src="/Kyle.png" alt="Kyle" className="welcome-avatar" />
+                <div className="online-badge"></div>
+              </div>
+              <div className="welcome-title">
+                <h2>Hello, I'm Kyle 👋</h2>
+                <span>Full-stack Developer</span>
+              </div>
             </div>
-            <div className="feature-item">
-              <i className="fas fa-rocket"></i>
-              <span>프로젝트 경험</span>
+
+            <div className="welcome-body">
+              <p>
+                Welcome to <strong>Kyle Portfolio OS</strong>.<br />
+                This is a spatial web experience designed to showcase my journey and skills interactively.
+              </p>
+
+              <div className="features-grid">
+                <div className="feature-box">
+                  <i className="fas fa-layer-group" style={{ color: '#0a84ff' }}></i>
+                  <span>Spatial UI</span>
+                </div>
+                <div className="feature-box">
+                  <i className="fas fa-bolt" style={{ color: '#30d158' }}></i>
+                  <span>Interactive</span>
+                </div>
+                <div className="feature-box">
+                  <i className="fas fa-code" style={{ color: '#bf5af2' }}></i>
+                  <span>Modern Stack</span>
+                </div>
+              </div>
             </div>
-            <div className="feature-item">
-              <i className="fas fa-code"></i>
-              <span>기술 스택 소개</span>
-            </div>
-          </div>
-        </div>
-        <button className="welcome-btn" onClick={onClose}>
-          <i className="fas fa-play"></i>
-          포트폴리오 탐험하기
-        </button>
-      </div>
-    </div>
+
+            <button className="welcome-btn" onClick={onClose}>
+              <span>Enter Portfolio</span>
+              <i className="fas fa-arrow-right"></i>
+            </button>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   )
 }
 

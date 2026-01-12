@@ -13,16 +13,16 @@ function GitHubWidget() {
     try {
       const userResponse = await fetch('https://api.github.com/users/Kyle-TM99')
       const userData = await userResponse.json()
-      
+
       const reposResponse = await fetch('https://api.github.com/users/Kyle-TM99/repos?sort=updated&per_page=100')
       const reposData = await reposResponse.json()
-      
+
       if (userResponse.ok && reposResponse.ok) {
         const totalStars = reposData.reduce((sum, repo) => sum + repo.stargazers_count, 0)
         const totalForks = reposData.reduce((sum, repo) => sum + repo.forks_count, 0)
         const languages = [...new Set(reposData.map(repo => repo.language).filter(lang => lang))]
         const publicRepos = reposData.filter(repo => !repo.private).length
-        
+
         setGithubData({
           publicRepos,
           totalStars,
@@ -44,7 +44,7 @@ function GitHubWidget() {
 
   if (!githubData) {
     return (
-      <div className="widget github-widget">
+      <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <div className="widget-header">
           <i className="fab fa-github"></i>
           <span>GitHub Stats</span>
@@ -62,7 +62,7 @@ function GitHubWidget() {
   }
 
   return (
-    <div className="widget github-widget">
+    <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <div className="widget-header">
         <i className="fab fa-github"></i>
         <span>GitHub Stats</span>

@@ -1,6 +1,7 @@
+import { motion } from 'framer-motion'
 import './Dock.css'
 
-function Dock({ onOpenWindow }) {
+function Dock({ onOpenWindow, openWindows = [] }) {
   const dockItems = [
     { id: 'about', icon: 'fa-user-circle', tooltip: 'About Me' },
     { id: 'skills', icon: 'fa-code', tooltip: 'Skills' },
@@ -21,16 +22,33 @@ function Dock({ onOpenWindow }) {
   }
 
   return (
-    <div className="dock">
+    <motion.div
+      className="dock"
+      initial={{ y: 100 }}
+      animate={{ y: 0 }}
+      transition={{ type: "spring", stiffness: 200, damping: 20 }}
+    >
       {dockItems.map(item => (
-        <div key={item.id} className="dock-item" onClick={() => handleClick(item)}>
+        <motion.div
+          key={item.id}
+          className="dock-item"
+          onClick={() => handleClick(item)}
+          whileHover={{
+            scale: 1.25,
+            y: -15,
+            transition: { type: "spring", stiffness: 300, damping: 15 }
+          }}
+          whileTap={{ scale: 0.9 }}
+        >
           <i className={`fas ${item.icon}`}></i>
           <div className="dock-tooltip">{item.tooltip}</div>
-        </div>
+          {openWindows.includes(item.id) && (
+            <div className="active-dot"></div>
+          )}
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   )
 }
 
 export default Dock
-

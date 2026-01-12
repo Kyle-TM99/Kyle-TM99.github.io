@@ -10,13 +10,36 @@ function ExperienceWindow({ onClose, onFocus, zIndex }) {
 
   const experiences = [
     {
+      id: 'baro',
+      icon: 'fa-layer-group',
+      company: 'BARO interactive',
+      position: 'Developer',
+      badge: '재직중',
+      badgeType: 'current',
+      period: '2025.12 ~ 현재',
+      location: '서울, 대한민국',
+      role: '개발',
+      achievements: [
+        { icon: 'fa-code', text: 'Web Development' },
+        { icon: 'fa-mobile-alt', text: 'Responsive Design' }
+      ],
+      duties: [
+        {
+          title: '웹 인터랙티브 개발',
+          icon: 'fa-laptop-code',
+          description: '다양한 웹 인터랙티브 콘텐츠 기획 및 개발'
+        }
+      ],
+      tech: ['React', 'JavaScript', 'CSS3']
+    },
+    {
       id: 'beo',
       icon: 'fa-building',
       company: '베오',
       position: 'Education PM & Full-stack Developer',
-      badge: '재직중',
-      badgeType: 'current',
-      period: '2025.07 ~ 현재',
+      badge: '완료',
+      badgeType: 'past',
+      period: '2025.07 ~ 2025.11',
       location: '서울, 대한민국',
       role: 'PM & 풀스택 개발',
       achievements: [

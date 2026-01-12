@@ -1,11 +1,15 @@
-/* Windows */
+/* Windows - Global Dark Glass Theme */
 .window {
     position: fixed;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border-radius: 12px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(22, 22, 24, 0.85);
+    /* Dark Glass */
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    border-radius: 16px;
+    box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     width: 800px;
     height: 600px;
     min-width: 400px;
@@ -14,9 +18,11 @@
     opacity: 0;
     left: 0;
     top: 0;
-    transform: scale(0.8);
+    transform: scale(0.95);
     user-select: none;
     transition: opacity 0.3s ease, transform 0.3s ease;
+    color: white;
+    /* Force white text */
 }
 
 .window.show {
@@ -24,44 +30,36 @@
     transform: scale(1);
 }
 
-.window.dragging {
-    transition: none;
-}
-
-.window:not(.dragging) {
-    transition: opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
 .window-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 16px;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    border-radius: 12px 12px 0 0;
+    padding: 16px 20px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), transparent);
+    border-radius: 16px 16px 0 0;
     cursor: move;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    /* Subtle separator */
     user-select: none;
-}
-
-.window-header:active {
-    cursor: grabbing;
 }
 
 .window-title {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     font-weight: 600;
-    color: #333;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
     pointer-events: none;
 }
 
 .window-title i {
     font-size: 16px;
-    color: #666;
+    color: #0a84ff;
+    /* Icon color */
 }
 
+/* Control Buttons (Mac Style) */
 .window-controls {
     display: flex;
     gap: 8px;
@@ -69,717 +67,141 @@
 }
 
 .control-btn {
-    width: 16px;
-    height: 16px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     border: none;
     cursor: pointer;
-    font-size: 10px;
-    font-weight: bold;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background: #ff5f56;
-    color: #fff;
+    /* Red */
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
 
 .control-btn:hover {
-    transform: scale(1.1);
     opacity: 0.8;
 }
 
 .window-content {
-    padding: 20px;
-    height: calc(100% - 60px);
-    overflow: hidden;
-    box-sizing: border-box;
-    position: relative;
-}
-
-/* About Content - Resume Style */
-.resume-content {
     padding: 0;
-    height: calc(100% - 60px);
-    overflow-y: auto;
-    overflow-x: hidden;
-    box-sizing: border-box;
-    background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
+    /* Remove default padding for full flexibility */
+    height: calc(100% - 50px);
+    overflow: hidden;
+    position: relative;
+    color: rgba(255, 255, 255, 0.9);
 }
 
-/* Resume Header - Professional Card */
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Resume/About Content Overrides */
+.resume-content {
+    background: transparent;
+    /* Remove white bg */
+    padding: 0;
+    height: 100%;
+    overflow-y: auto;
+}
+
 .resume-header {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-    padding: 50px;
-    display: flex;
-    gap: 50px;
-    align-items: center;
-    color: white;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    position: relative;
-    overflow: hidden;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+    padding: 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: none;
 }
 
 .resume-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-    pointer-events: none;
+    display: none;
 }
 
-.resume-photo-section {
-    flex-shrink: 0;
-    z-index: 2;
-    position: relative;
-}
-
-.resume-photo {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 5px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    position: relative;
-}
-
-.resume-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.status-badge {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(74, 222, 128, 0.95);
-    padding: 6px 16px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    font-weight: 600;
-    color: white;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: white;
-    animation: pulse 2s infinite;
-}
-
-.resume-info-section {
-    flex: 1;
-    z-index: 2;
-    position: relative;
-}
+/* Remove old overlay */
 
 .name-title h1 {
-    font-size: 42px;
-    font-weight: 700;
-    margin: 0 0 8px 0;
     color: white;
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-}
-
-.eng-name {
-    font-size: 24px;
-    font-weight: 400;
-    opacity: 0.9;
 }
 
 .job-title {
-    font-size: 20px;
-    margin: 0 0 24px 0;
-    opacity: 0.95;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 500;
+    color: #0a84ff;
 }
 
-.contact-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+.eng-name {
+    color: rgba(255, 255, 255, 0.6);
 }
 
-.contact-grid .contact-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    padding: 8px 12px;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 8px;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-}
-
-.contact-grid .contact-item:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateX(4px);
-}
-
-.contact-grid .contact-item i {
-    font-size: 14px;
-    width: 16px;
-    text-align: center;
+/* Global Text Colors - SCOPED and SAFE */
+.window-content h1,
+.window-content h2,
+.window-content h3,
+.window-content h4,
+.window-content h5 {
     color: white;
-    opacity: 0.9;
 }
 
-/* Resume Sections */
+.window-content p,
+.window-content li,
+.window-content span {
+    color: rgba(255, 255, 255, 0.85);
+    /* Default text color */
+}
+
+.text-muted {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Sections */
 .resume-section {
     padding: 40px;
-    border-bottom: 1px solid #e9ecef;
-}
-
-.resume-section:last-child {
-    border-bottom: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .section-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 32px;
-    padding-bottom: 16px;
-    border-bottom: 2px solid #e9ecef;
-    position: relative;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .section-header::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 60px;
-    height: 2px;
-    background: linear-gradient(90deg, #667eea, #764ba2);
+    background: #0a84ff;
 }
 
-.section-header i {
-    font-size: 28px;
-    color: #667eea;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-    padding: 12px;
-    border-radius: 12px;
-}
-
-.section-header h2 {
-    font-size: 28px;
-    font-weight: 700;
-    color: #1a1a2e;
-    margin: 0;
-    letter-spacing: -0.5px;
-}
-
-/* Professional Summary */
-.summary-section {
-    background: white;
-}
-
-.summary-content {
-    padding: 20px;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
-    border-radius: 12px;
-    border-left: 4px solid #667eea;
-}
-
-.summary-quote {
-    font-size: 24px;
-    font-weight: 700;
-    color: #667eea;
-    font-style: italic;
-    margin: 0 0 16px 0;
-    text-align: center;
-}
-
-.summary-text {
-    font-size: 16px;
-    line-height: 1.8;
-    color: #555;
-    margin: 0 0 16px 0;
-}
-
-.summary-text:last-child {
-    margin-bottom: 0;
-}
-
-.summary-text strong {
-    color: #333;
-    font-weight: 600;
-}
-
-/* Core Competencies Grid */
-.competencies-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-}
-
+/* Competency Cards - Fix Layout & Theme */
 .competency-card {
-    background: white;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    /* Ensure padding and layout remains */
     padding: 32px;
     border-radius: 16px;
-    border: 1px solid rgba(102, 126, 234, 0.1);
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-}
-
-.competency-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #667eea, #764ba2);
-    transform: scaleX(0);
-    transition: transform 0.4s ease;
-}
-
-.competency-card:hover {
-    border-color: rgba(102, 126, 234, 0.3);
-    box-shadow: 0 12px 40px rgba(102, 126, 234, 0.15);
-    transform: translateY(-8px);
-}
-
-.competency-card:hover::before {
-    transform: scaleX(1);
-}
-
-.competency-icon {
-    width: 70px;
-    height: 70px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
-}
-
-.competency-icon i {
-    font-size: 32px;
-    color: white;
+    transition: all 0.3s ease;
 }
 
 .competency-card h3 {
-    font-size: 22px;
-    font-weight: 700;
-    color: #1a1a2e;
-    margin: 0 0 12px 0;
-    letter-spacing: -0.3px;
-}
-
-.competency-card > p {
-    font-size: 15px;
-    color: #555;
-    line-height: 1.7;
-    margin: 0 0 20px 0;
-}
-
-.competency-items {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.competency-items li {
-    padding: 8px 0;
-    color: #555;
-    font-size: 14px;
-    border-bottom: 1px dashed #e9ecef;
-    display: flex;
-    align-items: center;
-}
-
-.competency-items li:last-child {
-    border-bottom: none;
-}
-
-.competency-items li::before {
-    content: '✓';
-    color: #4ade80;
-    font-weight: bold;
-    margin-right: 8px;
-    font-size: 16px;
-}
-
-/* Key Achievements Showcase */
-.achievements-showcase {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.achievement-box {
-    background: white;
-    padding: 32px 24px;
-    border-radius: 16px;
-    text-align: center;
-    border: 1px solid rgba(102, 126, 234, 0.1);
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    position: relative;
-    overflow: hidden;
-}
-
-.achievement-box::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.02), rgba(118, 75, 162, 0.02));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.achievement-box:hover {
-    border-color: rgba(102, 126, 234, 0.3);
-    box-shadow: 0 12px 40px rgba(102, 126, 234, 0.15);
-    transform: translateY(-8px);
-}
-
-.achievement-box:hover::before {
-    opacity: 1;
-}
-
-.achievement-number {
-    font-size: 56px;
-    font-weight: 800;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 12px;
-    position: relative;
-    z-index: 1;
-}
-
-.achievement-label {
-    font-size: 16px;
-    font-weight: 700;
-    color: #1a1a2e;
-    margin-bottom: 8px;
-    position: relative;
-    z-index: 1;
-    letter-spacing: -0.2px;
-}
-
-.achievement-desc {
-    font-size: 14px;
-    color: #666;
-    position: relative;
-    z-index: 1;
-    line-height: 1.5;
-}
-
-/* Technical Stack Summary */
-.tech-summary {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.tech-category-summary {
-    display: flex;
-    gap: 20px;
-    padding: 20px;
-    background: white;
-    border-radius: 12px;
-    border-left: 4px solid #667eea;
-    transition: all 0.3s ease;
-}
-
-.tech-category-summary:hover {
-    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.1);
-    transform: translateX(8px);
-}
-
-.tech-category-icon {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.tech-category-icon i {
-    font-size: 28px;
-    color: #667eea;
-}
-
-.tech-category-content h4 {
-    font-size: 18px;
-    font-weight: 700;
-    color: #333;
-    margin: 0 0 8px 0;
-}
-
-.tech-category-content p {
-    font-size: 15px;
-    color: #666;
-    line-height: 1.6;
-    margin: 0;
-}
-
-/* Career Timeline */
-.timeline {
-    position: relative;
-    padding-left: 40px;
-}
-
-.timeline-item {
-    position: relative;
-    margin-bottom: 40px;
-    padding-left: 30px;
-}
-
-.timeline-item:last-child {
-    margin-bottom: 0;
-}
-
-.timeline-marker {
-    position: absolute;
-    left: -25px;
-    top: 0;
-    width: 32px;
-    height: 32px;
-    background: white;
-    border: 3px solid #667eea;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.timeline-marker i {
-    font-size: 10px;
-    color: #667eea;
-}
-
-.timeline-item.current .timeline-marker {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    border-color: #667eea;
-    animation: pulse 2s infinite;
-}
-
-.timeline-item.current .timeline-marker i {
     color: white;
+    margin-top: 0;
 }
 
-.timeline-content {
-    background: white;
-    padding: 24px;
-    border-radius: 12px;
-    border: 2px solid #e9ecef;
-    transition: all 0.3s ease;
+.competency-card p {
+    color: rgba(255, 255, 255, 0.8);
 }
 
-.timeline-content:hover {
-    border-color: #667eea;
-    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.1);
+.competency-card:hover {
+    border-color: #0a84ff;
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.08);
 }
 
-.timeline-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-}
-
-.timeline-header h3 {
-    font-size: 22px;
-    font-weight: 700;
-    color: #333;
-    margin: 0;
-}
-
-.timeline-period {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.timeline-position {
-    font-size: 16px;
-    color: #667eea;
-    font-weight: 600;
-    margin: 0 0 16px 0;
-}
-
-.timeline-highlights {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.timeline-highlights li {
-    padding: 8px 0 8px 24px;
-    color: #555;
-    font-size: 14px;
-    line-height: 1.6;
-    position: relative;
-}
-
-.timeline-highlights li::before {
-    content: '●';
-    position: absolute;
-    left: 0;
-    color: #667eea;
-    font-size: 12px;
-}
-
-/* Featured Projects */
-.featured-projects {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.featured-project {
-    background: white;
-    padding: 24px;
-    border-radius: 12px;
-    border: 2px solid #e9ecef;
-    transition: all 0.3s ease;
-}
-
-.featured-project:hover {
-    border-color: #667eea;
-    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.1);
-    transform: translateX(8px);
-}
-
-.project-header-mini {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 12px;
-}
-
-.project-icon-mini {
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.project-icon-mini i {
-    font-size: 24px;
-    color: white;
-}
-
-.project-header-mini h4 {
-    font-size: 18px;
-    font-weight: 700;
-    color: #333;
-    margin: 0 0 4px 0;
-}
-
-.project-badge-mini {
-    font-size: 13px;
-    color: #666;
-}
-
-.featured-project > p {
-    font-size: 14px;
-    color: #555;
-    line-height: 1.6;
-    margin: 0 0 16px 0;
-}
-
-.project-tech-mini {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.project-tech-mini span {
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-    color: #667eea;
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-/* Why Me Section */
-.why-me-content {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.why-me-item {
-    display: flex;
-    gap: 24px;
-    padding: 24px;
-    background: white;
-    border-radius: 12px;
-    border-left: 4px solid #667eea;
-    transition: all 0.3s ease;
-}
-
-.why-me-item:hover {
-    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.1);
-    transform: translateX(8px);
-}
-
-.why-me-number {
-    font-size: 48px;
-    font-weight: 800;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    flex-shrink: 0;
-    line-height: 1;
-}
-
-.why-me-text h4 {
-    font-size: 20px;
-    font-weight: 700;
-    color: #333;
-    margin: 0 0 8px 0;
-}
-
-.why-me-text p {
-    font-size: 15px;
-    color: #666;
-    line-height: 1.6;
-    margin: 0;
-}
+/* --- RESUME / ABOUT ME REVAMP --- */
+/* Styles moved to AboutWindow.css for Tabbed Layout Redesign */
 
 /* About Content */
 .about-content {
@@ -1460,255 +882,255 @@
         border-radius: 0 !important;
         margin: 0 !important;
     }
-    
+
     .window.show {
         transform: none !important;
     }
-    
+
     .window-header {
         border-radius: 0 !important;
         padding: 15px 20px;
         height: 60px;
         cursor: default !important;
     }
-    
+
     .window-title {
         font-size: 16px;
     }
-    
+
     .control-btn {
         width: 24px;
         height: 24px;
         font-size: 14px;
     }
-    
+
     .window-content {
         padding: 15px;
         height: calc(100vh - 60px) !important;
         overflow-y: auto;
     }
-    
+
     /* Resume Mobile */
     .resume-content {
         padding: 0;
     }
-    
+
     .resume-header {
         flex-direction: column;
         padding: 24px;
         gap: 24px;
         text-align: center;
     }
-    
+
     .resume-photo {
         width: 120px;
         height: 120px;
     }
-    
+
     .name-title h1 {
         font-size: 28px;
         flex-direction: column;
         gap: 4px;
     }
-    
+
     .eng-name {
         font-size: 18px;
     }
-    
+
     .job-title {
         font-size: 16px;
         justify-content: center;
     }
-    
+
     .contact-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 8px;
     }
-    
+
     .contact-grid .contact-item {
         font-size: 12px;
         padding: 6px 10px;
     }
-    
+
     .resume-section {
         padding: 24px 16px;
     }
-    
+
     .section-header h2 {
         font-size: 20px;
     }
-    
+
     .section-header i {
         font-size: 20px;
     }
-    
+
     .summary-quote {
         font-size: 18px;
     }
-    
+
     .summary-text {
         font-size: 14px;
     }
-    
+
     .competencies-grid {
         grid-template-columns: 1fr;
         gap: 16px;
     }
-    
+
     .competency-card {
         padding: 20px;
     }
-    
+
     .competency-icon {
         width: 50px;
         height: 50px;
     }
-    
+
     .competency-icon i {
         font-size: 24px;
     }
-    
+
     .competency-card h3 {
         font-size: 18px;
     }
-    
+
     .achievements-showcase {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
     }
-    
+
     .achievement-box {
         padding: 16px;
     }
-    
+
     .achievement-number {
         font-size: 36px;
     }
-    
+
     .achievement-label {
         font-size: 14px;
     }
-    
+
     .achievement-desc {
         font-size: 12px;
     }
-    
+
     .tech-category-summary {
         flex-direction: column;
         gap: 12px;
         padding: 16px;
     }
-    
+
     .tech-category-icon {
         width: 50px;
         height: 50px;
     }
-    
+
     .tech-category-icon i {
         font-size: 24px;
     }
-    
+
     .tech-category-content h4 {
         font-size: 16px;
     }
-    
+
     .tech-category-content p {
         font-size: 13px;
     }
-    
+
     .timeline {
         padding-left: 30px;
     }
-    
+
     .timeline::before {
         left: 10px;
     }
-    
+
     .timeline-marker {
         left: -19px;
         width: 24px;
         height: 24px;
     }
-    
+
     .timeline-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 8px;
     }
-    
+
     .timeline-header h3 {
         font-size: 18px;
     }
-    
+
     .timeline-period {
         font-size: 12px;
     }
-    
+
     .timeline-position {
         font-size: 14px;
     }
-    
+
     .timeline-highlights li {
         font-size: 13px;
     }
-    
+
     .featured-project {
         padding: 16px;
     }
-    
+
     .project-icon-mini {
         width: 40px;
         height: 40px;
     }
-    
+
     .project-icon-mini i {
         font-size: 20px;
     }
-    
+
     .project-header-mini h4 {
         font-size: 16px;
     }
-    
+
     .why-me-item {
         flex-direction: column;
         gap: 16px;
         padding: 20px;
     }
-    
+
     .why-me-number {
         font-size: 36px;
     }
-    
+
     .why-me-text h4 {
         font-size: 18px;
     }
-    
+
     .why-me-text p {
         font-size: 14px;
     }
-    
+
     /* Original About Content Mobile */
     .about-content {
         padding: 15px;
         height: calc(100vh - 90px) !important;
     }
-    
+
     .profile-section {
         flex-direction: column;
         align-items: center;
         text-align: center;
     }
-    
+
     .profile-image {
         width: 120px;
         height: 120px;
     }
-    
+
     .profile-info h2 {
         font-size: 24px;
         text-align: center;
     }
-    
+
     .project-header,
     .experience-header {
         flex-direction: column;
@@ -1716,7 +1138,7 @@
         gap: 12px;
         padding: 15px;
     }
-    
+
     .project-icon,
     .experience-icon {
         width: 50px;
@@ -1730,188 +1152,187 @@
     .resume-header {
         padding: 20px 16px;
     }
-    
+
     .resume-photo {
         width: 100px;
         height: 100px;
     }
-    
+
     .name-title h1 {
         font-size: 24px;
     }
-    
+
     .eng-name {
         font-size: 16px;
     }
-    
+
     .job-title {
         font-size: 14px;
     }
-    
+
     .contact-grid {
         grid-template-columns: 1fr;
         gap: 6px;
     }
-    
+
     .contact-grid .contact-item {
         font-size: 11px;
         padding: 6px 8px;
     }
-    
+
     .resume-section {
         padding: 20px 12px;
     }
-    
+
     .section-header h2 {
         font-size: 18px;
     }
-    
+
     .summary-quote {
         font-size: 16px;
     }
-    
+
     .summary-text {
         font-size: 13px;
     }
-    
+
     .competency-card {
         padding: 16px;
     }
-    
+
     .competency-icon {
         width: 45px;
         height: 45px;
     }
-    
+
     .competency-icon i {
         font-size: 20px;
     }
-    
+
     .competency-card h3 {
         font-size: 16px;
     }
-    
-    .competency-card > p {
+
+    .competency-card>p {
         font-size: 13px;
     }
-    
+
     .competency-items li {
         font-size: 13px;
     }
-    
+
     .achievements-showcase {
         grid-template-columns: 1fr;
         gap: 12px;
     }
-    
+
     .achievement-number {
         font-size: 32px;
     }
-    
+
     .achievement-label {
         font-size: 13px;
     }
-    
+
     .achievement-desc {
         font-size: 11px;
     }
-    
+
     .tech-category-summary {
         padding: 12px;
     }
-    
+
     .tech-category-icon {
         width: 40px;
         height: 40px;
     }
-    
+
     .tech-category-icon i {
         font-size: 20px;
     }
-    
+
     .tech-category-content h4 {
         font-size: 15px;
     }
-    
+
     .tech-category-content p {
         font-size: 12px;
     }
-    
+
     .timeline {
         padding-left: 25px;
     }
-    
+
     .timeline-marker {
         width: 20px;
         height: 20px;
         left: -17px;
     }
-    
+
     .timeline-content {
         padding: 16px;
     }
-    
+
     .timeline-header h3 {
         font-size: 16px;
     }
-    
+
     .timeline-position {
         font-size: 13px;
     }
-    
+
     .timeline-highlights li {
         font-size: 12px;
     }
-    
+
     .featured-project {
         padding: 12px;
     }
-    
+
     .project-icon-mini {
         width: 35px;
         height: 35px;
     }
-    
+
     .project-icon-mini i {
         font-size: 18px;
     }
-    
+
     .project-header-mini {
         gap: 12px;
     }
-    
+
     .project-header-mini h4 {
         font-size: 15px;
     }
-    
+
     .project-badge-mini {
         font-size: 11px;
     }
-    
-    .featured-project > p {
+
+    .featured-project>p {
         font-size: 13px;
     }
-    
+
     .project-tech-mini span {
         font-size: 11px;
         padding: 3px 10px;
     }
-    
+
     .why-me-item {
         padding: 16px;
         gap: 12px;
     }
-    
+
     .why-me-number {
         font-size: 32px;
     }
-    
+
     .why-me-text h4 {
         font-size: 16px;
     }
-    
+
     .why-me-text p {
         font-size: 13px;
     }
 }
-
