@@ -1,5 +1,3 @@
-import './Modal.css'
-
 import { motion, AnimatePresence } from 'framer-motion'
 import './Modal.css'
 
@@ -8,7 +6,7 @@ function WelcomeModal({ show, onClose }) {
     <AnimatePresence>
       {show && (
         <motion.div
-          className="welcome-overlay"
+          className="welcome-modal"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

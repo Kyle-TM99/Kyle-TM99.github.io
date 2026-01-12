@@ -3,14 +3,14 @@ import './Dock.css'
 
 function Dock({ onOpenWindow, openWindows = [] }) {
   const dockItems = [
-    { id: 'about', icon: 'fa-user-circle', tooltip: 'About Me' },
-    { id: 'skills', icon: 'fa-code', tooltip: 'Skills' },
-    { id: 'experience', icon: 'fa-briefcase', tooltip: 'Experience' },
-    { id: 'projects', icon: 'fa-folder-open', tooltip: 'Projects' },
-    { id: 'contact', icon: 'fa-envelope', tooltip: 'Contact' },
-    { id: 'blog', icon: 'fa-blog', tooltip: 'Tech Blog', external: 'https://pids.tistory.com/' },
+    { id: 'about', icon: 'fas fa-user-circle', tooltip: 'About Me' },
+    { id: 'skills', icon: 'fas fa-code', tooltip: 'Skills' },
+    { id: 'experience', icon: 'fas fa-briefcase', tooltip: 'Experience' },
+    { id: 'projects', icon: 'fas fa-folder-open', tooltip: 'Projects' },
+    { id: 'contact', icon: 'fas fa-envelope', tooltip: 'Contact' },
+    { id: 'blog', icon: 'fas fa-blog', tooltip: 'Tech Blog', external: 'https://pids.tistory.com/' },
     { id: 'github', icon: 'fab fa-github', tooltip: 'GitHub', external: 'https://github.com/Kyle-TM99' },
-    { id: 'terminal', icon: 'fa-terminal', tooltip: 'Terminal' }
+    { id: 'terminal', icon: 'fas fa-terminal', tooltip: 'Terminal' }
   ]
 
   const handleClick = (item) => {
@@ -24,8 +24,8 @@ function Dock({ onOpenWindow, openWindows = [] }) {
   return (
     <motion.div
       className="dock"
-      initial={{ y: 100 }}
-      animate={{ y: 0 }}
+      initial={{ x: "-50%", y: 100 }}
+      animate={{ x: "-50%", y: 0 }}
       transition={{ type: "spring", stiffness: 200, damping: 20 }}
     >
       {dockItems.map(item => (
@@ -40,7 +40,7 @@ function Dock({ onOpenWindow, openWindows = [] }) {
           }}
           whileTap={{ scale: 0.9 }}
         >
-          <i className={`fas ${item.icon}`}></i>
+          <i className={item.icon}></i>
           <div className="dock-tooltip">{item.tooltip}</div>
           {openWindows.includes(item.id) && (
             <div className="active-dot"></div>
