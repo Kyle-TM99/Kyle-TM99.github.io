@@ -139,6 +139,17 @@
     border-color: rgba(255, 255, 255, 0.3);
 }
 
+.chip-link {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.chip-link:hover {
+    border-color: #0a84ff;
+    box-shadow: 0 0 12px rgba(10, 132, 255, 0.25);
+}
+
 .section-title {
     font-size: 20px;
     font-weight: 700;
@@ -168,7 +179,7 @@
     border-radius: 20px;
     padding: 24px;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     overflow: hidden;
 }
@@ -176,6 +187,7 @@
 .company-card:hover {
     background: rgba(255, 255, 255, 0.08);
     border-color: var(--accent-color);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
 }
 
 .company-card.expanded {
@@ -222,6 +234,18 @@
     color: rgba(255, 255, 255, 0.5);
 }
 
+.company-toggle-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-color);
+    flex-shrink: 0;
+}
+
+.company-toggle-icon i {
+    font-size: 14px;
+}
+
 .company-role-badge {
     margin-top: 16px;
     display: inline-block;
@@ -239,7 +263,11 @@
     font-size: 14px;
 }
 
-/* Expanded Details */
+/* Expanded Details (wrapper for height animation) */
+.company-details-wrapper {
+    display: block;
+}
+
 .company-details {
     margin-top: 30px;
     padding-top: 20px;
@@ -282,16 +310,24 @@
 
 .stat-box {
     background: rgba(255, 255, 255, 0.03);
-    padding: 12px;
+    padding: 14px 16px;
     border-radius: 12px;
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 .stat-value {
-    font-size: 20px;
+    font-size: 26px;
     font-weight: 800;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
 }
 
 .stat-label {
@@ -451,6 +487,11 @@
     border-radius: 6px;
     font-size: 13px;
     font-weight: 500;
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.skill-category-interactive .skill-tag:hover {
+    border: 1px solid rgba(10, 132, 255, 0.4);
 }
 
 /* Projects Tab */
@@ -503,7 +544,6 @@
 
 .gallery-card:hover {
     border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 
 .gallery-header {
@@ -572,12 +612,81 @@
     color: #dedede;
 }
 
-/* Scrollbar */
+/* Typewriter (Summary quote) */
+.typewriter-quote {
+    font-family: ui-monospace, monospace;
+}
+
+.cursor-blink {
+    opacity: 1;
+    animation: cursor-blink 0.8s step-end infinite;
+    color: #0a84ff;
+}
+
+@keyframes cursor-blink {
+    50% { opacity: 0; }
+}
+
+/* Gallery action buttons (Run App / View Source) */
+.gallery-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.gallery-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.gallery-btn-primary {
+    background: rgba(10, 132, 255, 0.2);
+    color: #0a84ff;
+    border: 1px solid rgba(10, 132, 255, 0.4);
+}
+
+.gallery-btn-primary:hover {
+    background: rgba(10, 132, 255, 0.35);
+    box-shadow: 0 0 14px rgba(10, 132, 255, 0.3);
+}
+
+.gallery-btn-secondary {
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.gallery-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* OS-style custom scrollbar */
 .about-main::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
+}
+
+.about-main::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
 }
 
 .about-main::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 4px;
+}
+
+.about-main::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.28);
 }

@@ -1,17 +1,40 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Window from './Window'
+import { TABS, CAREER_DATA, SKILLS_CATEGORIES, PROJECTS_GALLERY } from './aboutData'
 import './AboutWindow.css'
+
+const TYPEWRITER_PHRASE = '처음부터 끝까지, 제가 직접 만듭니다.'
+const TYPEWRITER_SPEED = 80
+
+function useTypewriter(text, speed, enabled = true) {
+  const [display, setDisplay] = useState('')
+  const [done, setDone] = useState(false)
+  useEffect(() => {
+    if (!enabled) {
+      setDisplay(text)
+      setDone(true)
+      return
+    }
+    setDisplay('')
+    setDone(false)
+    let i = 0
+    const t = setInterval(() => {
+      if (i >= text.length) {
+        clearInterval(t)
+        setDone(true)
+        return
+      }
+      setDisplay(text.slice(0, i + 1))
+      i += 1
+    }, speed)
+    return () => clearInterval(t)
+  }, [text, speed, enabled])
+  return { display, done }
+}
 
 function AboutWindow({ onClose, onFocus, zIndex }) {
   const [activeTab, setActiveTab] = useState('profile')
-
-  const tabs = [
-    { id: 'profile', icon: 'fa-user', label: 'Profile' },
-    { id: 'career', icon: 'fa-briefcase', label: 'Career' },
-    { id: 'skills', icon: 'fa-code', label: 'Skills' },
-    { id: 'projects', icon: 'fa-rocket', label: 'Projects' }
-  ]
 
   return (
     <Window
@@ -23,23 +46,25 @@ function AboutWindow({ onClose, onFocus, zIndex }) {
       zIndex={zIndex}
       width="900px"
       height="650px"
+      minWidth="400px"
+      minHeight="400px"
     >
       <div className="about-container">
-        {/* Sidebar Navigation */}
         <div className="about-sidebar">
-          {tabs.map(tab => (
+          {TABS.map(tab => (
             <button
               key={tab.id}
               className={`sidebar-btn ${activeTab === tab.id ? 'active' : ''}`}
               onClick={() => setActiveTab(tab.id)}
+              type="button"
+              aria-pressed={activeTab === tab.id}
             >
-              <i className={`fas ${tab.icon}`}></i>
+              <i className={`fas ${tab.icon}`} aria-hidden></i>
               {tab.label}
             </button>
           ))}
         </div>
 
-        {/* Main Content Area */}
         <div className="about-main">
           <AnimatePresence mode="wait">
             <motion.div
@@ -62,11 +87,17 @@ function AboutWindow({ onClose, onFocus, zIndex }) {
 }
 
 function ProfileTab() {
+  const { display, done } = useTypewriter(TYPEWRITER_PHRASE, TYPEWRITER_SPEED)
+
   return (
     <div className="tab-content">
       <div className="profile-header">
         <div className="profile-avatar-container">
-          <img src="/taemin.jpg" alt="Kyle" className="profile-avatar" />
+          <img
+            src="/taemin.jpg"
+            alt="Profile picture of Tae-min Kim (Kyle Kim)"
+            className="profile-avatar"
+          />
           <div className="online-status">
             <div className="status-dot"></div>
             <span>Online</span>
@@ -75,27 +106,34 @@ function ProfileTab() {
         <div className="profile-info">
           <h1>Kyle Kim (김태민)</h1>
           <div className="profile-role">
-            <i className="fas fa-terminal"></i>
+            <i className="fas fa-terminal" aria-hidden></i>
             <span>Full-stack Developer</span>
           </div>
           <div className="contact-chips">
-            <div className="chip"><i className="fas fa-envelope"></i> rlaxoals9977@gmail.com</div>
-            <div className="chip"><i className="fab fa-github"></i> github.com/Kyle-TM99</div>
-            <div className="chip"><i className="fas fa-map-marker-alt"></i> Seoul, Korea</div>
+            <a href="mailto:rlaxoals9977@gmail.com" className="chip chip-link" target="_blank" rel="noopener noreferrer">
+              <i className="fas fa-envelope" aria-hidden></i> rlaxoals9977@gmail.com
+            </a>
+            <a href="https://github.com/Kyle-TM99" className="chip chip-link" target="_blank" rel="noopener noreferrer">
+              <i className="fab fa-github" aria-hidden></i> github.com/Kyle-TM99
+            </a>
+            <div className="chip">
+              <i className="fas fa-map-marker-alt" aria-hidden></i> Seoul, Korea
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="section-title"><i className="fas fa-quote-left"></i> Summary</div>
+      <div className="section-title"><i className="fas fa-quote-left" aria-hidden></i> Summary</div>
       <div className="summary-card">
         <p style={{ lineHeight: '1.6', color: 'rgba(255,255,255,0.85)' }}>
-          "처음부터 끝까지, 제가 직접 만듭니다."<br /><br />
+          <span className="typewriter-quote">"{display}{!done && <span className="cursor-blink">|</span>}"</span>
+          <br /><br />
           <strong>1년 차 풀스택 개발자</strong>로서 기획부터 배포까지 전체 프로세스를 독립적으로 수행하는 <strong>End-to-End 개발 역량</strong>을 보유하고 있습니다.
-          현재 <strong>베오(BEO)</strong>에서 Education PM 겸 1인 풀스택 개발자로 SaaS 플랫폼을 단독 개발 및 운영하고 있습니다.
+          아이디어와 상상을 현실의 프로덕트로 만들어내는 실행력을 바탕으로, 현재 <strong>베오(BEO)</strong>에서 Education PM 겸 1인 풀스택 개발자로 SaaS 플랫폼을 단독 개발 및 운영하고 있습니다.
         </p>
       </div>
 
-      <div className="section-title"><i className="fas fa-star"></i> Core Values</div>
+      <div className="section-title"><i className="fas fa-star" aria-hidden></i> Core Values</div>
       <div className="skills-grid">
         <div className="skill-category">
           <h3>End-to-End</h3>
@@ -113,152 +151,109 @@ function ProfileTab() {
 function CareerTab() {
   const [selectedCompany, setSelectedCompany] = useState(null)
 
-  const careerData = [
-    {
-      id: 'beo',
-      name: 'BEO (베오)',
-      role: 'Education PM & Full-stack Developer',
-      period: '2025.07 ~ Present',
-      logo: 'fas fa-cube',
-      color: '#0a84ff',
-      summary: 'EdTech SaaS Startup',
-      identity: 'The All-Rounder',
-      identityDesc: '기획부터 개발, 운영까지 혼자서 A to Z를 책임지는 1인 메이커',
-      stats: [
-        { label: 'SaaS Platform', value: '1' },
-        { label: 'Extensions', value: '3' },
-        { label: 'Modules', value: '15+' }
-      ],
-      projects: [
-        {
-          title: 'SellerKit',
-          type: 'SaaS Platform',
-          desc: '쿠팡 셀러를 위한 올인원 분석 및 관리 솔루션. 광고 효율 분석, 마진 계산, 키워드 트래킹 기능 제공.',
-          tech: ['Vue.js 3', 'Spring Boot 3.2', 'Redis', 'AWS']
-        },
-        {
-          title: 'AutoCollector',
-          type: 'Chrome Extension',
-          desc: '이커머스 데이터 수집 자동화 도구. 상품 정보 및 리뷰 데이터를 실시간으로 크롤링하여 분석.',
-          tech: ['JavaScript', 'Python', 'Selenium']
-        }
-      ]
-    },
-    {
-      id: 'goodsen',
-      name: 'GoodSen (굿센)',
-      role: 'Backend Developer',
-      period: '2025.04 ~ 2025.07',
-      logo: 'fas fa-building',
-      color: '#bf5af2',
-      summary: 'Online Education Platform',
-      identity: 'The System Architect',
-      identityDesc: '대규모 트래픽을 고려한 안정적인 백엔드 시스템 설계 및 최적화',
-      stats: [
-        { label: 'Conversion', value: '106%↑' },
-        { label: 'Stability', value: '100%' },
-        { label: 'Automation', value: '70%↑' }
-      ],
-      projects: [
-        {
-          title: 'OnClass',
-          type: 'LMS Platform',
-          desc: '온라인 교육 플랫폼 백엔드 전체 구축. OAuth2 로그인, 결제 모듈, 스트리밍 서버 연동.',
-          tech: ['Spring Boot', 'Spring Security', 'JPA', 'MySQL']
-        },
-        {
-          title: 'BizAuto',
-          type: 'Automation Tool',
-          desc: '사내 업무 자동화 시스템. 인사/회계 데이터 처리 자동화로 업무 효율 70% 증대.',
-          tech: ['Python', 'Pandas', 'Google API']
-        }
-      ]
-    }
-  ]
+  const detailsTransition = {
+    type: 'tween',
+    duration: 0.35,
+    ease: [0.32, 0.72, 0, 1]
+  }
 
   return (
     <div className="tab-content career-content">
-      <div className="section-title"><i className="fas fa-film"></i> Career Journey</div>
+      <div className="section-title"><i className="fas fa-film" aria-hidden></i> Career Journey</div>
       <div className="career-grid">
-        {careerData.map(company => (
+        {CAREER_DATA.map(company => (
           <motion.div
             key={company.id}
-            layoutId={`card-${company.id}`}
             className={`company-card ${selectedCompany === company.id ? 'expanded' : ''}`}
             onClick={() => setSelectedCompany(selectedCompany === company.id ? null : company.id)}
             style={{ '--accent-color': company.color }}
+            whileHover={selectedCompany !== company.id ? { boxShadow: `0 0 24px ${company.color}40` } : undefined}
+            initial={false}
+            transition={{ type: 'tween', duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
           >
-            <motion.div className="company-header" layoutId={`header-${company.id}`}>
+            <div className="company-header">
               <div className="company-logo-wrapper">
-                <i className={company.logo}></i>
+                <i className={company.logo} aria-hidden></i>
               </div>
               <div className="company-info">
-                <motion.h2 layoutId={`title-${company.id}`}>{company.name}</motion.h2>
+                <h2>{company.name}</h2>
                 <span className="company-period">{company.period}</span>
               </div>
-              <div className="company-toggle-icon">
-                <i className={`fas fa-chevron-${selectedCompany === company.id ? 'up' : 'down'}`}></i>
-              </div>
-            </motion.div>
+              <motion.div
+                className="company-toggle-icon"
+                animate={{ rotate: selectedCompany === company.id ? 180 : 0 }}
+                transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
+              >
+                <i className="fas fa-chevron-down" aria-hidden></i>
+              </motion.div>
+            </div>
 
-            <motion.div className="company-role-badge" layoutId={`role-${company.id}`}>
+            <div className="company-role-badge">
               {company.role}
-            </motion.div>
+            </div>
 
-            <AnimatePresence>
-              {selectedCompany === company.id && (
+            <AnimatePresence initial={false} mode="wait">
+              {selectedCompany === company.id ? (
                 <motion.div
-                  className="company-details"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
+                  key={`details-${company.id}`}
+                  className="company-details-wrapper"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={detailsTransition}
+                  style={{ overflow: 'hidden' }}
                 >
-                  <div className="identity-section">
-                    <div className="identity-label">MY ROLE AS</div>
-                    <div className="identity-title">"{company.identity}"</div>
-                    <p className="identity-desc">{company.identityDesc}</p>
-                  </div>
+                  <div className="company-details">
+                    <div className="identity-section">
+                      <div className="identity-label">MY ROLE AS</div>
+                      <div className="identity-title">"{company.identity}"</div>
+                      <p className="identity-desc">{company.identityDesc}</p>
+                    </div>
 
-                  <div className="impact-stats">
-                    {company.stats.map((stat, idx) => (
-                      <div key={idx} className="stat-box">
-                        <div className="stat-value" style={{ color: company.color }}>{stat.value}</div>
-                        <div className="stat-label">{stat.label}</div>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="projects-showcase">
-                    <h3>Key Projects</h3>
-                    <div className="company-projects-list">
-                      {company.projects.map((project, pIdx) => (
-                        <div key={pIdx} className="mini-project-card">
-                          <div className="mini-project-header">
-                            <span className="project-type">{project.type}</span>
-                            <h4>{project.title}</h4>
-                          </div>
-                          <p>{project.desc}</p>
-                          <div className="mini-tech-stack">
-                            {project.tech.map((t, i) => <span key={i}>{t}</span>)}
-                          </div>
+                    <div className="impact-stats">
+                      {company.stats.map((stat, idx) => (
+                        <div key={idx} className="stat-box">
+                          <div className="stat-value" style={{ color: company.color }}>{stat.value}</div>
+                          <div className="stat-label">{stat.label}</div>
                         </div>
                       ))}
                     </div>
+
+                    <div className="projects-showcase">
+                      <h3>Key Projects</h3>
+                      <div className="company-projects-list">
+                        {company.projects.map((project, pIdx) => (
+                          <div key={pIdx} className="mini-project-card">
+                            <div className="mini-project-header">
+                              <span className="project-type">{project.type}</span>
+                              <h4>{project.title}</h4>
+                            </div>
+                            <p>{project.desc}</p>
+                            <div className="mini-tech-stack">
+                              {project.tech.map((t, i) => <span key={i}>{t}</span>)}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </motion.div>
+              ) : (
+                <motion.p
+                  key={`summary-${company.id}`}
+                  className="company-summary"
+                  initial={{ opacity: 0, y: -4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -4 }}
+                  transition={{
+                    opacity: { duration: 0.22 },
+                    y: { duration: 0.22 }
+                  }}
+                >
+                  {company.summary}
+                </motion.p>
               )}
             </AnimatePresence>
-
-            {selectedCompany !== company.id && (
-              <motion.p
-                className="company-summary"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
-              >
-                {company.summary}
-              </motion.p>
-            )}
           </motion.div>
         ))}
       </div>
@@ -266,90 +261,89 @@ function CareerTab() {
   )
 }
 
+const skillsContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.04, delayChildren: 0.05 }
+  }
+}
+
+const skillCategoryVariants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0 }
+}
+
+const skillTagVariants = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: { opacity: 1, scale: 1 }
+}
+
 function SkillsTab() {
   return (
     <div className="tab-content">
-      <div className="section-title"><i className="fas fa-layer-group"></i> Tech Stack</div>
-      <div className="skills-grid">
-        <div className="skill-category">
-          <h3><i className="fas fa-server"></i> Backend</h3>
-          <div className="skill-tags">
-            <span className="skill-tag">Java 17</span>
-            <span className="skill-tag">Spring Boot 3</span>
-            <span className="skill-tag">JPA/Hibernate</span>
-            <span className="skill-tag">QueryDSL</span>
-            <span className="skill-tag">Redis</span>
-            <span className="skill-tag">MySQL</span>
-          </div>
-        </div>
-        <div className="skill-category">
-          <h3><i className="fas fa-desktop"></i> Frontend</h3>
-          <div className="skill-tags">
-            <span className="skill-tag">React 18</span>
-            <span className="skill-tag">Vue.js 3</span>
-            <span className="skill-tag">TailwindCSS</span>
-            <span className="skill-tag">Vite</span>
-            <span className="skill-tag">Framer Motion</span>
-          </div>
-        </div>
-        <div className="skill-category">
-          <h3><i className="fas fa-cloud"></i> DevOps & Tools</h3>
-          <div className="skill-tags">
-            <span className="skill-tag">AWS (EC2, S3)</span>
-            <span className="skill-tag">Docker</span>
-            <span className="skill-tag">Jenkins</span>
-            <span className="skill-tag">Git</span>
-            <span className="skill-tag">Selenium</span>
-          </div>
-        </div>
-      </div>
+      <div className="section-title"><i className="fas fa-layer-group" aria-hidden></i> Tech Stack</div>
+      <motion.div
+        className="skills-grid"
+        variants={skillsContainerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {SKILLS_CATEGORIES.map((cat, cIdx) => (
+          <motion.div
+            key={cIdx}
+            className="skill-category skill-category-interactive"
+            variants={skillCategoryVariants}
+          >
+            <h3><i className={`fas ${cat.icon}`} aria-hidden></i> {cat.title}</h3>
+            <div className="skill-tags">
+              {cat.tags.map((tag, tIdx) => (
+                <motion.span
+                  key={tIdx}
+                  className="skill-tag"
+                  variants={skillTagVariants}
+                  whileHover={{ scale: 1.05, boxShadow: '0 0 12px rgba(10, 132, 255, 0.35)' }}
+                >
+                  {tag}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
     </div>
   )
 }
 
-function ProjectsTab() {
-  const projects = [
-    {
-      title: 'OneStack',
-      role: 'Team Lead',
-      period: '2024.12 ~ 2025.02',
-      category: 'Community Platform',
-      desc: 'IT 전문가 매칭 및 협업을 위한 올인원 커뮤니티 플랫폼',
-      tech: ['Java', 'Spring Boot', 'WebSocket', 'AWS', 'Docker'],
-      features: ['실시간 채팅', '프로젝트 매칭', '화상 회의 연동'],
-      color: '#bf5af2'
-    },
-    {
-      title: 'SellerKit',
-      role: 'Solo Developer',
-      period: '2025.07 ~ Present',
-      category: 'SaaS Solution',
-      desc: '쿠팡 셀러를 위한 데이터 분석 및 마진 관리 자동화 솔루션',
-      tech: ['Vue.js', 'Spring Boot', 'Redis', 'JPA'],
-      features: ['마진 계산기', '키워드 분석', '광고 효율 트래킹'],
-      color: '#0a84ff'
-    },
-    {
-      title: 'OnClass',
-      role: 'Solo Developer',
-      period: '2025.04 ~ 2025.07',
-      category: 'LMS Platform',
-      desc: '15개 핵심 모듈을 탑재한 온라인 교육 및 강의 플랫폼',
-      tech: ['Spring Security', 'OAuth2', 'PortOne', 'MySQL'],
-      features: ['강의 시청', '결제 시스템', '자료실'],
-      color: '#30d158'
-    }
-  ]
+const galleryContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08, delayChildren: 0.05 }
+  }
+}
 
+const galleryCardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 }
+}
+
+function ProjectsTab() {
   return (
     <div className="tab-content">
-      <div className="section-title"><i className="fas fa-layer-group"></i> All Projects Gallery</div>
-      <div className="projects-gallery">
-        {projects.map((project, idx) => (
+      <div className="section-title"><i className="fas fa-layer-group" aria-hidden></i> All Projects Gallery</div>
+      <motion.div
+        className="projects-gallery"
+        variants={galleryContainerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {PROJECTS_GALLERY.map((project, idx) => (
           <motion.div
             key={idx}
             className="gallery-card"
-            whileHover={{ y: -5 }}
+            variants={galleryCardVariants}
+            whileHover={{ y: -5, boxShadow: `0 12px 40px ${project.color}30` }}
             style={{ borderTop: `4px solid ${project.color}` }}
           >
             <div className="gallery-header">
@@ -357,8 +351,8 @@ function ProjectsTab() {
               <h3>{project.title}</h3>
             </div>
             <div className="gallery-meta">
-              <span><i className="fas fa-user-tag"></i> {project.role}</span>
-              <span><i className="far fa-calendar-alt"></i> {project.period}</span>
+              <span><i className="fas fa-user-tag" aria-hidden></i> {project.role}</span>
+              <span><i className="far fa-calendar-alt" aria-hidden></i> {project.period}</span>
             </div>
             <p className="gallery-desc">{project.desc}</p>
             <div className="gallery-features">
@@ -372,9 +366,33 @@ function ProjectsTab() {
             <div className="gallery-tech">
               {project.tech.map((t, i) => <span key={i}>{t}</span>)}
             </div>
+            {(project.liveUrl || project.repoUrl) && (
+              <div className="gallery-actions">
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    className="gallery-btn gallery-btn-primary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fas fa-external-link-alt" aria-hidden></i> Run App
+                  </a>
+                )}
+                {project.repoUrl && (
+                  <a
+                    href={project.repoUrl}
+                    className="gallery-btn gallery-btn-secondary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fab fa-github" aria-hidden></i> View Source
+                  </a>
+                )}
+              </div>
+            )}
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   )
 }
