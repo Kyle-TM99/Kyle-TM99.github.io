@@ -1,18 +1,8 @@
 import { motion } from 'framer-motion'
+import { dockItems } from '../../data/dockItems'
 import './Dock.css'
 
 function Dock({ onOpenWindow, openWindows = [] }) {
-  const dockItems = [
-    { id: 'about', icon: 'fas fa-user-circle', tooltip: 'About Me' },
-    { id: 'skills', icon: 'fas fa-code', tooltip: 'Skills' },
-    { id: 'experience', icon: 'fas fa-briefcase', tooltip: 'Experience' },
-    { id: 'projects', icon: 'fas fa-folder-open', tooltip: 'Projects' },
-    { id: 'contact', icon: 'fas fa-envelope', tooltip: 'Contact' },
-    { id: 'blog', icon: 'fas fa-blog', tooltip: 'Tech Blog', external: 'https://pids.tistory.com/' },
-    { id: 'github', icon: 'fab fa-github', tooltip: 'GitHub', external: 'https://github.com/Kyle-TM99' },
-    { id: 'terminal', icon: 'fas fa-terminal', tooltip: 'Terminal' }
-  ]
-
   const handleClick = (item) => {
     if (item.external) {
       window.open(item.external, '_blank')

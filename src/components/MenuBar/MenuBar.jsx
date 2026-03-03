@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { siteMeta } from '../../data/siteMeta'
 import './MenuBar.css'
 
 function MenuBar({ onHelpClick }) {
@@ -21,12 +22,13 @@ function MenuBar({ onHelpClick }) {
     <div className="menu-bar">
       <div className="menu-left">
         <span className="apple-logo">
-          <img src="image/Kyle.png" alt="Kyle" id="Kyle" />
+          <img src="/Kyle.png" alt="Kyle" id="Kyle" />
         </span>
-        <span className="menu-item active">Kyle Portfolio [KIM TAEMIN]</span>
+        <span className="menu-item active">김태민(Kyle) | 풀스택 개발자 포트폴리오</span>
         <span className="menu-item" onClick={onHelpClick}>도움말</span>
       </div>
       <div className="menu-right">
+        <span className="last-updated">최종 업데이트 {siteMeta.lastUpdated}</span>
         <span className="time">{formatTime(time)}</span>
       </div>
     </div>

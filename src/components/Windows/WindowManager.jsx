@@ -1,7 +1,6 @@
 import AboutWindow from './AboutWindow'
-import SkillsWindow from './SkillsWindow'
 import ProjectsWindow from './ProjectsWindow'
-import ExperienceWindow from './ExperienceWindow'
+import NewsWindow from './NewsWindow'
 import ContactWindow from './ContactWindow'
 import TerminalWindow from './TerminalWindow'
 import './Window.css'
@@ -9,9 +8,8 @@ import './Window.css'
 function WindowManager({ openWindows, onCloseWindow, onFocusWindow, zIndexCounter }) {
   const windows = {
     about: AboutWindow,
-    skills: SkillsWindow,
     projects: ProjectsWindow,
-    experience: ExperienceWindow,
+    news: NewsWindow,
     contact: ContactWindow,
     terminal: TerminalWindow
   }

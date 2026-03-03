@@ -1,9 +1,8 @@
 import Tilt from 'react-parallax-tilt'
 import InfoWidget from './InfoWidget'
 import GitHubWidget from './GitHubWidget'
-import BaekjoonWidget from './BaekjoonWidget'
-import ExperienceWidget from './ExperienceWidget'
-import ClockWidget from './ClockWidget'
+import NewsWidget from './NewsWidget'
+import TerminalWidget from './TerminalWidget'
 import ProjectsWidget from './ProjectsWidget'
 import './Widgets.css'
 
@@ -23,18 +22,18 @@ function DesktopWidgets() {
 
   return (
     <div className="desktop-widgets">
-      {/* Column 1: Profile & Time */}
+      {/* Column 1: Profile & Terminal(whoami) */}
       <Tilt {...tiltOptions} className="widget info-widget">
         <InfoWidget />
       </Tilt>
 
-      <Tilt {...tiltOptions} className="widget clock-widget">
-        <ClockWidget />
+      <Tilt {...tiltOptions} className="widget terminal-widget">
+        <TerminalWidget />
       </Tilt>
 
-      {/* Column 2-3: Experience (Spans 2 columns, 2 rows) */}
-      <Tilt {...tiltOptions} className="widget experience-widget">
-        <ExperienceWidget />
+      {/* Column 2-3: News (Spans 2 columns, 2 rows) */}
+      <Tilt {...tiltOptions} className="widget news-widget">
+        <NewsWidget />
       </Tilt>
 
       {/* Column 4: Projects & Stats */}

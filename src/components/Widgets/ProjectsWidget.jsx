@@ -10,6 +10,7 @@ function ProjectsWidget() {
             title: "SellerKit",
             category: "SaaS Platform",
             image: "linear-gradient(135deg, #FF9966 0%, #FF5E62 100%)",
+            mediaUrl: null,
             description: "Coupang Seller Tool"
         },
         {
@@ -17,6 +18,7 @@ function ProjectsWidget() {
             title: "EduPlatform",
             category: "EdTech",
             image: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+            mediaUrl: null,
             description: "LMS System"
         },
         {
@@ -24,6 +26,7 @@ function ProjectsWidget() {
             title: "DataAuto",
             category: "Automation",
             image: "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
+            mediaUrl: null,
             description: "Marketing Data"
         }
     ]
@@ -50,6 +53,14 @@ function ProjectsWidget() {
                             style={{ background: projects[activeProject].image }}
                             onClick={() => setActiveProject((prev) => (prev + 1) % projects.length)}
                         >
+                            {projects[activeProject].mediaUrl ? (
+                                <div className="project-slide-media">
+                                    <img
+                                        src={projects[activeProject].mediaUrl}
+                                        alt={projects[activeProject].title}
+                                    />
+                                </div>
+                            ) : null}
                             <div className="project-dots">
                                 {projects.map((_, index) => (
                                     <span

@@ -46,3 +46,32 @@
     }
 }
 
+/* 데스크톱 안내 (창이 하나도 없을 때) */
+.desktop-hint {
+    position: fixed;
+    left: 50%;
+    bottom: 100px;
+    transform: translateX(-50%);
+    z-index: 100;
+    text-align: center;
+    padding: 14px 24px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    color: #fff;
+    font-size: 15px;
+    line-height: 1.5;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.desktop-hint p {
+    margin: 0;
+}
+
+.desktop-hint-sub {
+    margin-top: 6px !important;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.75);
+}
+

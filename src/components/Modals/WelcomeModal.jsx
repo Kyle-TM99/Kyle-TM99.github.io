@@ -12,47 +12,42 @@ function WelcomeModal({ show, onClose }) {
           exit={{ opacity: 0 }}
         >
           <motion.div
-            className="welcome-card"
-            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+            className="welcome-card welcome-card--wide"
+            initial={{ scale: 0.96, opacity: 0, y: 16 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            transition={{ type: "spring", duration: 0.5 }}
+            exit={{ scale: 0.96, opacity: 0, y: 16 }}
+            transition={{ type: 'spring', duration: 0.45 }}
           >
             <div className="welcome-header">
               <div className="avatar-wrapper">
-                <img src="/Kyle.png" alt="Kyle" className="welcome-avatar" />
+                <img src="/Kyle.png" alt="김태민(Kyle)" className="welcome-avatar" />
                 <div className="online-badge"></div>
               </div>
-              <div className="welcome-title">
-                <h2>Hello, I'm Kyle 👋</h2>
-                <span>Full-stack Developer</span>
-              </div>
+              <h2 className="welcome-name">김태민 (Kyle)</h2>
+              <p className="welcome-role">풀스택 개발자 · BARO Interactive</p>
             </div>
 
             <div className="welcome-body">
-              <p>
-                Welcome to <strong>Kyle Portfolio OS</strong>.<br />
-                This is a spatial web experience designed to showcase my journey and skills interactively.
+              <p className="welcome-desc">
+                이 사이트는 <strong>제 포트폴리오</strong>입니다.<br />
+                경력, 보유 기술, 프로젝트, 연락처를 한곳에서 확인하실 수 있어요.
               </p>
 
-              <div className="features-grid">
-                <div className="feature-box">
-                  <i className="fas fa-layer-group" style={{ color: '#0a84ff' }}></i>
-                  <span>Spatial UI</span>
-                </div>
-                <div className="feature-box">
-                  <i className="fas fa-bolt" style={{ color: '#30d158' }}></i>
-                  <span>Interactive</span>
-                </div>
-                <div className="feature-box">
-                  <i className="fas fa-code" style={{ color: '#bf5af2' }}></i>
-                  <span>Modern Stack</span>
-                </div>
+              <div className="welcome-how">
+                <p className="welcome-how-title">어떻게 보나요?</p>
+                <p className="welcome-how-desc">화면 <strong>하단의 아이콘(독)</strong>을 <strong>왼쪽부터 순서대로</strong> 눌러보세요.</p>
+                <ul className="welcome-steps">
+                  <li><i className="fas fa-user-circle"></i> <span>소개</span> — 저에 대한 간단한 소개</li>
+                  <li><i className="fas fa-briefcase"></i> <span>경력</span> — 회사별 경력과 프로젝트</li>
+                  <li><i className="fas fa-code"></i> <span>스킬</span> — 사용 기술 스택</li>
+                  <li><i className="fas fa-folder-open"></i> <span>프로젝트</span> — 진행한 프로젝트 목록</li>
+                  <li><i className="fas fa-envelope"></i> <span>연락처</span> — 이메일, GitHub, 블로그 등</li>
+                </ul>
               </div>
             </div>
 
-            <button className="welcome-btn" onClick={onClose}>
-              <span>Enter Portfolio</span>
+            <button className="welcome-btn" onClick={onClose} type="button">
+              <span>소개부터 보기</span>
               <i className="fas fa-arrow-right"></i>
             </button>
           </motion.div>
@@ -63,4 +58,3 @@ function WelcomeModal({ show, onClose }) {
 }
 
 export default WelcomeModal
-

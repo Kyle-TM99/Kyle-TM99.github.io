@@ -1,68 +1,53 @@
-import { useState, useEffect } from 'react'
-
 function ExperienceWidget() {
-  const [totalExperience, setTotalExperience] = useState('')
-
-  useEffect(() => {
-    updateExperience()
-    const interval = setInterval(updateExperience, 60000)
-    return () => clearInterval(interval)
-  }, [])
-
-  const updateExperience = () => {
-    const startDate = new Date('2025-04-21')
-    const currentDate = new Date()
-
-    const diffTime = currentDate.getTime() - startDate.getTime()
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-
-    const months = Math.floor(diffDays / 30)
-    const remainingDays = diffDays % 30
-
-    let experienceText = ''
-    if (months > 0) {
-      experienceText = `${months}개월`
-      if (remainingDays > 0) {
-        experienceText += ` ${remainingDays}일`
-      }
-    } else {
-      experienceText = `${remainingDays}일`
+  const experiences = [
+    {
+      period: '2025.12 ~ Current',
+      company: 'BARO Interactive',
+      position: 'Full-stack Developer',
+      impactTags: ['Web/App 개발', '교육·커머스 도메인'],
+      current: true
+    },
+    {
+      period: '2025.07 ~ 2025.11',
+      company: 'BEO (베오)',
+      position: 'PM & Full-stack',
+      impactTags: ['1인 SaaS 플랫폼', 'Chrome Extension 3종'],
+      current: false
+    },
+    {
+      period: '2025.04 ~ 2025.07',
+      company: 'GoodSen',
+      position: 'Backend Developer',
+      impactTags: ['LMS 백엔드 구축', '업무 효율 70% 증대'],
+      current: false
     }
-
-    setTotalExperience(experienceText)
-  }
+  ]
 
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <div className="widget-header">
-        <i className="fas fa-briefcase"></i>
-        <span>Experience ({totalExperience})</span>
+        <i className="fas fa-briefcase" aria-hidden></i>
+        <span>Experience</span>
       </div>
       <div className="widget-content">
         <div className="experience-summary">
           <div className="experience-list">
-
-            <div className="experience-item-mini current">
-              <div className="experience-dot"></div>
-              <span className="period">2025.12 ~ Current</span>
-              <span className="company-name">BARO interactive</span>
-              <span className="position">Full-stack Developer</span>
-            </div>
-
-            <div className="experience-item-mini">
-              <div className="experience-dot"></div>
-              <span className="period">2025.07 ~ 2025.11</span>
-              <span className="company-name">Beo (베오)</span>
-              <span className="position">PM & Full-stack</span>
-            </div>
-
-            <div className="experience-item-mini">
-              <div className="experience-dot"></div>
-              <span className="period">2025.04 ~ 2025.07</span>
-              <span className="company-name">GoodSen</span>
-              <span className="position">Full-stack Developer</span>
-            </div>
-
+            {experiences.map((exp, idx) => (
+              <div
+                key={idx}
+                className={`experience-item-mini ${exp.current ? 'current' : ''}`}
+              >
+                <div className="experience-dot"></div>
+                <span className="period">{exp.period}</span>
+                <span className="company-name">{exp.company}</span>
+                <span className="position">{exp.position}</span>
+                <div className="impact-tags">
+                  {exp.impactTags.map((tag, i) => (
+                    <span key={i} className="impact-tag">{tag}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

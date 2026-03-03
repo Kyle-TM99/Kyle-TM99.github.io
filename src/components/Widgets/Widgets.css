@@ -1,36 +1,58 @@
-/* Bento Grid Layout */
+/* Bento Grid - 적당한 위젯 높이(260px 고정), 여백 유지 */
 .desktop-widgets {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, minmax(280px, auto));
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 260px 260px;
     gap: 24px;
-    padding: 30px;
+    padding: 36px 24px 100px;
     width: 100%;
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 56px);
+    min-height: 0;
     pointer-events: none;
+    align-items: stretch;
     align-content: center;
+    box-sizing: border-box;
 }
 
-/* Base Widget Styling - High Visibility Glass */
+/* Grid items must shrink to cell: no overflow into neighbour columns */
+.desktop-widgets .widget {
+    min-width: 0;
+    min-height: 0;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Tilt wrapper fills cell, also constrained */
+.desktop-widgets .widget > div {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* Glassmorphism - OS depth, stay inside grid cell */
 .widget {
     pointer-events: auto;
-    background: rgba(18, 18, 20, 0.75);
-    /* Darker base for contrast */
-    backdrop-filter: blur(50px) saturate(200%);
-    -webkit-backdrop-filter: blur(50px) saturate(200%);
-    border-radius: 28px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(25, 25, 35, 0.7);
+    backdrop-filter: blur(10px) saturate(180%);
+    -webkit-backdrop-filter: blur(10px) saturate(180%);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow:
-        0 25px 50px -12px rgba(0, 0, 0, 0.5),
-        0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+        0 25px 50px -12px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.06) inset;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
     display: flex;
     flex-direction: column;
     color: white;
-    /* Force text white */
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .widget:hover {
@@ -42,27 +64,30 @@
     z-index: 100;
 }
 
-/* Widget Header - Neon Accents */
+/* Widget Header - compact, clear hierarchy */
 .widget-header {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 20px 24px;
+    gap: 10px;
+    padding: 14px 20px;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.03), transparent);
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     font-weight: 600;
     color: white;
     font-size: 15px;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
-    opacity: 0.9;
+    opacity: 0.95;
 }
 
+/* Widget header icons: unified size & style (Solid/Brand) */
 .widget-header i {
-    font-size: 18px;
+    font-size: 17px;
+    width: 20px;
+    text-align: center;
+    line-height: 1;
     color: #0a84ff;
     filter: drop-shadow(0 0 8px rgba(10, 132, 255, 0.6));
-    /* Neon Glow */
 }
 
 /* Specific Header Colors based on type if needed */
@@ -71,7 +96,8 @@
     filter: drop-shadow(0 0 8px rgba(48, 209, 88, 0.6));
 }
 
-.experience-widget .widget-header i {
+.experience-widget .widget-header i,
+.news-widget .widget-header i {
     color: #bf5af2;
     filter: drop-shadow(0 0 8px rgba(191, 90, 242, 0.6));
 }
@@ -87,15 +113,22 @@
 }
 
 .widget-content {
-    padding: 24px;
+    padding: 16px 20px;
     flex: 1;
+    min-height: 0;
+    min-width: 0;
     overflow-y: auto;
+    overflow-x: hidden;
     position: relative;
     display: flex;
     flex-direction: column;
 }
 
-/* Info Widget (Profile) */
+/* Info Widget (Profile) - avatar + tight proportion */
+.info-widget .widget-content {
+    padding: 12px 16px;
+}
+
 .profile-quick {
     display: flex;
     flex-direction: column;
@@ -103,35 +136,49 @@
     justify-content: center;
     height: 100%;
     text-align: center;
+    gap: 4px;
+}
+
+.profile-avatar-wrap {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 6px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    flex-shrink: 0;
+}
+
+.profile-avatar-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .status-indicator.online {
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
+    min-width: 12px;
+    min-height: 12px;
+    flex-shrink: 0;
     background: #30d158;
     border-radius: 50%;
-    box-shadow: 0 0 15px 2px rgba(48, 209, 88, 0.6);
-    margin-bottom: 16px;
-    animation: pulse-green 2s infinite;
+    box-shadow: 0 0 0 0 rgba(48, 209, 88, 0.5);
+    margin-bottom: 4px;
+    animation: pulse-green 2s ease-in-out infinite;
 }
 
 @keyframes pulse-green {
-    0% {
-        box-shadow: 0 0 0 0 rgba(48, 209, 88, 0.7);
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(48, 209, 88, 0.4);
     }
-
-    70% {
-        box-shadow: 0 0 0 10px rgba(48, 209, 88, 0);
-    }
-
-    100% {
-        box-shadow: 0 0 0 0 rgba(48, 209, 88, 0);
+    50% {
+        box-shadow: 0 0 0 6px rgba(48, 209, 88, 0);
     }
 }
 
 .status-text {
-    font-size: 16px;
-    margin-bottom: 8px;
+    font-size: 13px;
     color: rgba(255, 255, 255, 0.9);
 }
 
@@ -141,9 +188,8 @@
 }
 
 .role {
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 800;
-    margin-bottom: 12px;
     background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -154,27 +200,56 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 6px 12px;
-    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 10px;
+    background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(10px);
     border-radius: 20px;
-    font-size: 13px;
+    font-size: 12px;
 }
 
-/* Experience Widget - Timeline Redesign */
+.profile-contact {
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.profile-contact-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+    transition: background 0.2s, color 0.2s;
+}
+
+.profile-contact-link:hover {
+    background: rgba(48, 209, 88, 0.25);
+    color: #30d158;
+}
+
+.profile-contact-link i {
+    font-size: 12px;
+}
+
+/* Experience Widget - Timeline Redesign, stay in cell */
 .experience-summary {
     height: 100%;
+    min-width: 0;
     display: flex;
     flex-direction: column;
 }
 
 .experience-list {
     flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
     position: relative;
-    padding-left: 20px;
+    padding-left: 18px;
 }
 
 /* Vertical Line */
@@ -191,16 +266,15 @@
 
 .experience-item-mini {
     position: relative;
-    padding: 18px;
+    padding: 14px 16px;
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
     border: 1px solid rgba(255, 255, 255, 0.08);
-    /* More visible border */
-    border-radius: 16px;
+    border-radius: 14px;
     cursor: pointer;
     transition: all 0.2s ease;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
 }
 
 .experience-item-mini:hover {
@@ -242,43 +316,62 @@
 }
 
 .company-name {
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 15px;
+    font-weight: 800;
     color: white;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
 }
 
 .position {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.8);
-    font-weight: 500;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
 }
 
 .period {
-    font-size: 12px;
+    font-size: 11px;
     color: rgba(255, 255, 255, 0.5);
-    margin-top: 4px;
+    font-weight: 500;
     display: inline-block;
-    padding: 2px 8px;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
+    padding: 2px 6px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    margin-top: 2px;
+}
+
+.impact-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.impact-tag {
+    font-size: 11px;
+    padding: 4px 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.85);
 }
 
 
-/* Projects Widget - Fix Visibility */
+/* Projects Widget - fill cell + subtle texture */
 .projects-widget .widget-content {
     padding: 0;
-    /* Remove padding to fill */
+    flex: 1;
+    min-height: 0;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 160px;
 }
 
 .project-gallery {
     flex: 1;
+    min-height: 160px;
     position: relative;
     width: 100%;
-    height: 100%;
 }
 
 .project-slide {
@@ -294,11 +387,38 @@
     display: flex;
     align-items: flex-end;
     padding: 0;
-    /* Clear padding */
+}
+
+/* Subtle grid texture so gradient isn't empty */
+.project-slide::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 20px 20px;
+    z-index: 0;
+    pointer-events: none;
 }
 
 .project-slide.active {
     opacity: 1;
+}
+
+.project-slide-media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+.project-slide-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* Gradient Overlay for Text Readability */
@@ -316,12 +436,12 @@
 .project-info-overlay {
     position: relative;
     z-index: 2;
-    padding: 24px;
+    padding: 16px 20px;
     width: 100%;
 }
 
 .project-info-overlay h4 {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     color: white;
     margin: 0 0 4px 0;
@@ -330,19 +450,19 @@
 
 .project-info-overlay span {
     display: inline-block;
-    padding: 4px 10px;
+    padding: 3px 8px;
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(4px);
-    border-radius: 12px;
-    font-size: 12px;
+    border-radius: 10px;
+    font-size: 11px;
     color: white;
     font-weight: 600;
 }
 
 .project-dots {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 12px;
+    right: 12px;
     z-index: 5;
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
@@ -402,15 +522,165 @@
     grid-row: span 1;
 }
 
-.clock-widget {
+.clock-widget,
+.terminal-widget {
     grid-column: span 1;
     grid-row: span 1;
 }
 
-.experience-widget {
+/* Terminal Widget (whoami typewriter) */
+.terminal-widget-inner {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.terminal-widget .widget-header i {
+    color: #30d158;
+    filter: drop-shadow(0 0 8px rgba(48, 209, 88, 0.6));
+}
+
+.terminal-widget-content {
+    flex: 1;
+    padding: 12px 16px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 0 0 28px 28px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.terminal-widget-output {
+    margin: 0;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 12px;
+    line-height: 1.55;
+    color: #30d158;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.terminal-cursor {
+    display: inline-block;
+    color: #30d158;
+    font-weight: bold;
+    animation: terminal-blink 0.8s step-end infinite;
+}
+
+.terminal-cursor.visible {
+    opacity: 1;
+}
+
+@keyframes terminal-blink {
+    50% { opacity: 0; }
+}
+
+.experience-widget,
+.news-widget {
     grid-column: span 2;
     grid-row: span 2;
     max-height: none !important;
+    min-width: 0;
+    overflow: hidden;
+}
+
+/* News Widget - 가운데 큰(2x2) 위젯용 카드 레이아웃 */
+.news-widget-inner {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.news-widget .news-widget-content {
+    flex: 1;
+    min-height: 0;
+    padding: 20px 24px;
+    overflow-y: auto;
+}
+
+.news-widget-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+}
+
+.news-widget-card {
+    padding: 14px 18px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.news-widget-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(191, 90, 242, 0.35);
+    transform: translateX(4px);
+}
+
+/* 1:1 비율 썸네일 - 모든 카드 동일 크기 */
+.news-widget-card-thumb {
+    width: 72px;
+    height: 72px;
+    min-width: 72px;
+    min-height: 72px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.news-widget-card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.news-widget-card-placeholder {
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 24px;
+}
+
+.news-widget-card-body {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.news-widget-date {
+    font-size: 12px;
+    font-weight: 700;
+    color: #bf5af2;
+    letter-spacing: 0.05em;
+}
+
+.news-widget-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: white;
+    line-height: 1.3;
+    text-decoration: none;
+}
+
+a.news-widget-title:hover {
+    color: #bf5af2;
+    text-decoration: underline;
+}
+
+.news-widget-summary {
+    margin: 0;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
 }
 
 .projects-widget {
@@ -423,6 +693,91 @@
     grid-row: span 1;
 }
 
+.github-widget-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 0;
+}
+
+.github-contrib {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.github-pinned {
+    flex: 0 0 auto;
+}
+
+.github-pinned-label {
+    margin: 0 0 8px 0;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.github-chart-link {
+    display: flex;
+    align-items: stretch;
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.15);
+    flex: 1;
+    min-height: 100px;
+}
+
+.github-chart-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    min-height: 90px;
+    object-fit: contain;
+    object-position: top left;
+}
+
+.github-pinned-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.github-pinned-item {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.github-pinned-item:last-child {
+    border-bottom: none;
+}
+
+.github-pinned-name {
+    color: #fff;
+    font-weight: 500;
+    font-size: 13px;
+    text-decoration: none;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.github-pinned-name:hover {
+    color: #58a6ff;
+}
+
+.github-pinned-stack {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+    flex-shrink: 0;
+}
+
 /* Responsive adjustments */
 @media (max-width: 1200px) {
     .desktop-widgets {
@@ -430,7 +785,8 @@
         gap: 20px;
     }
 
-    .experience-widget {
+    .experience-widget,
+    .news-widget {
         grid-column: span 2;
         grid-row: span 1;
     }

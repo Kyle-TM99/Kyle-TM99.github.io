@@ -1,0 +1,93 @@
+.news-container {
+  padding: 24px 28px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.news-intro {
+  margin: 0 0 20px 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.news-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.news-item {
+  display: flex;
+  gap: 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  align-items: flex-start;
+}
+
+.news-item:last-child {
+  border-bottom: none;
+}
+
+/* 1:1 비율 썸네일 - 모든 아이템 동일 크기 */
+.news-item-thumb {
+  width: 72px;
+  height: 72px;
+  min-width: 72px;
+  min-height: 72px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.news-item-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.news-item-placeholder {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 24px;
+}
+
+.news-date {
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #0a84ff;
+  margin-bottom: 4px;
+}
+
+.news-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.news-title {
+  margin: 0 0 6px 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  line-height: 1.35;
+}
+
+.news-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.news-title a:hover {
+  color: #0a84ff;
+  text-decoration: underline;
+}
+
+.news-summary {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
+}

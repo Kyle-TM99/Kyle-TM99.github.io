@@ -21,6 +21,11 @@ function App() {
     focusWindow(windowId)
   }
 
+  const handleWelcomeClose = () => {
+    setShowWelcome(false)
+    openWindow('about')
+  }
+
   const closeWindow = (windowId) => {
     setOpenWindows(openWindows.filter(id => id !== windowId))
   }
@@ -72,7 +77,7 @@ function App() {
           zIndexCounter={zIndexCounter}
         />
       </Desktop>
-      <WelcomeModal show={showWelcome} onClose={() => setShowWelcome(false)} />
+      <WelcomeModal show={showWelcome} onClose={handleWelcomeClose} />
       <HelpModal show={showHelp} onClose={() => setShowHelp(false)} />
     </>
   )

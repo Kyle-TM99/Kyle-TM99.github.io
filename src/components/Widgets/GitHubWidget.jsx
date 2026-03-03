@@ -1,104 +1,80 @@
 import { useState, useEffect } from 'react'
 
+const GITHUB_USER = 'Kyle-TM99'
+const CONTRIB_CHART_URL = `https://ghchart.rshah.org/${GITHUB_USER}`
+
 function GitHubWidget() {
-  const [githubData, setGithubData] = useState(null)
+  const [pinnedRepos, setPinnedRepos] = useState([])
 
   useEffect(() => {
-    fetchGitHubData()
-    const interval = setInterval(fetchGitHubData, 300000) // 5분마다 업데이트
-    return () => clearInterval(interval)
+    fetchPinnedRepos()
   }, [])
 
-  const fetchGitHubData = async () => {
+  const fetchPinnedRepos = async () => {
     try {
-      const userResponse = await fetch('https://api.github.com/users/Kyle-TM99')
-      const userData = await userResponse.json()
-
-      const reposResponse = await fetch('https://api.github.com/users/Kyle-TM99/repos?sort=updated&per_page=100')
-      const reposData = await reposResponse.json()
-
-      if (userResponse.ok && reposResponse.ok) {
-        const totalStars = reposData.reduce((sum, repo) => sum + repo.stargazers_count, 0)
-        const totalForks = reposData.reduce((sum, repo) => sum + repo.forks_count, 0)
-        const languages = [...new Set(reposData.map(repo => repo.language).filter(lang => lang))]
-        const publicRepos = reposData.filter(repo => !repo.private).length
-
-        setGithubData({
-          publicRepos,
-          totalStars,
-          totalForks,
-          followers: userData.followers,
-          languages: languages.length,
-          since: new Date(userData.created_at)
-        })
-      }
-    } catch (error) {
-      console.error('Failed to fetch GitHub data:', error)
-      setGithubData({
-        publicRepos: 8,
-        followers: 1,
-        since: new Date('2024-04-01')
-      })
+      const res = await fetch(
+        `https://api.github.com/users/${GITHUB_USER}/repos?sort=updated&per_page=30`
+      )
+      const repos = await res.json()
+      if (!Array.isArray(repos)) return
+      const publicRepos = repos.filter((r) => !r.private)
+      const sorted = [...publicRepos].sort(
+        (a, b) => (b.stargazers_count || 0) - (a.stargazers_count || 0)
+      )
+      const top = sorted.slice(0, 3).map((r) => ({
+        name: r.name,
+        url: r.html_url,
+        language: r.language || '—',
+        description: r.description || ''
+      }))
+      setPinnedRepos(top)
+    } catch (e) {
+      console.error('GitHub pinned repos:', e)
     }
-  }
-
-  if (!githubData) {
-    return (
-      <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-        <div className="widget-header">
-          <i className="fab fa-github"></i>
-          <span>GitHub Stats</span>
-        </div>
-        <div className="widget-content">
-          <div className="github-stats">
-            <div className="stat-row">
-              <span className="stat-icon">📊</span>
-              <span className="stat-text">Loading...</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
   }
 
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <div className="widget-header">
-        <i className="fab fa-github"></i>
-        <span>GitHub Stats</span>
+        <i className="fab fa-github" aria-hidden></i>
+        <span>GitHub</span>
       </div>
-      <div className="widget-content">
-        <div className="github-stats">
-          <div className="stat-row">
-            <i className="fas fa-folder-open stat-icon"></i>
-            <span className="stat-text">Public Repos: {githubData.publicRepos}</span>
-          </div>
-          {githubData.totalStars !== undefined && (
-            <div className="stat-row">
-              <i className="fas fa-star stat-icon"></i>
-              <span className="stat-text">Total Stars: {githubData.totalStars}</span>
-            </div>
-          )}
-          {githubData.totalForks !== undefined && (
-            <div className="stat-row">
-              <i className="fas fa-code-branch stat-icon"></i>
-              <span className="stat-text">Total Forks: {githubData.totalForks}</span>
-            </div>
-          )}
-          <div className="stat-row">
-            <i className="fas fa-users stat-icon"></i>
-            <span className="stat-text">Followers: {githubData.followers}</span>
-          </div>
-          {githubData.languages !== undefined && (
-            <div className="stat-row">
-              <i className="fas fa-code stat-icon"></i>
-              <span className="stat-text">Languages: {Math.min(githubData.languages, 8)}+</span>
-            </div>
-          )}
-          <div className="stat-row">
-            <i className="fas fa-calendar-alt stat-icon"></i>
-            <span className="stat-text">Since: {githubData.since.getFullYear()}.{String(githubData.since.getMonth() + 1).padStart(2, '0')}</span>
-          </div>
+      <div className="widget-content github-widget-content">
+        <div className="github-contrib">
+          <a
+            href={`https://github.com/${GITHUB_USER}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="github-chart-link"
+          >
+            <img
+              src={CONTRIB_CHART_URL}
+              alt="GitHub contribution chart"
+              className="github-chart-img"
+            />
+          </a>
+        </div>
+        <div className="github-pinned">
+          <p className="github-pinned-label">Pinned Repos</p>
+          <ul className="github-pinned-list">
+            {pinnedRepos.length === 0 ? (
+              <li className="github-pinned-item">Loading...</li>
+            ) : (
+              pinnedRepos.map((repo, i) => (
+                <li key={i} className="github-pinned-item">
+                  <a
+                    href={repo.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="github-pinned-name"
+                  >
+                    {repo.name}
+                  </a>
+                  <span className="github-pinned-stack">{repo.language}</span>
+                </li>
+              ))
+            )}
+          </ul>
         </div>
       </div>
     </div>
