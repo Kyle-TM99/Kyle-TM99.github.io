@@ -263,11 +263,27 @@
     margin-bottom: 12px;
 }
 
+.gallery-badges {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
 .gallery-category {
     font-size: 11px;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.5);
     letter-spacing: 1px;
+}
+
+.gallery-type-badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid;
+    letter-spacing: 0.02em;
 }
 
 .gallery-card h3 {
@@ -289,9 +305,48 @@
     font-size: 13px;
     color: rgba(255, 255, 255, 0.8);
     line-height: 1.5;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     flex: 1;
-    /* Pushes content down if needed */
+}
+
+.gallery-section {
+    margin-bottom: 16px;
+}
+
+.gallery-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0 0 8px 0;
+    text-transform: uppercase;
+}
+
+.gallery-overview {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.55;
+    margin: 0;
+}
+
+.gallery-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.gallery-list li {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+    padding: 4px 0 4px 12px;
+    border-left: 3px solid;
+    margin-bottom: 4px;
+}
+
+.gallery-list--results li {
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .gallery-features {

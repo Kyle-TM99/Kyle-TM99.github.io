@@ -1,35 +1,10 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { featuredProjects } from '../../data/projects'
 
 function ProjectsWidget() {
     const [activeProject, setActiveProject] = useState(0)
-
-    const projects = [
-        {
-            id: 1,
-            title: "PlanFlow",
-            category: "SaaS Platform",
-            image: "logo/planflow.png",
-            mediaUrl: null,
-            description: "Coupang Seller Tool"
-        },
-        {
-            id: 2,
-            title: "EduPlatform",
-            category: "EdTech",
-            image: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
-            mediaUrl: null,
-            description: "LMS System"
-        },
-        {
-            id: 3,
-            title: "DataAuto",
-            category: "Automation",
-            image: "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
-            mediaUrl: null,
-            description: "Marketing Data"
-        }
-    ]
+    const projects = featuredProjects
 
     // Auto-rotate projects every 5s
     // useEffect(() => { ... }, []) - Optional feature
@@ -50,7 +25,11 @@ function ProjectsWidget() {
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.5 }}
                             className="project-slide"
-                            style={{ background: projects[activeProject].image }}
+                            style={{
+                                background: projects[activeProject].image.startsWith('linear-gradient')
+                                    ? projects[activeProject].image
+                                    : `url(${projects[activeProject].image}) center/cover`
+                            }}
                             onClick={() => setActiveProject((prev) => (prev + 1) % projects.length)}
                         >
                             {projects[activeProject].mediaUrl ? (

@@ -6,7 +6,6 @@ import WindowManager from './components/Windows/WindowManager'
 import WelcomeModal from './components/Modals/WelcomeModal'
 import HelpModal from './components/Modals/HelpModal'
 import ParticleSystem from './components/ParticleSystem/ParticleSystem'
-import SolarSystem from './components/SolarSystem/SolarSystem'
 import './App.css'
 
 function App() {
@@ -67,7 +66,6 @@ function App() {
 
   return (
     <>
-      <SolarSystem />
       <ParticleSystem />
       <Desktop>
         <MenuBar onHelpClick={handleHelp} />
