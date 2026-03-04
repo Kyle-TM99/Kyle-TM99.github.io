@@ -8,7 +8,7 @@ function InfoWidget() {
       <div className="widget-content info-widget-content">
         <div className="profile-quick">
           <div className="profile-avatar-wrap">
-            <img src="/taemin.jpg" alt="Kyle" onError={(e) => { e.target.onerror = null; e.target.src = '/Kyle.png' }} />
+            <img src="/Kyle.png" alt="Kyle" onError={(e) => { e.target.onerror = null; e.target.src = '/Kyle.png' }} />
           </div>
           <div className="status-indicator online"></div>
           <div className="status-text">현재 <strong>BARO Interactive</strong>에서 재직중</div>
