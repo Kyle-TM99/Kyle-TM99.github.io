@@ -11,7 +11,7 @@ function NewsWidget() {
         <div className="news-widget-list">
           {newsItems.map((item, index) => (
             <div key={index} className="news-widget-card">
-              <div className="news-widget-card-thumb" aria-hidden>
+              <div className={`news-widget-card-thumb ${item.image ? 'news-widget-card-thumb--white' : ''}`} aria-hidden>
                 {item.image ? (
                   <img src={item.image} alt="" />
                 ) : (

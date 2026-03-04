@@ -129,7 +129,9 @@ function Window({
           {title}
         </div>
         <div className="window-controls">
-          <button className="control-btn close" onClick={handleClose}>×</button>
+          <button type="button" className="control-btn control-btn--close" onClick={handleClose} aria-label="창 닫기">
+          <i className="fas fa-times" aria-hidden></i>
+        </button>
         </div>
       </div>
       <div className="window-content">

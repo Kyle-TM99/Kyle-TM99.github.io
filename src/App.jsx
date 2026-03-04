@@ -6,6 +6,7 @@ import WindowManager from './components/Windows/WindowManager'
 import WelcomeModal from './components/Modals/WelcomeModal'
 import HelpModal from './components/Modals/HelpModal'
 import ParticleSystem from './components/ParticleSystem/ParticleSystem'
+import SolarSystem from './components/SolarSystem/SolarSystem'
 import './App.css'
 
 function App() {
@@ -66,9 +67,11 @@ function App() {
 
   return (
     <>
+      <SolarSystem />
       <ParticleSystem />
       <Desktop>
         <MenuBar onHelpClick={handleHelp} />
+        <p className="dock-hint" aria-hidden>아래 아이콘을 클릭해 소개, 뉴스, 프로젝트를 열어보세요.</p>
         <Dock onOpenWindow={openWindow} openWindows={openWindows} />
         <WindowManager
           openWindows={openWindows}

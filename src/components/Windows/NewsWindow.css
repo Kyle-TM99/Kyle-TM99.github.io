@@ -7,7 +7,14 @@
 .news-intro {
   margin: 0 0 20px 0;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--muted-foreground);
+}
+
+.news-empty {
+  margin: 24px 0;
+  font-size: 14px;
+  color: var(--muted-foreground);
+  text-align: center;
 }
 
 .news-list {
@@ -41,6 +48,10 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+}
+
+.news-item-thumb--white {
+  background: #fff;
 }
 
 .news-item-thumb img {
@@ -90,4 +101,11 @@
   font-size: 13px;
   color: rgba(255, 255, 255, 0.7);
   line-height: 1.5;
+}
+
+.news-detail {
+  margin: 10px 0 0 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
 }

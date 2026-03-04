@@ -4,11 +4,13 @@ function HelpModal({ show, onClose }) {
   if (!show) return null
 
   return (
-    <div className={`help-modal ${show ? '' : 'hidden'}`}>
+    <div className={`help-modal ${show ? '' : 'hidden'}`} role="dialog" aria-modal="true" aria-labelledby="help-title">
       <div className="help-content">
         <div className="help-header">
-          <h2><i className="fas fa-question-circle"></i> Kyle Portfolio OS 사용법 & 구현 가이드</h2>
-          <button className="help-close-btn" onClick={onClose}>×</button>
+          <h2 id="help-title"><i className="fas fa-question-circle" aria-hidden></i> Kyle Portfolio OS 사용법 & 구현 가이드</h2>
+          <button type="button" className="help-close-btn" onClick={onClose} aria-label="닫기">
+            <i className="fas fa-times" aria-hidden></i>
+          </button>
         </div>
         <div className="help-body">
           <div className="help-section">

@@ -1,15 +1,14 @@
-/* Windows - Global Dark Glass Theme */
+/* Windows - shadcn-inspired card theme */
 .window {
     position: fixed;
-    background: rgba(22, 22, 24, 0.85);
-    /* Dark Glass */
+    background: var(--card);
     backdrop-filter: blur(40px) saturate(180%);
     -webkit-backdrop-filter: blur(40px) saturate(180%);
-    border-radius: 16px;
+    border-radius: calc(var(--radius) * 1.6);
     box-shadow:
         0 30px 60px rgba(0, 0, 0, 0.5),
-        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+        0 0 0 1px var(--border) inset;
+    border: 1px solid var(--border);
     width: 800px;
     height: 600px;
     min-width: 400px;
@@ -21,8 +20,7 @@
     transform: scale(0.95);
     user-select: none;
     transition: opacity 0.3s ease, transform 0.3s ease;
-    color: white;
-    /* Force white text */
+    color: var(--foreground);
 }
 
 .window.show {
@@ -35,11 +33,10 @@
     justify-content: space-between;
     align-items: center;
     padding: 16px 20px;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), transparent);
-    border-radius: 16px 16px 0 0;
+    background: var(--muted);
+    border-radius: calc(var(--radius) * 1.6) calc(var(--radius) * 1.6) 0 0;
     cursor: move;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    /* Subtle separator */
+    border-bottom: 1px solid var(--border);
     user-select: none;
 }
 
@@ -48,15 +45,14 @@
     align-items: center;
     gap: 10px;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--foreground);
     font-size: 14px;
     pointer-events: none;
 }
 
 .window-title i {
     font-size: 16px;
-    color: #0a84ff;
-    /* Icon color */
+    color: var(--primary);
 }
 
 /* Control Buttons (Mac Style) */
@@ -69,35 +65,52 @@
 .control-btn {
     width: 12px;
     height: 12px;
+    min-width: 12px;
+    min-height: 12px;
+    padding: 0;
     border-radius: 50%;
     border: none;
     cursor: pointer;
-    background: #ff5f56;
-    /* Red */
+    background: var(--destructive);
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+    box-sizing: border-box;
+}
+
+.control-btn i {
+    display: block;
+    font-size: 6px;
+    line-height: 1;
 }
 
 .control-btn:hover {
     opacity: 0.8;
 }
 
+.control-btn:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+}
+
 .window-content {
     padding: 0;
-    /* Remove default padding for full flexibility */
     height: calc(100% - 50px);
     overflow: hidden;
     position: relative;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--foreground);
 }
 
-/* Scrollbar Styling */
+/* Scrollbar - shadcn muted */
 ::-webkit-scrollbar {
     width: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 4px;
+    background: var(--muted);
+    border-radius: var(--radius);
 }
 
 ::-webkit-scrollbar-track {
@@ -114,9 +127,9 @@
 }
 
 .resume-header {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+    background: var(--muted);
     padding: 40px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid var(--border);
     box-shadow: none;
 }
 
@@ -127,77 +140,75 @@
 /* Remove old overlay */
 
 .name-title h1 {
-    color: white;
+    color: var(--foreground);
 }
 
 .job-title {
-    color: #0a84ff;
+    color: var(--primary);
 }
 
 .eng-name {
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--muted-foreground);
 }
 
-/* Global Text Colors - SCOPED and SAFE */
+/* Global Text Colors - shadcn tokens */
 .window-content h1,
 .window-content h2,
 .window-content h3,
 .window-content h4,
 .window-content h5 {
-    color: white;
+    color: var(--foreground);
 }
 
 .window-content p,
 .window-content li,
 .window-content span {
-    color: rgba(255, 255, 255, 0.85);
-    /* Default text color */
+    color: var(--foreground);
 }
 
 .text-muted {
-    color: rgba(255, 255, 255, 0.5) !important;
+    color: var(--muted-foreground) !important;
 }
 
 /* Sections */
 .resume-section {
     padding: 40px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid var(--border);
 }
 
 .section-header {
-    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 2px solid var(--border);
 }
 
 .section-header::after {
-    background: #0a84ff;
+    background: var(--primary);
 }
 
-/* Competency Cards - Fix Layout & Theme */
+/* Competency Cards - shadcn card style */
 .competency-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: white;
-    /* Ensure padding and layout remains */
+    background: var(--muted);
+    border: 1px solid var(--border);
+    color: var(--foreground);
     padding: 32px;
-    border-radius: 16px;
+    border-radius: calc(var(--radius) * 1.6);
     position: relative;
     overflow: hidden;
     transition: all 0.3s ease;
 }
 
 .competency-card h3 {
-    color: white;
+    color: var(--foreground);
     margin-top: 0;
 }
 
 .competency-card p {
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--muted-foreground);
 }
 
 .competency-card:hover {
-    border-color: #0a84ff;
+    border-color: var(--primary);
     transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--accent);
 }
 
 /* --- RESUME / ABOUT ME REVAMP --- */
@@ -244,7 +255,7 @@
 }
 
 .profile-info h2 {
-    color: #333;
+    color: var(--foreground);
     margin-bottom: 8px;
     font-size: 28px;
     font-weight: 700;
