@@ -7,9 +7,9 @@ function ProjectsWidget() {
     const projects = [
         {
             id: 1,
-            title: "SellerKit",
+            title: "PlanFlow",
             category: "SaaS Platform",
-            image: "linear-gradient(135deg, #FF9966 0%, #FF5E62 100%)",
+            image: "logo/planflow.png",
             mediaUrl: null,
             description: "Coupang Seller Tool"
         },

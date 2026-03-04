@@ -69,23 +69,44 @@
     position: relative;
 }
 
-/* About 상단: 한눈에 들어오는 헤드라인 */
+/* Hero: 첫 인상 */
+.about-hero {
+    margin-bottom: 36px;
+}
+
+.about-lead {
+    font-size: 15px;
+    color: var(--primary);
+    font-weight: 500;
+    margin: 0 0 12px 0;
+    letter-spacing: 0.02em;
+}
+
+.about-lead .typewriter-quote {
+    font-style: italic;
+}
+
 .about-headline {
-    font-size: 28px;
+    font-size: 32px;
     font-weight: 800;
-    margin: 0 0 8px 0;
+    margin: 0 0 12px 0;
     color: var(--foreground);
-    letter-spacing: -0.02em;
-    line-height: 1.3;
+    letter-spacing: -0.03em;
+    line-height: 1.25;
+}
+
+.about-headline strong {
+    color: var(--primary);
 }
 
 .about-oneliner {
-    font-size: 16px;
-    color: var(--primary);
-    font-weight: 600;
-    margin: 0 0 32px 0;
-    padding-bottom: 24px;
+    font-size: 15px;
+    color: var(--muted-foreground);
+    font-weight: 500;
+    margin: 0;
+    padding-bottom: 28px;
     border-bottom: 1px solid var(--border);
+    letter-spacing: 0.01em;
 }
 
 /* Profile Tab */
@@ -105,9 +126,9 @@
     width: 140px;
     height: 140px;
     border-radius: 50%;
-    border: 4px solid var(--border);
+    border: 3px solid var(--border);
     object-fit: cover;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px var(--primary) inset;
 }
 
 .online-status {
@@ -126,14 +147,22 @@
     gap: 4px;
 }
 
-.profile-info h1 {
-    font-size: 36px;
+.profile-name {
+    font-size: 32px;
     font-weight: 800;
-    margin: 0 0 8px 0;
+    margin: 0 0 2px 0;
+    letter-spacing: -0.02em;
     background: linear-gradient(135deg, var(--foreground) 0%, var(--primary) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+}
+
+.profile-name-ko {
+    font-size: 16px;
+    color: var(--muted-foreground);
+    margin: 0 0 14px 0;
+    font-weight: 500;
 }
 
 .profile-role {
@@ -152,21 +181,21 @@
 }
 
 .chip {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 6px 12px;
-    border-radius: 8px;
+    background: var(--muted);
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    border-radius: var(--radius);
     font-size: 13px;
-    color: rgba(255, 255, 255, 0.8);
-    display: flex;
+    color: var(--foreground);
+    display: inline-flex;
     align-items: center;
     gap: 8px;
     transition: all 0.2s;
 }
 
 .chip:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
+    background: var(--accent);
+    border-color: var(--border);
 }
 
 .chip-link {
@@ -176,24 +205,144 @@
 }
 
 .chip-link:hover {
-    border-color: #0a84ff;
-    box-shadow: 0 0 12px rgba(10, 132, 255, 0.25);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 1px var(--primary);
 }
 
 .section-title {
-    font-size: 20px;
+    font-size: 13px;
     font-weight: 700;
-    margin: 40px 0 20px 0;
-    padding-bottom: 12px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 36px 0 16px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
     gap: 10px;
-    color: white;
+    color: var(--muted-foreground);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
 }
 
 .section-title i {
-    color: #0a84ff;
+    color: var(--primary);
+}
+
+/* 스토리 카드 */
+.summary-card {
+    border: 1px solid var(--border);
+    background: var(--card);
+    border-radius: calc(var(--radius) * 2);
+    padding: 28px 32px;
+    margin-bottom: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.summary-lead {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--foreground);
+    margin: 0 0 24px 0;
+    line-height: 1.55;
+}
+
+.summary-blocks {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.summary-block {
+    padding: 0;
+}
+
+.summary-block-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.summary-block p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--foreground);
+    margin: 0;
+}
+
+.summary-philosophy {
+    margin-top: 24px;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--muted-foreground);
+}
+
+/* 핵심 가치 */
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
+}
+
+.value-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) * 2);
+    padding: 24px 26px;
+    cursor: default;
+    transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.value-card:hover {
+    background: var(--accent);
+    border-color: var(--primary);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2), 0 0 0 1px var(--primary);
+}
+
+.value-card:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+}
+
+.value-card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius);
+    background: var(--primary);
+    color: var(--primary-foreground);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    font-size: 16px;
+    transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.value-card:hover .value-card-icon {
+    transform: scale(1.08);
+    background: var(--primary);
+}
+
+.value-card-title {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
+    margin: 0 0 10px 0;
+    line-height: 1.3;
+}
+
+.value-card-desc {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--muted-foreground);
+    margin: 0;
+}
+
+.tab-content--profile {
+    max-width: 720px;
 }
 
 /* Career Tab - Cinematic Mode */

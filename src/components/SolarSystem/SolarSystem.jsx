@@ -64,7 +64,6 @@ function SolarSystem() {
       // Orbits (ellipses, slightly tilted for depth)
       const tilt = 0.18
       const orbitRotation = 0.35
-      const rxBase = scale
       ORBITS.forEach((orbit) => {
         const rx = orbit.radius * rxBase
         const ry = orbit.radius * rxBase * (1 - tilt)
